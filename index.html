@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!--Include Bootstrap’s JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+    <!-- Custom JS for this template -->
+    <script src="gitpages/js/copyText.js"></script>
+    <!--Include Latex (optional)-->
+    <!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+    <!--<script type="text/x-mathjax-config">-->
+    <!--    MathJax.Hub.Config({-->
+    <!--        tex2jax: {inlineMath: [['$', '$']]},-->
+    <!--        messageStyle: "none"-->
+    <!--    });-->
+    <!--</script>-->
+
+    <!-- Include the icon fonts stylesheet-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!--Include Bootstrap’s CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+          crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="gitpages/style.css" rel="stylesheet">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pytorch-SVGRender</title>
+    <meta property="og:description" content="SVG, DiffVG, DiffSketcher, CLIPasso"/>
+</head>
+
+<body>
+<header class="container">
+    <hr>
+    <!-- Paper Title -->
+    <div class="container text-center">
+        <a class="blog-header-logo text-body-emphasis" href="#">Pytorch-SVGRender</a>
+    </div>
+    <hr>
+    <!-- author list -->
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <p class="fs-5"><a href="#" class="link-body-emphasis">first author</a><sup>1</sup></p>
+            </div>
+            <div class="col"><p class="fs-5">second author<sup>1</sup></p></div>
+            <div class="col"><p class="fs-5">second author<sup>1</sup></p></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="fs-5"><a href="#" class="link-body-emphasis">first author</a><sup>2</sup></p>
+            </div>
+            <div class="col"><p class="fs-5">second author<sup>2</sup></p></div>
+        </div>
+    </div>
+    <!-- author organization -->
+    <div class="text-center">
+        <p class="fs-6"><sup>1</sup>Beihang University &nbsp;&nbsp;<sup>2</sup>Google Research</p>
+    </div>
+    <!-- paper status -->
+    <div class="text-center">
+        <h6>Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rendering methods for image vectorization.</h6>
+    </div>
+    <!-- links -->
+    <div class="text-center">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                <!-- more svg icon can bre found in:  https://icons.getbootstrap.com/?q=github -->
+                <a class="icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);"
+                   href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                         class="bi bi-file-earmark-pdf" viewBox="0 0 16 16">
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                        <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
+                    </svg>
+                    <h3>Paper</h3>
+                </a>
+            </div>
+            <div class="col col-lg-3">
+                <a class="icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);"
+                   href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-github" viewBox="0 0 16 16">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    <h3>Code</h3>
+                </a>
+                (Coming Soon)
+            </div>
+            <div class="col col-lg-2">
+                <a class="icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);"
+                   href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-play-btn" viewBox="0 0 16 16">
+                        <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                    </svg>
+                    <h3>Video</h3>
+                </a>
+            </div>
+            <div class="col col-lg-2">
+                <a class="icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);"
+                   href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-file-earmark-ppt" viewBox="0 0 16 16">
+                        <path d="M7 5.5a1 1 0 0 0-1 1V13a.5.5 0 0 0 1 0v-2h1.188a2.75 2.75 0 0 0 0-5.5H7zM8.188 10H7V6.5h1.188a1.75 1.75 0 1 1 0 3.5z"/>
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                    </svg>
+                    <h3>Slides</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <!-- teaser -->
+    <div class="text-center">
+        <figure class="figure">
+            <img src="gitpages/assets/beautiful_teaser.png" class="img-thumbnail figure-img img-fluid rounded" alt="beautiful teaser">
+            <figcaption class="figure-caption">A caption for the above image.</figcaption>
+        </figure>
+    </div>
+
+</header>
+<br>
+
+<main class="container">
+    <!-- Abstract -->
+<!--    <div class="card">-->
+<!--        <div class="card-body">-->
+<!--            <h2 class="card-title text-center card-title-margin">Pytorch-SVGRender</h2>-->
+<!--            <p class="card-text">-->
+<!--            Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rendering methods for image vectorization.-->
+<!--            </p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <br>-->
+
+    <!-- Online Demo -->
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title card-title-margin">Online Demo</h2>
+            <hr class="body-hr"/>
+            <p class="card-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo
+                dapibus sit amet. Suspendisse condimentum, libero vel tempus mattis, risus risus vulputate libero,
+                elementum fermentum mi neque vel nisl. Maecenas facilisis maximus dignissim. Curabitur mattis vulputate
+                dui, tincidunt varius libero luctus eu. Mauris mauris nulla, scelerisque eget massa id, tincidunt congue
+                felis. Sed convallis tempor ipsum rhoncus viverra. Pellentesque nulla orci, accumsan volutpat fringilla
+                vitae, maximus sit amet tortor. Aliquam ultricies odio ut volutpat scelerisque. Donec nisl nisl,
+                porttitor vitae pharetra quis, fringilla sed mi. Fusce pretium dolor ut aliquam consequat. Cras
+                volutpat, tellus accumsan mattis molestie, nisl lacus tempus massa, nec malesuada tortor leo vel quam.
+                Aliquam vel ex consectetur, vehicula leo nec, efficitur eros. Donec convallis non urna quis feugiat.
+            </p>
+            <div class="text-center">
+                <figure class="figure">
+                    <img src="gitpages/assets/online_demo.png" class="img-thumbnail figure-img img-fluid rounded"
+                         alt="online demo">
+                    <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <!-- Video 1 -- video in modal -->
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title card-title-margin">Video<small class="text-body-secondary">(3min)</small></h2>
+            <hr class="body-hr"/>
+
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <!-- video teaser -->
+                        <img src="gitpages/assets/video_teaser.png" class="img-thumbnail figure-img img-fluid rounded"
+                             alt="video teaser">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                            Play Video
+                        </button>
+
+                        <!-- Youtube in Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                            <u>Short presentation</u>(3min)
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="embed-responsive embed-responsive-16by9" style="text-align:center">
+                                            <iframe class="embed-responsive-item text-center"
+                                                    src="https://www.youtube.com/embed/j20MBc1hWGQ"
+                                                    frameborder="0"
+                                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                    style="width:100%; height: 60em; clip-path:inset(1px 1px);"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end row-->
+            </div> <!-- end container-->
+        </div>
+    </div>
+    <br>
+
+    <!-- Video 2 -- video in HTML -->
+    <!--    <div class="card">-->
+    <!--        <div class="card-body">-->
+    <!--            <h2 class="card-title card-title-margin">Video</h2>-->
+    <!--            <hr class="body-hr"/>-->
+    <!--            <div class="text-center">-->
+    <!--                <h4><u>Short presentation</u> (3min)</h4>-->
+    <!--                <div class="embed-responsive embed-responsive-16by9" style="text-align:center">-->
+    <!--                    <iframe class="embed-responsive-item text-center"-->
+    <!--                            src="https://www.youtube.com/embed/j20MBc1hWGQ"-->
+    <!--                            frameborder="0"-->
+    <!--                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"-->
+    <!--                            style="width:80%; height: 650px; clip-path:inset(1px 1px);"-->
+    <!--                            allowfullscreen></iframe>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <br>-->
+
+    <!-- Methodology -->
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title card-title-margin">Methodology</h2>
+            <hr class="body-hr"/>
+            <p class="card-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo
+                dapibus sit amet. Suspendisse condimentum, libero vel tempus mattis, risus risus vulputate libero,
+                elementum fermentum mi neque vel nisl. Maecenas facilisis maximus dignissim. Curabitur mattis vulputate
+                dui, tincidunt varius libero luctus eu. Mauris mauris nulla, scelerisque eget massa id, tincidunt congue
+                felis. Sed convallis tempor ipsum rhoncus viverra. Pellentesque nulla orci, accumsan volutpat fringilla
+                vitae, maximus sit amet tortor. Aliquam ultricies odio ut volutpat scelerisque. Donec nisl nisl,
+                porttitor vitae pharetra quis, fringilla sed mi. Fusce pretium dolor ut aliquam consequat. Cras
+                volutpat, tellus accumsan mattis molestie, nisl lacus tempus massa, nec malesuada tortor leo vel quam.
+                Aliquam vel ex consectetur, vehicula leo nec, efficitur eros. Donec convallis non urna quis feugiat.
+            </p>
+            <div class="text-center">
+                <figure class="figure">
+                    <img src="gitpages/assets/method.png" class="figure-img img-fluid rounded" alt="method">
+                    <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <!-- Experiments -->
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title card-title-margin">Experiments</h2>
+            <hr class="body-hr"/>
+            <p class="card-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo
+                dapibus sit amet. Suspendisse condimentum, libero vel tempus mattis, risus risus vulputate libero,
+                elementum fermentum mi neque vel nisl. Maecenas facilisis maximus dignissim. Curabitur mattis vulputate
+                dui, tincidunt varius libero luctus eu. Mauris mauris nulla, scelerisque eget massa id, tincidunt congue
+                felis. Sed convallis tempor ipsum rhoncus viverra. Pellentesque nulla orci, accumsan volutpat fringilla
+                vitae, maximus sit amet tortor. Aliquam ultricies odio ut volutpat scelerisque. Donec nisl nisl,
+                porttitor vitae pharetra quis, fringilla sed mi. Fusce pretium dolor ut aliquam consequat. Cras
+                volutpat, tellus accumsan mattis molestie, nisl lacus tempus massa, nec malesuada tortor leo vel quam.
+                Aliquam vel ex consectetur, vehicula leo nec, efficitur eros. Donec convallis non urna quis feugiat.
+            </p>
+            <br>
+
+            <!-- Table example -->
+            <table class="table">
+                <thead>
+                <tr class="table-primary">
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <br>
+
+            <div class="text-center">
+                <figure class="figure">
+                    <img src="gitpages/assets/experiments.png" class="img-thumbnail figure-img img-fluid rounded" alt="experiments">
+                    <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                </figure>
+            </div>
+
+        </div>
+    </div>
+    <br>
+
+    <!-- Supplementary Material -->
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title card-title-margin">Supplementary Material</h2>
+            <hr class="body-hr"/>
+            <p class="card-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo
+                dapibus sit amet.
+            </p>
+        </div>
+    </div>
+    <br>
+
+    <!-- Citation -->
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title card-title-margin">Citation</h2>
+            <p id="bibtex" class="card-text" style="border: #1a1c20 1px">
+                <code> @article{author20XXtitle,<br>
+                    &nbsp;&nbsp;title={Please cite me},<br>
+                    &nbsp;&nbsp;author={Author, First and Author, Second and Author, Third},<br>
+                    &nbsp;&nbsp;booktitle={arXiv preprint},<br>
+                    &nbsp;&nbsp;year={20XX}<br>
+                    }
+                </code>
+            </p>
+
+            <!-- Bibtex (Button trigger modal)-->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    onclick="copyText()">
+                Copy BibTex
+            </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Bibtex</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="bibtex modal-body">
+                            Copy Success!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <!-- Acknowledgements -->
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title card-title-margin">Acknowledgements</h4>
+            <p class="card-text">We thank Ximing Xing for providing us with the source code of the web page to help us
+                build the project home page.</p>
+        </div>
+    </div>
+    <br>
+
+</main>
+
+<footer class="container blog-footer">
+    <p>
+        This webpage template was originally made by
+        <a href="https://github.com/ximinng"
+           class="link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Ximing Xing</a>.
+    </p>
+    <div class="container">
+        <div class="badge bg-primary text-wrap">
+            <p>
+                <a href="#" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                    Back to top
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

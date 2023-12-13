@@ -10,6 +10,9 @@
     <a href="/">
         <img src="https://img.shields.io/badge/website-Gitpage-yellow" alt="website">
     </a>
+    <a href="https://pytorch-svgrender.readthedocs.io/en/latest/index.html">
+        <img src="https://img.shields.io/badge/docs-readthedocs-purple" alt="docs">
+    </a>
 </p>
 
 <p align="center">
@@ -28,7 +31,7 @@ Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rende
 
 <h2 align="center">Recent Updates</h2>
 
-- [12/2023] 🔥 We open-sourced the first version of Pytorch-SVGRender.
+- [12/2023] 🔥 We open-sourced the Pytorch-SVGRender V1.0
 
 <h2 align="center">Installation</h2>
 

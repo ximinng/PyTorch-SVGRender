@@ -1,0 +1,48 @@
+/*
+ * Header
+ */
+.blog-header {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-header-logo {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif /*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+    font-size: 2.25rem;
+}
+
+.blog-header-logo:hover {
+    text-decoration: none;
+}
+
+/*
+ * Body
+ */
+.card-title-margin {
+    margin-bottom: 0.7em;
+}
+
+a {
+    color: cornflowerblue;
+}
+
+.body-hr {
+    margin-top: -1em;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 3px solid cornflowerblue;
+}
+
+/*
+ * Footer
+ */
+.blog-footer {
+    padding: 2.5rem 0;
+    color: #727272;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: .05rem solid #e5e5e5;
+}
+
+.blog-footer p:last-child {
+    margin-bottom: 0;
+}
