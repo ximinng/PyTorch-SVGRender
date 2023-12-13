@@ -76,6 +76,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*/.ipynb_checkpoints/*
 
 # IPython
 profile_default/
@@ -128,6 +129,12 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
 # .idea
 .idea/
 /idea/
@@ -135,8 +142,10 @@ dmypy.json
 *.iml
 *.iws
 
-# system
+# macos system
 .DS_Store
+
+### project ###
 
 # pytorch-lighting logs
 lightning_logs/*
@@ -157,7 +166,6 @@ lightning_logs/*
 !/dataset/placeholder.md
 
 # ignore files
-/LIST.md
 /assets/poster/
 /assets/poster/*
 ./tmp/

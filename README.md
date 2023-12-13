@@ -19,7 +19,7 @@
     <a href="#quickstart">Quickstart</a> •
     <a href="#faq">FAQ</a> •
     <a href="#todo">TODO</a> •
-    <a href="#acknowledgment">Acknowledgment</a> •
+    <a href="#acknowledgement">Acknowledgment</a> •
     <a href="#citation">Citation</a> •
     <a href="#licence">Licence</a>
 </p>
@@ -28,7 +28,7 @@ Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rende
 
 <h2 align="center">Recent Updates</h2>
 
-- [12/2023] We open-sourced the first version of Pytorch-SVGRender.
+- [12/2023] 🔥 We open-sourced the first version of Pytorch-SVGRender.
 
 <h2 align="center">Installation</h2>
 
@@ -60,6 +60,7 @@ pip install kornia==0.5.0
 pip install wldhx.yadisk-direct
 
 cd lama
+# download LaMa model weights
 curl -L $(yadisk-direct https://disk.yandex.ru/d/kHJkc7bs7mKIVA) -o big-lama.zip
 unzip big-lama.zip
 ```
@@ -98,7 +99,7 @@ python setup.py install
 <h2 align="center">Table of Contents</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
-### # DiffVG: Differentiable Vector Graphics Rasterization for Editing and Learning (`SIGGRAPH 2020`)
+### DiffVG: Differentiable Vector Graphics Rasterization for Editing and Learning (`SIGGRAPH 2020`)
 
 [[Project]](https://people.csail.mit.edu/tzumao/diffvg/) [[Paper]](https://cseweb.ucsd.edu/~tzli/diffvg/diffvg.pdf) [[Code]](https://github.com/BachiLi/diffvg)
 
@@ -132,11 +133,11 @@ DiffVG is a differentiable rasterizer for 2D vector graphics. **This repository 
 
 [[Project]](https://vectorfusion.github.io/) [[Paper]](https://openaccess.thecvf.com/content/CVPR2023/papers/Jain_VectorFusion_Text-to-SVG_by_Abstracting_Pixel-Based_Diffusion_Models_CVPR_2023_paper.pdf)
 
-### # DiffSketcher (`NIPS 2023`)
+### DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models (`NIPS 2023`)
 
 [[Project]](https://ximinng.github.io/DiffSketcher-project/) [[Paper]](https://arxiv.org/abs/2306.14685) [[Code]](https://github.com/ximinng/DiffSketcher)
 
-### # Word-As-Image for Semantic Typography (`SIGGRAPH 2023`)
+### Word-As-Image for Semantic Typography (`SIGGRAPH 2023`)
 
 [[Project]](https://wordasimage.github.io/Word-As-Image-Page/) [[Paper]](https://arxiv.org/abs/2303.01818) [[Code]](https://github.com/Shiriluz/Word-As-Image)
 
