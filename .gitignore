@@ -154,7 +154,7 @@ lightning_logs/*
 .editorconfig
 
 # model checkpoint
-/checkpoint/
+/checkpoint/u2net/u2net.pth
 !/checkpoint/placeholder.md
 
 # ignore local results

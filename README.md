@@ -161,7 +161,8 @@ python setup.py install
 python svg_render.py x=live target='./data/simile.png'
 
 # CLIPasso
-# note: first download the U2Net model from https://huggingface.co/akhaliq/CLIPasso/blob/main/u2net.pth
+# note: first download the U2Net model from https://huggingface.co/akhaliq/CLIPasso/blob/main/u2net.pth, 
+# put the model in `./checkpoint/u2net/u2net.pth` 
 python svg_render.py x=clipasso target='./data/horse.png'
 
 # CLIPDraw
@@ -181,14 +182,14 @@ python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a 
 python svg_render.py x=vectorfusion x.style='sketch' prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'
 
 # DiffSketcher
-python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5
+python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 seed=8019
 # DiffSketcher, variable stroke width
-python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True
+python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True seed=8019
 # DiffSketcher RGBA version
-python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True x.optim_rgba=True x.optim_opacity=False
+python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True x.optim_rgba=True x.optim_opacity=False seed=8019
 
-# DiffSketcher + Style transfer
-python svg_render.py x=stylediffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 target='./data/starry.png'
+# DiffSketcher + style transfer
+python svg_render.py x=stylediffsketcher prompt='A horse is drinking water by the lake' x.token_ind=5 target='./data/starry.png' seed=998
 
 # Word-As-Image
 python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'
