@@ -153,21 +153,15 @@ lightning_logs/*
 # Edit settings
 .editorconfig
 
-# model chexkpoints
+# model checkpoint
 /checkpoint/
 !/checkpoint/placeholder.md
 
-# local results
-/workdir/
-.workdir/
-
-# dataset
-/dataset/
-!/dataset/placeholder.md
+# ignore local results
+/workspace/
+.workspace/
 
 # ignore files
-/assets/poster/
-/assets/poster/*
 ./tmp/
 ./tmp/*
 /tmp/

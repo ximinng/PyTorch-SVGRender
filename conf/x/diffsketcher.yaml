@@ -1,0 +1,75 @@
+method: 'diffsketcher'
+
+image_size: 224 # canvas size
+path_svg: ~ # if you want to load a svg file and train from it
+mask_object: False # if the target image contains background, it's better to mask it out
+fix_scale: False  # if the target image is not squared, it is recommended to fix the scale
+
+# train
+num_iter: 2000
+num_stages: 1 # training stages, you can train x strokes, then freeze them and train another x strokes etc
+lr_schedule: False
+lr_decay_rate: 0.1
+decay_steps: [ 1000, 1500 ]
+lr: 1
+color_lr: 0.01
+color_vars_threshold: 0.0 # uncomment the code
+width_lr: 0.1
+max_width: 50 # stroke width
+
+# stroke attrs
+num_paths: 128 # number of strokes
+width: 1.5 # stroke width
+control_points_per_seg: 4
+num_segments: 1
+optim_opacity: True # if True, the stroke opacity is optimized
+optim_width: False  # if True, the stroke width is optimized
+optim_rgba: False # if True, the stroke RGBA is optimized
+
+# init strokes
+attention_init: True # if True, use the attention heads of Dino model to set the location of the initial strokes
+xdog_intersec: True # initialize along the edge, mix XDoG and attn up
+softmax_temp: 0.5
+cross_attn_res: 16
+self_attn_res: 32
+max_com: 20
+mean_comp: False
+comp_idx: 0
+attn_coeff: 1.0 # attn fusion, w * cross-attn + (1-w) * self-attn
+log_cross_attn: False # True if cross attn every step
+u2net_path: "./checkpoint/u2net/u2net.pth"
+
+# ldm
+model_id: "sd15"
+ldm_speed_up: False
+enable_xformers: True
+gradient_checkpoint: False
+token_ind: 5
+use_ddim: True
+num_inference_steps: 100
+guidance_scale: 7.5 # sdxl default 5.0
+
+# ASDS loss
+sds:
+  crop_size: 512
+  augmentations: "affine"
+  guidance_scale: 100
+  grad_scale: 1e-5
+  t_range: [ 0.05, 0.95 ]
+  warmup: 1000
+
+clip:
+  model_name: "RN101"  # RN101, ViT-L/14
+  feats_loss_type: "l2" # clip visual loss type, conv layers
+  feats_loss_weights: [ 0,0,1.0,1.0,0 ] # RN based
+  #  feats_loss_weights: [ 0,0,1.0,1.0,0,0,0,0,0,0,0,0 ] # ViT based
+  fc_loss_weight: 0.1 # clip visual loss, fc layer weight
+  augmentations: "affine" # augmentation before clip visual computation
+  num_aug: 4 # num of augmentation before clip visual computation
+  vis_loss: 1 # 1 or 0 for use or disable clip visual loss
+  text_visual_coeff: 0 # cosine similarity between text and img
+
+perceptual:
+  name: "lpips" # dists
+  lpips_net: 'vgg'
+  coeff: 0.2

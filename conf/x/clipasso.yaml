@@ -1,0 +1,48 @@
+method: 'clipasso'
+
+image_size: 224
+mask_object: False
+fix_scale: False
+path_svg: ~ # if you want to load a svg file and train from it
+
+# train
+num_iter: 2001
+num_stages: 1 # training stages, you can train x strokes, then freeze them and train another x strokes etc
+lr_schedule: False
+lr: 1
+color_lr: 0.01
+color_vars_threshold: 0.0
+
+# SVG path attr
+num_paths: 32 # number of strokes
+width: 1.5 # stroke width
+control_points_per_seg: 4
+num_segments: 1
+attention_init: 1 # if True, use the attention heads of Dino model to set the location of the initial strokes
+saliency_model: "clip"
+saliency_clip_model: "ViT-B/32"
+xdog_intersec: 1
+mask_object_attention: 0
+softmax_temp: 0.3
+u2net_path: "./checkpoint/u2net/u2net.pth"
+
+# loss
+percep_loss: "none"
+perceptual_weight: 0
+train_with_clip: 0
+clip_weight: 0
+start_clip: 0
+num_aug_clip: 4
+include_target_in_aug: 0
+augment_both: 0
+augemntations: "affine"  # can be any combination of: 'affine_noise_eraserchunks_eraser_press'
+noise_thresh: 0.5
+aug_scale_min: 0.7
+force_sparse: 0 # if True, use L1 regularization on stroke's opacity to encourage small number of strokes
+clip_conv_loss: 1
+clip_conv_loss_type: "L2"
+clip_conv_layer_weights: "0,0,1.0,1.0,0"
+clip_model_name: "RN101"
+clip_fc_loss_weight: 0.1
+clip_text_guide: 0
+text_target: None

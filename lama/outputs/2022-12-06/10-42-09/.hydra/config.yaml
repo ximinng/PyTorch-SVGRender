@@ -1,0 +1,20 @@
+indir: /home/vinker/dev/lama/lama/LaMa_test_images
+outdir: /home/vinker/dev/lama/lama/output
+model:
+  path: /home/vinker/dev/lama/lama/big-lama
+  checkpoint: best.ckpt
+dataset:
+  kind: default
+  img_suffix: .png
+  pad_out_to_modulo: 8
+device: cuda
+out_key: inpainted
+refine: false
+refiner:
+  gpu_ids: 0,1
+  modulo: ${dataset.pad_out_to_modulo}
+  n_iters: 15
+  lr: 0.002
+  min_side: 512
+  max_scales: 3
+  px_budget: 1800000

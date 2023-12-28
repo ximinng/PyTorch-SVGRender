@@ -1,0 +1,27 @@
+method: 'clipfont'
+
+# optimizer
+lr_base:
+  point: 0.1
+  color: 0.01
+lr_decay_rate: 0.1
+decay_steps: [ 1000, 1500 ]
+lr_schedule: False
+
+# train
+num_iter: 200
+batch_size: 1
+font:
+  reinit: False
+  reinit_color: 'randn' # 'randn', 'randn_all', 'green' et al
+
+# loss
+clip:
+  model_name: "ViT-B/32"  # RN101, 'ViT-B/32', ViT-L/14
+thresh: 0.0
+num_crops: 128
+crop_size: 230
+lam_patch: 150
+lam_dir: 30
+lam_lpips: 0
+lam_l2: 0

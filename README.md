@@ -7,7 +7,7 @@
     <a href="http://mozilla.org/MPL/2.0/">
         <img src="https://img.shields.io/badge/license-MPL2.0-orange" alt="license">
     </a>
-    <a href="/">
+    <a href="https://ximinng.github.io/PyTorch-SVGRender/">
         <img src="https://img.shields.io/badge/website-Gitpage-yellow" alt="website">
     </a>
     <a href="https://pytorch-svgrender.readthedocs.io/en/latest/index.html">
@@ -17,8 +17,8 @@
 
 <p align="center">
     <a href="#recent-updates">Updates</a> •
-    <a href="#installation">Installation</a> •
     <a href="#table-of-contents">Table of Contents</a> •
+    <a href="#installation">Installation</a> •
     <a href="#quickstart">Quickstart</a> •
     <a href="#faq">FAQ</a> •
     <a href="#todo">TODO</a> •
@@ -27,11 +27,65 @@
     <a href="#licence">Licence</a>
 </p>
 
-Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rendering methods for image vectorization.
+<h2 align="center">About</h2>
+
+Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rendering methods for SVG generation.
 
 <h2 align="center">Recent Updates</h2>
 
-- [12/2023] 🔥 We open-sourced the Pytorch-SVGRender V1.0
+- [12/2023] 🔥 We open-sourced Pytorch-SVGRender V1.0.
+
+<h2 align="center">Table of Contents</h2>
+<p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
+
+## 1. Image Vectorization
+
+### DiffVG: Differentiable Vector Graphics Rasterization for Editing and Learning (`SIGGRAPH 2020`)
+
+[[Project]](https://people.csail.mit.edu/tzumao/diffvg/) [[Paper]](https://cseweb.ucsd.edu/~tzli/diffvg/diffvg.pdf) [[Code]](https://github.com/BachiLi/diffvg)
+
+DiffVG is a differentiable rasterizer for 2D vector graphics. **This repository is based on DiffVG.**
+
+### LIVE: Towards Layer-wise Image Vectorization (`CVPR 2022`)
+
+[[Project]](https://ma-xu.github.io/LIVE/) [[Paper]](https://ma-xu.github.io/LIVE/index_files/CVPR22_LIVE_main.pdf) [[Code]](https://github.com/Picsart-AI-Research/LIVE-Layerwise-Image-Vectorization)
+
+### CLIPasso: Semantically-Aware Object Sketching (`SIGGRAPH 2022`)
+
+[[Project]](https://clipasso.github.io/clipasso/) [[Paper]](https://arxiv.org/abs/2202.05822) [[Code]](https://github.com/yael-vinker/CLIPasso)
+
+### CLIPascene: Scene Sketching with Different Types and Levels of Abstraction (`ICCV 2023`)
+
+[[Project]](https://clipascene.github.io/CLIPascene/) [[Paper]](https://arxiv.org/abs/2211.17256) [[Code]](https://github.com/yael-vinker/SceneSketch)
+
+## 2. Text-to-SVG Synthesis
+
+### CLIPDraw: Exploring Text-to-Drawing Synthesis through Language-Image Encoders (`NIPS 2022`)
+
+[[Paper]](https://arxiv.org/abs/2106.14843) [[Code]](https://github.com/kvfrans/clipdraw)
+
+### StyleCLIPDraw: Coupling Content and Style in Text-to-Drawing Synthesis
+
+[[Live]](https://slideslive.com/38970834/styleclipdraw-coupling-content-and-style-in-texttodrawing-synthesis?ref=account-folder-92044-folders) [[Paper]](https://arxiv.org/abs/2202.12362) [[Code]](https://github.com/pschaldenbrand/StyleCLIPDraw)
+
+### CLIPFont: Texture Guided Vector WordArt Generation (`BMVC 2022`)
+
+[[Paper]](https://bmvc2022.mpi-inf.mpg.de/0543.pdf) [[Code]](https://github.com/songyiren98/CLIPFont)
+
+### VectorFusion: Text-to-SVG by Abstracting Pixel-Based Diffusion Models (`CVPR 2023`)
+
+[[Project]](https://vectorfusion.github.io/) [[Paper]](https://openaccess.thecvf.com/content/CVPR2023/papers/Jain_VectorFusion_Text-to-SVG_by_Abstracting_Pixel-Based_Diffusion_Models_CVPR_2023_paper.pdf)
+
+### DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models (`NIPS 2023`)
+
+[[Project]](https://ximinng.github.io/DiffSketcher-project/) [[Paper]](https://arxiv.org/abs/2306.14685) [[Code]](https://github.com/ximinng/DiffSketcher)
+
+### Word-As-Image for Semantic Typography (`SIGGRAPH 2023`)
+
+[[Project]](https://wordasimage.github.io/Word-As-Image-Page/) [[Paper]](https://arxiv.org/abs/2303.01818) [[Code]](https://github.com/Shiriluz/Word-As-Image)
+
+### SVGDreamer: Text Guided SVG Generation with Diffusion Model  (`coming soon`)
+
 
 <h2 align="center">Installation</h2>
 
@@ -46,9 +100,9 @@ Install pytorch and the following libraries:
 
 ```shell
 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
-pip install hydra-core omegaconf BeautifulSoup4
+pip install hydra-core omegaconf 
 pip install freetype-py shapely svgutils
-pip install opencv-python scikit-image matplotlib visdom wandb
+pip install opencv-python scikit-image matplotlib visdom wandb BeautifulSoup4
 pip install triton numba
 pip install numpy scipy timm scikit-fmm einops
 pip install accelerate transformers safetensors datasets
@@ -99,53 +153,46 @@ pip install svgwrite svgpathtools cssutils torch-tools
 python setup.py install
 ```
 
-<h2 align="center">Table of Contents</h2>
-<p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
-
-### DiffVG: Differentiable Vector Graphics Rasterization for Editing and Learning (`SIGGRAPH 2020`)
-
-[[Project]](https://people.csail.mit.edu/tzumao/diffvg/) [[Paper]](https://cseweb.ucsd.edu/~tzli/diffvg/diffvg.pdf) [[Code]](https://github.com/BachiLi/diffvg)
-
-DiffVG is a differentiable rasterizer for 2D vector graphics. **This repository is based on DiffVG.**
-
-### CLIPDraw: Exploring Text-to-Drawing Synthesis through Language-Image Encoders (`NIPS 2022`)
-
-[[Paper]](https://arxiv.org/abs/2106.14843) [[Code]](https://github.com/kvfrans/clipdraw)
-
-### CLIPFont: Texture Guided Vector WordArt Generation (`BMVC 2022`)
-
-[[Paper]](https://bmvc2022.mpi-inf.mpg.de/0543.pdf) [[Code]](https://github.com/songyiren98/CLIPFont)
-
-### StyleCLIPDraw: Coupling Content and Style in Text-to-Drawing Synthesis
-
-[[Live]](https://slideslive.com/38970834/styleclipdraw-coupling-content-and-style-in-texttodrawing-synthesis?ref=account-folder-92044-folders) [[Paper]](https://arxiv.org/abs/2202.12362) [[Code]](https://github.com/pschaldenbrand/StyleCLIPDraw)
-
-### LIVE: Towards Layer-wise Image Vectorization (`CVPR 2022`)
-
-[[Project]](https://ma-xu.github.io/LIVE/) [[Paper]](https://ma-xu.github.io/LIVE/index_files/CVPR22_LIVE_main.pdf) [[Code]](https://github.com/Picsart-AI-Research/LIVE-Layerwise-Image-Vectorization)
-
-### CLIPasso: Semantically-Aware Object Sketching (`SIGGRAPH 2022`)
-
-[[Project]](https://clipasso.github.io/clipasso/) [[Paper]](https://arxiv.org/abs/2202.05822) [[Code]](https://github.com/yael-vinker/CLIPasso)
-
-### CLIPascene: Scene Sketching with Different Types and Levels of Abstraction (`ICCV 2023`)
-
-[[Project]](https://clipascene.github.io/CLIPascene/) [[Paper]](https://arxiv.org/abs/2211.17256) [[Code]](https://github.com/yael-vinker/SceneSketch)
-
-### VectorFusion: Text-to-SVG by Abstracting Pixel-Based Diffusion Models (`CVPR 2023`)
-
-[[Project]](https://vectorfusion.github.io/) [[Paper]](https://openaccess.thecvf.com/content/CVPR2023/papers/Jain_VectorFusion_Text-to-SVG_by_Abstracting_Pixel-Based_Diffusion_Models_CVPR_2023_paper.pdf)
-
-### DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models (`NIPS 2023`)
-
-[[Project]](https://ximinng.github.io/DiffSketcher-project/) [[Paper]](https://arxiv.org/abs/2306.14685) [[Code]](https://github.com/ximinng/DiffSketcher)
-
-### Word-As-Image for Semantic Typography (`SIGGRAPH 2023`)
-
-[[Project]](https://wordasimage.github.io/Word-As-Image-Page/) [[Paper]](https://arxiv.org/abs/2303.01818) [[Code]](https://github.com/Shiriluz/Word-As-Image)
-
 <h2 align="center">Quickstart</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
+
+```shell
+# LIVE
+python svg_render.py x=live target='./data/simile.png'
+
+# CLIPasso
+# note: first download the U2Net model from https://huggingface.co/akhaliq/CLIPasso/blob/main/u2net.pth
+python svg_render.py x=clipasso target='./data/horse.png'
+
+# CLIPDraw
+python svg_render.py x=clipdraw prompt='a photo of a cat'
+
+# StyleCLIPDraw
+python svg_render.py x=styleclipdraw prompt='a photo of a cat' target='./data/starry.png'
+
+# CLIPFont
+python svg_render.py x=clipfont prompt='Starry Night by Vincent van gogh' target='./data/alphabet1.svg'
+
+# VectorFusion, iconography
+python svg_render.py x=vectorfusion prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'
+# VectorFusion, pixel art
+python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a boat in a pond. pixel art. trending on artstation.'
+# VectorFusion, sketch
+python svg_render.py x=vectorfusion x.style='sketch' prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'
+
+# DiffSketcher
+python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5
+# DiffSketcher, variable stroke width
+python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True
+# DiffSketcher RGBA version
+python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True x.optim_rgba=True x.optim_opacity=False
+
+# DiffSketcher + Style transfer
+python svg_render.py x=stylediffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 target='./data/starry.png'
+
+# Word-As-Image
+python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'
+```
 
 <h2 align="center">FAQ</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
@@ -153,7 +200,7 @@ DiffVG is a differentiable rasterizer for 2D vector graphics. **This repository 
 <h2 align="center">TODO</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
-- [ ] integrated the [Hydra](https://hydra.cc/docs/intro/), [repo link](https://github.com/facebookresearch/hydra)
+- [ ] integrated SVGDreamer.
 
 <h2 align="center">Acknowledgement</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
@@ -177,7 +224,7 @@ If you use this code for your research, please cite the following work:
     xing2023diffsketcher,
     title={DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models},
     author={XiMing Xing and Chuang Wang and Haitao Zhou and Jing Zhang and Qian Yu and Dong Xu},
-    booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
+    booktitle={Thirty-seventh Conference on Neural Information Processing Systems (NeurIPS)},
     year={2023},
     url={https://openreview.net/forum?id=CY1xatvEQj}
 }

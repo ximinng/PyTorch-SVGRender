@@ -5,7 +5,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='Pytorch-SVGRender',
+    name='PyTorch-SVGRender',
     packages=find_packages(),
     version='1.0.0',
     license='Mozilla Public License Version 2.0',
@@ -21,6 +21,7 @@ setup(
         'generative models',
     ],
     install_requires=[
+        'hydra-core',
         'omegaconf',  # YAML processor
         'accelerate',  # Hugging Face - pytorch distributed configuration
         'diffusers==0.20.2',  # Hugging Face - diffusion models

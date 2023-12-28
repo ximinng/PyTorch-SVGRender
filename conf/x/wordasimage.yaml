@@ -1,0 +1,46 @@
+method: "wordasimage"
+
+image_size: 600 # canvas size
+word: "BUNNY"
+optim_letter: "Y"
+prompt_suffix: "minimal flat 2d vector. lineal color. trending on artstation"
+
+# train
+num_iter: 500
+lr_schedule: True
+lr:
+  point_lr: 1
+  lr_init: 0.002
+  lr_final: 0.0008
+  lr_delay_mult: 0.1
+  lr_delay_steps: 100
+
+# font
+font: 'KaushanScript-Regular'
+font_path: "./assets/fonts/${x.font}.ttf"
+level_of_cc: 1 # 0 - original number of cc / 1 - recommended / 2 - more control points
+
+# diffusion
+model_id: "sd15"
+ldm_speed_up: False
+enable_xformers: False
+gradient_checkpoint: False
+lora_path: ~
+
+# SDS
+sds:
+  im_size: 512
+  guidance_scale: 100
+  grad_scale: 1.0
+  t_range: [ 0.05, 0.95 ]
+  num_iter: 1000
+
+tone_loss:
+  use: True
+  dist_loss_weight: 100
+  pixel_dist_kernel_blur: 201
+  pixel_dist_sigma: 30
+
+conformal:
+  use: True
+  angeles_w: 0.5

@@ -1,0 +1,3 @@
+- model.path=/home/vinker/dev/lama/lama/big-lama
+- indir=/home/vinker/dev/lama/lama/LaMa_test_images
+- outdir=/home/vinker/dev/lama/lama/output

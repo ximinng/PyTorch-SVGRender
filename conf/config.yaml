@@ -1,0 +1,48 @@
+# optional args
+target: ~
+prompt: ~
+neg_prompt: ~ # negative prompt
+
+# Accelerate config
+state:
+  cpu: False # use cpu
+  mprec: no # mixed precision, choices: 'no', 'fp16', 'bf16'
+  wandb: False
+  tensorboard: False
+
+# Diffusers config
+diffuser:
+  download: False
+  force_download: False
+  resume_download: False
+
+# PyDiffVG config
+diffvg:
+  print_timing: False
+
+# reproduction
+seed: 951222
+# multi-run
+multirun: False
+srange: ~ # seed range, example: [100, 100]
+
+# log
+result_path: './workspace'
+save_step: 10
+eval_step: 10
+
+# visual rendering process
+mv: False # make video
+framefreq: 5 # save the image interval
+framerate: 24 # by adjusting the frame rate, you can control the playback speed of the output video
+
+# hydra setting
+hydra:
+  run:
+    # output directory for normal runs
+    dir: ./${result_path}/${x.method}/sd${seed}-${now:%Y-%m-%d_%H-%M-%S}
+
+# default settings
+defaults:
+  - _self_
+  - x: ~

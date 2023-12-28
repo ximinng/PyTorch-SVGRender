@@ -1,0 +1,85 @@
+method: "vectorfusion"
+
+image_size: 600 # canvas size
+path_svg: ~  # if you want to load a svg file and train from it
+num_stages: 1 # training stages, you can train x strokes, then freeze them and train another x strokes etc
+skip_live: False # if skip_live then training from scratch
+style: "iconography" # "iconography", "pixelart", "low-poly", "painting", "sketch", "ink"
+
+# train
+batch_size: 1
+num_iter: 500 # num_iter per path group
+# lr and optim
+lr_stage_one:
+  point: 1
+  width: 0.1
+  color: 0.01
+  bg: 0.01
+  optim:
+    name: 'adam'
+    betas: [ 0.9, 0.9 ]
+    eps: 1e-6
+  lr_schedule: True # use lr_scheduler
+  schedule:
+    name: 'linear'
+    keep_ratio: 0.2
+    decay_ratio: 0.4
+lr_stage_two:
+  point: 1
+  width: 0.1
+  color: 0.01
+  bg: 0.01
+  lr_schedule: True # use lr_scheduler
+  optim:
+    name: 'adam'
+    betas: [ 0.9, 0.9 ]
+    eps: 1e-6
+  schedule:
+    name: 'cosine'
+    warmup_steps: 50
+    warmup_start_lr: 0.02
+    warmup_end_lr: 1.0
+    cosine_end_lr: 0.4
+
+# primitives
+num_paths: 128 # number of strokes
+path_schedule: 'repeat' # 'list'
+schedule_each: 16 # [1, 3, 5, 7]
+trainable_bg: False # set the background to be trainable
+width: 3 # stroke width
+num_segments: 4
+segment_init: 'circle' # 'random'
+radius: 20
+coord_init: 'sparse' # 'random', 'naive', place the first control point
+grid: 32 # divide the canvas into n grids
+path_reinit: # reinitializing paths
+  use: True
+  freq: 50 # every 50 iterations
+  stop_step: 800 # for SDS fine-tuning
+  opacity_threshold: 0.05
+  area_threshold: 64
+
+# diffusion
+model_id: "sd15" # sd14, sd15, sd21, sd21b, sdxl
+ldm_speed_up: False
+enable_xformers: True
+gradient_checkpoint: False
+cpu_offload: True
+num_inference_steps: 50
+guidance_scale: 7.5 # sdxl default 5.0
+K: 6
+lora_path: ~
+
+# SDS
+sds:
+  im_size: 512
+  guidance_scale: 100
+  grad_scale: 1.0
+  t_range: [ 0.05, 0.95 ]
+  num_iter: 1000 # fine-tuning steps
+
+# Live loss
+use_distance_weighted_loss: True
+xing_loss_weight: 0.01
+# pixel loss
+penalty_weight: 0.05
