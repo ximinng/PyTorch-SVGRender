@@ -42,51 +42,51 @@ Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rende
 
 - DiffVG: Differentiable Vector Graphics Rasterization for Editing and Learning (`SIGGRAPH 2020`)
 
-    [[Project]](https://people.csail.mit.edu/tzumao/diffvg/) [[Paper]](https://cseweb.ucsd.edu/~tzli/diffvg/diffvg.pdf) [[Code]](https://github.com/BachiLi/diffvg)
-    
-    DiffVG is a differentiable rasterizer for 2D vector graphics. **This repository is based on DiffVG.**
+  [[Project]](https://people.csail.mit.edu/tzumao/diffvg/) [[Paper]](https://cseweb.ucsd.edu/~tzli/diffvg/diffvg.pdf) [[Code]](https://github.com/BachiLi/diffvg)
+
+  DiffVG is a differentiable rasterizer for 2D vector graphics. **This repository is based on DiffVG.**
 
 - LIVE: Towards Layer-wise Image Vectorization (`CVPR 2022`)
 
-    [[Project]](https://ma-xu.github.io/LIVE/) [[Paper]](https://ma-xu.github.io/LIVE/index_files/CVPR22_LIVE_main.pdf) [[Code]](https://github.com/Picsart-AI-Research/LIVE-Layerwise-Image-Vectorization)
+  [[Project]](https://ma-xu.github.io/LIVE/) [[Paper]](https://ma-xu.github.io/LIVE/index_files/CVPR22_LIVE_main.pdf) [[Code]](https://github.com/Picsart-AI-Research/LIVE-Layerwise-Image-Vectorization)
 
 - CLIPasso: Semantically-Aware Object Sketching (`SIGGRAPH 2022`)
 
-    [[Project]](https://clipasso.github.io/clipasso/) [[Paper]](https://arxiv.org/abs/2202.05822) [[Code]](https://github.com/yael-vinker/CLIPasso)
+  [[Project]](https://clipasso.github.io/clipasso/) [[Paper]](https://arxiv.org/abs/2202.05822) [[Code]](https://github.com/yael-vinker/CLIPasso)
 
 - CLIPascene: Scene Sketching with Different Types and Levels of Abstraction (`ICCV 2023`)
 
-    [[Project]](https://clipascene.github.io/CLIPascene/) [[Paper]](https://arxiv.org/abs/2211.17256) [[Code]](https://github.com/yael-vinker/SceneSketch)
+  [[Project]](https://clipascene.github.io/CLIPascene/) [[Paper]](https://arxiv.org/abs/2211.17256) [[Code]](https://github.com/yael-vinker/SceneSketch)
 
 ### 2. Text-to-SVG Synthesis
 
 - CLIPDraw: Exploring Text-to-Drawing Synthesis through Language-Image Encoders (`NIPS 2022`)
 
-    [[Paper]](https://arxiv.org/abs/2106.14843) [[Code]](https://github.com/kvfrans/clipdraw)
+  [[Paper]](https://arxiv.org/abs/2106.14843) [[Code]](https://github.com/kvfrans/clipdraw)
 
 - StyleCLIPDraw: Coupling Content and Style in Text-to-Drawing Synthesis
 
-    [[Live]](https://slideslive.com/38970834/styleclipdraw-coupling-content-and-style-in-texttodrawing-synthesis?ref=account-folder-92044-folders) [[Paper]](https://arxiv.org/abs/2202.12362) [[Code]](https://github.com/pschaldenbrand/StyleCLIPDraw)
+  [[Live]](https://slideslive.com/38970834/styleclipdraw-coupling-content-and-style-in-texttodrawing-synthesis?ref=account-folder-92044-folders) [[Paper]](https://arxiv.org/abs/2202.12362) [[Code]](https://github.com/pschaldenbrand/StyleCLIPDraw)
 
 - CLIPFont: Texture Guided Vector WordArt Generation (`BMVC 2022`)
 
-    [[Paper]](https://bmvc2022.mpi-inf.mpg.de/0543.pdf) [[Code]](https://github.com/songyiren98/CLIPFont)
+  [[Paper]](https://bmvc2022.mpi-inf.mpg.de/0543.pdf) [[Code]](https://github.com/songyiren98/CLIPFont)
 
 - VectorFusion: Text-to-SVG by Abstracting Pixel-Based Diffusion Models (`CVPR 2023`)
 
-    [[Project]](https://vectorfusion.github.io/) [[Paper]](https://openaccess.thecvf.com/content/CVPR2023/papers/Jain_VectorFusion_Text-to-SVG_by_Abstracting_Pixel-Based_Diffusion_Models_CVPR_2023_paper.pdf)
+  [[Project]](https://vectorfusion.github.io/) [[Paper]](https://openaccess.thecvf.com/content/CVPR2023/papers/Jain_VectorFusion_Text-to-SVG_by_Abstracting_Pixel-Based_Diffusion_Models_CVPR_2023_paper.pdf)
 
 - DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models (`NIPS 2023`)
 
-    [[Project]](https://ximinng.github.io/DiffSketcher-project/) [[Paper]](https://arxiv.org/abs/2306.14685) [[Code]](https://github.com/ximinng/DiffSketcher)
+  [[Project]](https://ximinng.github.io/DiffSketcher-project/) [[Paper]](https://arxiv.org/abs/2306.14685) [[Code]](https://github.com/ximinng/DiffSketcher)
 
 - Word-As-Image for Semantic Typography (`SIGGRAPH 2023`)
 
-    [[Project]](https://wordasimage.github.io/Word-As-Image-Page/) [[Paper]](https://arxiv.org/abs/2303.01818) [[Code]](https://github.com/Shiriluz/Word-As-Image)
+  [[Project]](https://wordasimage.github.io/Word-As-Image-Page/) [[Paper]](https://arxiv.org/abs/2303.01818) [[Code]](https://github.com/Shiriluz/Word-As-Image)
 
 - SVGDreamer: Text Guided SVG Generation with Diffusion Model
-    
-    [[Paper]](https://arxiv.org/abs/2312.16476) [Code coming soon]
+
+  [[Paper]](https://arxiv.org/abs/2312.16476) [Code coming soon]
 
 <h2 align="center">Installation</h2>
 
@@ -157,42 +157,67 @@ python setup.py install
 <h2 align="center">Quickstart</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
+**LIVE**, vectorize emojis in original PNG format:
+
 ```shell
-# LIVE
 python svg_render.py x=live target='./data/simile.png'
+```
 
-# CLIPasso
-# note: first download the U2Net model from https://huggingface.co/akhaliq/CLIPasso/blob/main/u2net.pth, 
-# put the model in `./checkpoint/u2net/u2net.pth` 
+**CLIPasso**, synthesizes vectorized sketches from images:
+
+**note:** first download the [U2Net model](https://huggingface.co/akhaliq/CLIPasso/blob/main/u2net.pth), and put the
+model in `./checkpoint/u2net/u2net.pth`.
+
+```shell
 python svg_render.py x=clipasso target='./data/horse.png'
+```
 
-# CLIPDraw
+**CLIPDraw**, synthesizes SVGs based on text prompts:
+
+```shell
 python svg_render.py x=clipdraw prompt='a photo of a cat'
+```
 
-# StyleCLIPDraw
+**StyleCLIPDraw**, synthesizes SVG based on a text prompt and a reference image:
+
+```shell
 python svg_render.py x=styleclipdraw prompt='a photo of a cat' target='./data/starry.png'
+```
 
-# CLIPFont
+**CLIPFont**, styles vector fonts according to text prompts:
+
+```shell
 python svg_render.py x=clipfont prompt='Starry Night by Vincent van gogh' target='./data/alphabet1.svg'
+```
 
+**VectorFusion**, synthesize SVGs in various styles based on text prompts:
+
+```shell
 # VectorFusion, iconography
 python svg_render.py x=vectorfusion prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'
 # VectorFusion, pixel art
 python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a boat in a pond. pixel art. trending on artstation.'
 # VectorFusion, sketch
 python svg_render.py x=vectorfusion x.style='sketch' prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'
+```
 
+**DiffSketcher**, synthesize vector sketches based on text prompts:
+
+```shell
 # DiffSketcher
 python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 seed=8019
 # DiffSketcher, variable stroke width
 python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True seed=8019
 # DiffSketcher RGBA version
 python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True x.optim_rgba=True x.optim_opacity=False seed=8019
-
 # DiffSketcher + style transfer
 python svg_render.py x=stylediffsketcher prompt='A horse is drinking water by the lake' x.token_ind=5 target='./data/starry.png' seed=998
+```
 
-# Word-As-Image
+**Word-As-Image**, follow a text prompt to style a letter in a word:
+
+```shell
+# Inject the meaning of the word bunny into the 'Y' in the word 'BUNNY'
 python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'
 ```
 
@@ -210,9 +235,9 @@ python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter=
 The project is built based on the following repository:
 
 - [BachiLi/diffvg](https://github.com/BachiLi/diffvg)
-- [ma-xu/LIVE](https://github.com/Picsart-AI-Research/LIVE-Layerwise-Image-Vectorization)
 - [huggingface/diffusers](https://github.com/huggingface/diffusers)
 - [yael-vinker/CLIPasso](https://github.com/yael-vinker/CLIPasso)
+- [ximinng/DiffSketcher](https://github.com/ximinng/DiffSketcher)
 
 We gratefully thank the authors for their wonderful works.
 
