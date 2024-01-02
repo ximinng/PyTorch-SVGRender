@@ -38,54 +38,55 @@ Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rende
 <h2 align="center">Table of Contents</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
-## 1. Image Vectorization
+### 1. Image Vectorization
 
-### DiffVG: Differentiable Vector Graphics Rasterization for Editing and Learning (`SIGGRAPH 2020`)
+- DiffVG: Differentiable Vector Graphics Rasterization for Editing and Learning (`SIGGRAPH 2020`)
 
-[[Project]](https://people.csail.mit.edu/tzumao/diffvg/) [[Paper]](https://cseweb.ucsd.edu/~tzli/diffvg/diffvg.pdf) [[Code]](https://github.com/BachiLi/diffvg)
+    [[Project]](https://people.csail.mit.edu/tzumao/diffvg/) [[Paper]](https://cseweb.ucsd.edu/~tzli/diffvg/diffvg.pdf) [[Code]](https://github.com/BachiLi/diffvg)
+    
+    DiffVG is a differentiable rasterizer for 2D vector graphics. **This repository is based on DiffVG.**
 
-DiffVG is a differentiable rasterizer for 2D vector graphics. **This repository is based on DiffVG.**
+- LIVE: Towards Layer-wise Image Vectorization (`CVPR 2022`)
 
-### LIVE: Towards Layer-wise Image Vectorization (`CVPR 2022`)
+    [[Project]](https://ma-xu.github.io/LIVE/) [[Paper]](https://ma-xu.github.io/LIVE/index_files/CVPR22_LIVE_main.pdf) [[Code]](https://github.com/Picsart-AI-Research/LIVE-Layerwise-Image-Vectorization)
 
-[[Project]](https://ma-xu.github.io/LIVE/) [[Paper]](https://ma-xu.github.io/LIVE/index_files/CVPR22_LIVE_main.pdf) [[Code]](https://github.com/Picsart-AI-Research/LIVE-Layerwise-Image-Vectorization)
+- CLIPasso: Semantically-Aware Object Sketching (`SIGGRAPH 2022`)
 
-### CLIPasso: Semantically-Aware Object Sketching (`SIGGRAPH 2022`)
+    [[Project]](https://clipasso.github.io/clipasso/) [[Paper]](https://arxiv.org/abs/2202.05822) [[Code]](https://github.com/yael-vinker/CLIPasso)
 
-[[Project]](https://clipasso.github.io/clipasso/) [[Paper]](https://arxiv.org/abs/2202.05822) [[Code]](https://github.com/yael-vinker/CLIPasso)
+- CLIPascene: Scene Sketching with Different Types and Levels of Abstraction (`ICCV 2023`)
 
-### CLIPascene: Scene Sketching with Different Types and Levels of Abstraction (`ICCV 2023`)
+    [[Project]](https://clipascene.github.io/CLIPascene/) [[Paper]](https://arxiv.org/abs/2211.17256) [[Code]](https://github.com/yael-vinker/SceneSketch)
 
-[[Project]](https://clipascene.github.io/CLIPascene/) [[Paper]](https://arxiv.org/abs/2211.17256) [[Code]](https://github.com/yael-vinker/SceneSketch)
+### 2. Text-to-SVG Synthesis
 
-## 2. Text-to-SVG Synthesis
+- CLIPDraw: Exploring Text-to-Drawing Synthesis through Language-Image Encoders (`NIPS 2022`)
 
-### CLIPDraw: Exploring Text-to-Drawing Synthesis through Language-Image Encoders (`NIPS 2022`)
+    [[Paper]](https://arxiv.org/abs/2106.14843) [[Code]](https://github.com/kvfrans/clipdraw)
 
-[[Paper]](https://arxiv.org/abs/2106.14843) [[Code]](https://github.com/kvfrans/clipdraw)
+- StyleCLIPDraw: Coupling Content and Style in Text-to-Drawing Synthesis
 
-### StyleCLIPDraw: Coupling Content and Style in Text-to-Drawing Synthesis
+    [[Live]](https://slideslive.com/38970834/styleclipdraw-coupling-content-and-style-in-texttodrawing-synthesis?ref=account-folder-92044-folders) [[Paper]](https://arxiv.org/abs/2202.12362) [[Code]](https://github.com/pschaldenbrand/StyleCLIPDraw)
 
-[[Live]](https://slideslive.com/38970834/styleclipdraw-coupling-content-and-style-in-texttodrawing-synthesis?ref=account-folder-92044-folders) [[Paper]](https://arxiv.org/abs/2202.12362) [[Code]](https://github.com/pschaldenbrand/StyleCLIPDraw)
+- CLIPFont: Texture Guided Vector WordArt Generation (`BMVC 2022`)
 
-### CLIPFont: Texture Guided Vector WordArt Generation (`BMVC 2022`)
+    [[Paper]](https://bmvc2022.mpi-inf.mpg.de/0543.pdf) [[Code]](https://github.com/songyiren98/CLIPFont)
 
-[[Paper]](https://bmvc2022.mpi-inf.mpg.de/0543.pdf) [[Code]](https://github.com/songyiren98/CLIPFont)
+- VectorFusion: Text-to-SVG by Abstracting Pixel-Based Diffusion Models (`CVPR 2023`)
 
-### VectorFusion: Text-to-SVG by Abstracting Pixel-Based Diffusion Models (`CVPR 2023`)
+    [[Project]](https://vectorfusion.github.io/) [[Paper]](https://openaccess.thecvf.com/content/CVPR2023/papers/Jain_VectorFusion_Text-to-SVG_by_Abstracting_Pixel-Based_Diffusion_Models_CVPR_2023_paper.pdf)
 
-[[Project]](https://vectorfusion.github.io/) [[Paper]](https://openaccess.thecvf.com/content/CVPR2023/papers/Jain_VectorFusion_Text-to-SVG_by_Abstracting_Pixel-Based_Diffusion_Models_CVPR_2023_paper.pdf)
+- DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models (`NIPS 2023`)
 
-### DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models (`NIPS 2023`)
+    [[Project]](https://ximinng.github.io/DiffSketcher-project/) [[Paper]](https://arxiv.org/abs/2306.14685) [[Code]](https://github.com/ximinng/DiffSketcher)
 
-[[Project]](https://ximinng.github.io/DiffSketcher-project/) [[Paper]](https://arxiv.org/abs/2306.14685) [[Code]](https://github.com/ximinng/DiffSketcher)
+- Word-As-Image for Semantic Typography (`SIGGRAPH 2023`)
 
-### Word-As-Image for Semantic Typography (`SIGGRAPH 2023`)
+    [[Project]](https://wordasimage.github.io/Word-As-Image-Page/) [[Paper]](https://arxiv.org/abs/2303.01818) [[Code]](https://github.com/Shiriluz/Word-As-Image)
 
-[[Project]](https://wordasimage.github.io/Word-As-Image-Page/) [[Paper]](https://arxiv.org/abs/2303.01818) [[Code]](https://github.com/Shiriluz/Word-As-Image)
-
-### SVGDreamer: Text Guided SVG Generation with Diffusion Model  (`coming soon`)
-
+- SVGDreamer: Text Guided SVG Generation with Diffusion Model
+    
+    [[Paper]](https://arxiv.org/abs/2312.16476) [Code coming soon]
 
 <h2 align="center">Installation</h2>
 
@@ -221,8 +222,13 @@ We gratefully thank the authors for their wonderful works.
 If you use this code for your research, please cite the following work:
 
 ```
-@inproceedings{
-    xing2023diffsketcher,
+@article{xing2023svgdreamer,
+    title={SVGDreamer: Text Guided SVG Generation with Diffusion Model},
+    author={Xing, Ximing and Zhou, Haitao and Wang, Chuang and Zhang, Jing and Xu, Dong and Yu, Qian},
+    journal={arXiv preprint arXiv:2312.16476},
+    year={2023}
+}
+@inproceedings{xing2023diffsketcher,
     title={DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models},
     author={XiMing Xing and Chuang Wang and Haitao Zhou and Jing Zhang and Qian Yu and Dong Xu},
     booktitle={Thirty-seventh Conference on Neural Information Processing Systems (NeurIPS)},
