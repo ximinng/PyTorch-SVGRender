@@ -1,18 +1,10 @@
 <h1 id="ptsvg" align="center">Pytorch-SVGRender</h1>
 
 <p align="center">
-    <a href="https://www.python.org/">
-        <img src="https://img.shields.io/badge/python-3.10-or?logo=python" alt="pyhton">
-    </a>
-    <a href="http://mozilla.org/MPL/2.0/">
-        <img src="https://img.shields.io/badge/license-MPL2.0-orange" alt="license">
-    </a>
-    <a href="https://ximinng.github.io/PyTorch-SVGRender/">
-        <img src="https://img.shields.io/badge/website-Gitpage-yellow" alt="website">
-    </a>
-    <a href="https://pytorch-svgrender.readthedocs.io/en/latest/index.html">
-        <img src="https://img.shields.io/badge/docs-readthedocs-purple" alt="docs">
-    </a>
+    <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.10-or?logo=python" alt="pyhton"></a>
+    <a href="http://mozilla.org/MPL/2.0/"><img src="https://img.shields.io/badge/license-MPL2.0-orange" alt="license"></a>
+    <a href="https://ximinng.github.io/PyTorch-SVGRender/"><img src="https://img.shields.io/badge/website-Gitpage-yellow" alt="website"></a>
+    <a href="https://pytorch-svgrender.readthedocs.io/en/latest/index.html"><img src="https://img.shields.io/badge/docs-readthedocs-purple" alt="docs"></a>
 </p>
 
 <p align="center">

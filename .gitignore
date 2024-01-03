@@ -147,6 +147,8 @@ cython_debug/
 
 ### project ###
 
+/diffvg/
+
 # pytorch-lighting logs
 lightning_logs/*
 
