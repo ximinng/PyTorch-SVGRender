@@ -3,6 +3,10 @@ Welcome to PyTorch-SVGRender documentation!
 
 **Pytorch-SVGRender** is the go-to library for state-of-the-art differentiable rendering methods for image vectorization.
 
+.. note::
+
+   This project is under active development.
+
 Installation
 ----------
 
@@ -51,7 +55,7 @@ Install diffusers:
 
    (svgrender) $ pip install diffusers==0.20.2
 
-Install xformers (require `python=3.10`):
+Install xformers (require ``python=3.10``):
 
 .. code-block:: console
 
@@ -73,16 +77,12 @@ Install diffvg:
 Table of Contents
 ----------
 
-* :doc:`live`, to :ref:`live`
+* :doc:`live`
 
-.. note::
-
-   This project is under active development.
 
 Contents
 --------
 
 .. toctree::
    live
-   usage
    api
