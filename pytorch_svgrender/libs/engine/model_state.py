@@ -6,8 +6,11 @@
 from typing import Union, List
 from pathlib import Path
 from datetime import datetime
+import logging
+import yaml
 
 from omegaconf import OmegaConf, DictConfig
+import hydra
 from pprint import pprint
 import torch
 from accelerate.utils import LoggerType
@@ -24,7 +27,7 @@ class ModelState:
         - Precision
         - Device
         - Optimizer
-        - Logger (default: python system print)
+        - Logger (default: python system print and logging)
         - Monitor (default: wandb, tensorboard)
     """
 
@@ -47,20 +50,20 @@ class ModelState:
         """create working space"""
         # rule: ['./config'. 'method_name', 'exp_name.yaml']
         # -> result_path: ./runs/{method_name}-{exp_name}, as a base folder
-        # config_prefix, config_name = str(self.args.get("config")).split('/')
-        # config_name_only = str(config_name).split(".")[0]
-
-        config_name_only = str(self.args.x.method).split(".")[0]
+        now_time = datetime.now().strftime('%Y-%m-%d-%H-%M')
         results_folder = self.args.get("result_path", None)
         if results_folder is None:
-            self.result_path = Path("./workdir") / f"{config_name_only}"
+            self.result_path = Path("./workdir") / f"{self.x_cfg.method}-{now_time}"
         else:
-            self.result_path = Path(results_folder) / f"{config_name_only}"
+            self.result_path = Path(results_folder) / f"{self.x_cfg.method}-{now_time}"
 
         # update result_path: ./runs/{method_name}-{exp_name}/{log_path_suffix}
         # noting: can be understood as "results dir / methods / ablation study / your result"
+        config_name_only = str(self.x_cfg.method).split(".")[0]
         if log_path_suffix is not None:
-            self.result_path = self.result_path / log_path_suffix
+            self.result_path = self.result_path / f"{config_name_only}-{log_path_suffix}"
+        else:
+            self.result_path = self.result_path / f"{config_name_only}"
 
         """init visualized tracker"""
         self.log_with = []
@@ -80,13 +83,15 @@ class ModelState:
 
         """logs"""
         if self.accelerator.is_local_main_process:
-            # for logging results in a folder periodically
+            # logging
+            self.log = logging.getLogger(__name__)
+
+            # log results in a folder periodically
             self.result_path.mkdir(parents=True, exist_ok=True)
             if not ignore_log:
-                now_time = datetime.now().strftime('%Y-%m-%d-%H-%M')
                 self.logger = get_logger(
                     logs_dir=self.result_path.as_posix(),
-                    file_name=f"{now_time}-log-{args.seed}.txt"
+                    file_name=f"{now_time}-{args.seed}-log.txt"
                 )
 
             print("==> system args: ")

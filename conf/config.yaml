@@ -38,9 +38,12 @@ framerate: 24 # by adjusting the frame rate, you can control the playback speed 
 
 # hydra setting
 hydra:
+  help:
+    # app name, override to match the name your app is known by
+    app_name: 'SVGRender'
   run:
     # output directory for normal runs
-    dir: ./${result_path}/${x.method}/sd${seed}-${now:%Y-%m-%d_%H-%M-%S}
+    dir: ./${result_path}/${x.method}-${now:%Y-%m-%d-%H-%M}
 
 # default settings
 defaults:

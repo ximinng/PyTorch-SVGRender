@@ -37,7 +37,7 @@ def main(cfg: omegaconf.DictConfig):
     seed_range = get_seed_range(cfg.srange) if cfg.multirun else None
 
     # render function
-    render_batch_fn = partial(render_batch_wrap, args=cfg, seed_range=seed_range)
+    render_batch_fn = partial(render_batch_wrap, cfg=cfg, seed_range=seed_range)
 
     if flag == "wordasimage":  # text2font
         from pytorch_svgrender.pipelines.WordAsImage_pipeline import WordAsImagePipeline
