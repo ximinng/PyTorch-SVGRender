@@ -70,7 +70,7 @@ Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rende
 
 - DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models (`NIPS 2023`)
 
-  [[Project]](https://ximinng.github.io/DiffSketcher-project/) [[Paper]](https://arxiv.org/abs/2306.14685) [[Code]](https://github.com/ximinng/DiffSketcher)
+  [[Project]](https://ximinng.github.io/DiffSketcher-project/) [[Live]](https://neurips.cc/virtual/2023/poster/72425) [[Paper]](https://arxiv.org/abs/2306.14685) [[Code]](https://github.com/ximinng/DiffSketcher)
 
 - Word-As-Image for Semantic Typography (`SIGGRAPH 2023`)
 
@@ -78,7 +78,7 @@ Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rende
 
 - SVGDreamer: Text Guided SVG Generation with Diffusion Model
 
-  [[Paper]](https://arxiv.org/abs/2312.16476) [Code coming soon]
+  [[Project]](https://ximinng.github.io/SVGDreamer-project/) [[Paper]](https://arxiv.org/abs/2312.16476) [[code]](https://github.com/ximinng/SVGDreamer)
 
 <h2 align="center">Installation</h2>
 
@@ -149,7 +149,7 @@ python setup.py install
 <h2 align="center">Quickstart</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
-**LIVE**, vectorize emojis in original PNG format:
+**LIVE**, vectorizes emojis in original PNG format:
 
 ```shell
 python svg_render.py x=live target='./data/simile.png'
@@ -182,7 +182,7 @@ python svg_render.py x=styleclipdraw prompt='a photo of a cat' target='./data/st
 python svg_render.py x=clipfont prompt='Starry Night by Vincent van gogh' target='./data/alphabet1.svg'
 ```
 
-**VectorFusion**, synthesize SVGs in various styles based on text prompts:
+**VectorFusion**, synthesizes SVGs in various styles based on text prompts:
 
 ```shell
 # VectorFusion, iconography
@@ -193,7 +193,7 @@ python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a 
 python svg_render.py x=vectorfusion x.style='sketch' prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'
 ```
 
-**DiffSketcher**, synthesize vector sketches based on text prompts:
+**DiffSketcher**, synthesizes vector sketches based on text prompts:
 
 ```shell
 # DiffSketcher

@@ -13,19 +13,10 @@ LIVE
 The LIVE algorithm was proposed in *Towards Layer-wise Image Vectorization*.
 
 The abstract from the paper is:
-::
-  Image rasterization is a mature technique in computer graphics, while image vectorization, the reverse path of rasterization, remains a major challenge.
-  Recent advanced deep learning-based models achieve vectorization and semantic interpolation of vector graphs and demonstrate a better topology of generating new figures.
-  However, deep models cannot be easily generalized to out-ofdomain testing data.
-  The generated SVGs also contain complex and redundant shapes that are not quite convenient for further editing.
-  Specifically, the crucial layerwise topology and fundamental semantics in images are still not well understood and thus not fully explored.
-  In this work, we propose Layer-wise Image Vectorization, namely LIVE, to convert raster images to SVGs and simultaneously maintain its image topology.
-  LIVE can generate compact SVG forms with layer-wise structures that are semantically consistent with human perspective.
-  We progressively add new bézier paths and optimize these paths with the layer-wise framework, newly designed loss functions, and component-wise path initialization technique.
-  Our experiments demonstrate that LIVE presents more plausible vectorized forms than prior works and can be generalized to new images.  With the help of this newly learned topology, LIVE initiates human editable SVGs for both designers and other downstream applications.
 
-Examples
-^^^^^^^^^^^
+`Image rasterization is a mature technique in computer graphics, while image vectorization, the reverse path of rasterization, remains a major challenge. Recent advanced deep learning-based models achieve vectorization and semantic interpolation of vector graphs and demonstrate a better topology of generating new figures. However, deep models cannot be easily generalized to out-ofdomain testing data. The generated SVGs also contain complex and redundant shapes that are not quite convenient for further editing. Specifically, the crucial layerwise topology and fundamental semantics in images are still not well understood and thus not fully explored. In this work, we propose Layer-wise Image Vectorization, namely LIVE, to convert raster images to SVGs and simultaneously maintain its image topology. LIVE can generate compact SVG forms with layer-wise structures that are semantically consistent with human perspective. We progressively add new bézier paths and optimize these paths with the layer-wise framework, newly designed loss functions, and component-wise path initialization technique. Our experiments demonstrate that LIVE presents more plausible vectorized forms than prior works and can be generalized to new images.  With the help of this newly learned topology, LIVE initiates human editable SVGs for both designers and other downstream applications.`
+
+**Examples:**
 
 LIVE to convert raster images to SVGs and simultaneously maintain its image topology.
 

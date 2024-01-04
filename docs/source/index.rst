@@ -7,6 +7,12 @@ Welcome to PyTorch-SVGRender documentation!
 
    This project is under active development.
 
+Table of Contents
+----------
+
+* :doc:`live`
+* :doc:`api`
+
 Installation
 ----------
 
@@ -72,17 +78,3 @@ Install diffvg:
    (svgrender) $ conda install -y -c conda-forge ffmpeg
    (svgrender) $ pip install svgwrite svgpathtools cssutils torch-tools
    (svgrender) $ python setup.py install
-
-
-Table of Contents
-----------
-
-* :doc:`live`
-
-
-Contents
---------
-
-.. toctree::
-   live
-   api
