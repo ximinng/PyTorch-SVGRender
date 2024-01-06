@@ -10,8 +10,19 @@ Welcome to PyTorch-SVGRender documentation!
 Table of Contents
 ----------
 
-* :doc:`live`
-* :doc:`api`
+.. toctree::
+   :maxdepth: 2
+
+   live
+   clipasso
+   clipdraw
+   styleclipdraw
+   clipfont
+   vectorfusion
+   diffsketcher
+   wordasimage
+   svgdreamer
+   api
 
 Installation
 ----------

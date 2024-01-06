@@ -3,12 +3,7 @@ LIVE
 
 .. _live:
 
-.. hlist::
-   :columns: 3
-
-    * `[Project] <https://ma-xu.github.io/LIVE/>`_
-    * `[Paper] <https://ma-xu.github.io/LIVE/index_files/CVPR22_LIVE_main.pdf>`_
-    * `[Code] <https://github.com/Picsart-AI-Research/LIVE-Layerwise-Image-Vectorization>`_
+`[Project] <https://ma-xu.github.io/LIVE/>`_ `[Paper] <https://ma-xu.github.io/LIVE/index_files/CVPR22_LIVE_main.pdf>`_ `[Code] <https://github.com/Picsart-AI-Research/LIVE-Layerwise-Image-Vectorization>`_
 
 The LIVE algorithm was proposed in *Towards Layer-wise Image Vectorization*.
 
