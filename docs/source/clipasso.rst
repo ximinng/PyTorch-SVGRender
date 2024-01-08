@@ -22,3 +22,7 @@ Convert an image of a horse from the original PNG format to an abstract sketch:
 .. code-block:: console
 
    $ python svg_render.py x=clipasso target='./data/horse.png'
+
+You will get the following result:
+
+.. image:: ../../examples/clipasso/clipasso_horse.svg

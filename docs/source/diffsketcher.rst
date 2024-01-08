@@ -21,11 +21,19 @@ Synthesize a sketch of a photo of Sydney opera house:
 
    $ python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 seed=8019
 
+You will get the following result:
+
+.. image:: ../../examples/diffsketcher/diffsketcher_Sydney.svg
+
 Synthesize a sketch of a photo of Sydney opera house, where the width of the strokes is also optimized:
 
 .. code-block:: console
 
    $ python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True seed=8019
+
+You will get the following result:
+
+.. image:: ../../examples/diffsketcher/diffsketcher_Sydney_width.svg
 
 Synthesize a colorful sketch of a photo of Sydney opera house, where the width of the strokes is also optimized:
 
@@ -33,9 +41,16 @@ Synthesize a colorful sketch of a photo of Sydney opera house, where the width o
 
    $ python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True x.optim_rgba=True x.optim_opacity=False seed=8019
 
+You will get the following result:
+
+.. image:: ../../examples/diffsketcher/diffsketcher_Sydney_width_color.svg
 
 Synthesize a sketch of a photo of a horse drinking water by the lake, using style of Van Gogh's Starry Night:
 
 .. code-block:: console
 
    $ python svg_render.py x=stylediffsketcher prompt='A horse is drinking water by the lake' x.token_ind=5 target='./data/starry.png' seed=998
+
+You will get the following result:
+
+.. image:: ../../examples/diffsketcher/stylediffsketcher_horse_starry.svg

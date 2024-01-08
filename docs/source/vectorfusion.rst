@@ -21,14 +21,27 @@ Synthesize an iconographic of a panda rowing a boat in a pond.
 
    $ python svg_render.py x=vectorfusion prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'
 
+You will get the following result:
+
+.. image:: ../../examples/vectorfusion/vectorfusion_panda_icon.svg
+
 Synthesize a pixel art of a panda rowing a boat in a pond.
 
 .. code-block:: console
 
    $ python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a boat in a pond. pixel art. trending on artstation.'
 
+You will get the following result:
+
+.. image:: ../../examples/vectorfusion/vectorfusion_panda_pixel.svg
+
 Synthesize a sketch of a panda rowing a boat in a pond.
 
 .. code-block:: console
 
    $ python svg_render.py x=vectorfusion x.style='sketch' prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'
+
+You will get the following result:
+
+.. image:: ../../examples/vectorfusion/vectorfusion_panda_sketch.svg
+

@@ -112,7 +112,7 @@ class WordAsImagePipeline(ModelState):
 
                 raster_img = renderer.get_image(step=i)
 
-                if self.make_video and (i % self.args.video_frame_freq == 0 or i == n_iter - 1):
+                if self.make_video and (i % self.args.framefreq == 0 or i == n_iter - 1):
                     log_input(raster_img, self.frame_log_dir, output_prefix=f"iter{self.step}")
 
                 L_sds, grad = self.diffusion.score_distillation_sampling(

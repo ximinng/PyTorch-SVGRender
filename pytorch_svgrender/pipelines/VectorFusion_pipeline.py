@@ -31,7 +31,7 @@ class VectorFusionPipeline(ModelState):
         logdir_ = f"sd{args.seed}-" \
                   f"{'scratch' if args.x.skip_live else 'baseline'}" \
                   f"-{args.x.model_id}" \
-                  f"-{args.style}" \
+                  f"-{args.x.style}" \
                   f"-P{args.x.num_paths}" \
                   f"{'-RePath' if args.x.path_reinit.use else ''}"
         super().__init__(args, log_path_suffix=logdir_)
@@ -94,7 +94,7 @@ class VectorFusionPipeline(ModelState):
         self.style = self.x_cfg.style
         if self.style in ["pixelart", "low-poly"]:
             self.x_cfg.path_schedule = 'list'
-            self.x_cfg.schedule_each = list([args.grid])
+            self.x_cfg.schedule_each = list([args.x.grid])
 
         if self.style == "pixelart":
             self.x_cfg.lr_stage_one.lr_schedule = False
