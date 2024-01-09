@@ -29,7 +29,7 @@ Synthesize a pixel art of a panda rowing a boat in a pond.
 
 .. code-block:: console
 
-   $ python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a boat in a pond. pixel art. trending on artstation.'
+   $ python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a boat in a pond. pixel art. trending on artstation.' image_size=512
 
 You will get the following result:
 

@@ -19,7 +19,7 @@ Synthesize a sketch of a photo of Sydney opera house:
 
 .. code-block:: console
 
-   $ python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 seed=8019
+   $ python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 seed=8019 x.num_paths=96
 
 You will get the following result:
 
@@ -29,7 +29,7 @@ Synthesize a sketch of a photo of Sydney opera house, where the width of the str
 
 .. code-block:: console
 
-   $ python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True seed=8019
+   $ python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True seed=8019 x.num_paths=96
 
 You will get the following result:
 
