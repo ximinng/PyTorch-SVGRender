@@ -278,7 +278,7 @@ class PainterOptimizer:
     def init_optimizers(self):
         # optimizers
         self.renderer.set_point_parameters()
-        self.points_optimizer = torch.optim.Adam(self.renderer.get_color_parameters(), lr=self.points_lr)
+        self.points_optimizer = torch.optim.Adam(self.renderer.get_point_parameters(), lr=self.points_lr)
         if self.optim_color:
             self.renderer.set_color_parameters()
             self.color_optimizer = torch.optim.Adam(self.renderer.get_color_parameters(), lr=self.color_lr)

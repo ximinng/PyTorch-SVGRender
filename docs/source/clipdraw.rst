@@ -20,3 +20,7 @@ Synthesize a photo of a cat:
 .. code-block:: console
 
    $ python svg_render.py x=clipdraw prompt='a photo of a cat'
+
+You will get the following result:
+
+.. image:: ../../examples/clipdraw/clipdraw_cat.svg

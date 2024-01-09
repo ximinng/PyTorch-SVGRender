@@ -21,6 +21,10 @@ Convert emojis from the original PNG format to vector format:
 
    $ python svg_render.py x=live target='./data/simile.png'
 
+You will get the following result:
+
+.. image:: ../../examples/live/live_smile.svg
+
 To improve the SVGs, adjust the ``num_paths`` based on the raster image:
 
 .. code-block:: console
