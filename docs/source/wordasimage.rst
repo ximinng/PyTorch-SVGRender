@@ -15,12 +15,13 @@ The abstract from the paper is:
 
 Word-As-Image follows a text prompt to style a letter in a word.
 
-Inject the meaning of the word bunny into the 'Y' in the word 'BUNNY':
+Inject the meaning of the word *bunny* into the 'Y' in the word 'BUNNY':
 
 .. code-block:: console
     
-    $ python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'
+   $ python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'
 
 You will get the following result:
 
 .. image:: ../../examples/wordasimage/wordasimage_BUNNY_Y.svg
+   :width: 224
