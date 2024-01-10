@@ -32,6 +32,11 @@ a {
     border-top: 3px solid cornflowerblue;
 }
 
+.img224 {
+    height: 224px;
+    width: auto;
+}
+
 /*
  * Footer
  */
