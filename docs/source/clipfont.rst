@@ -27,3 +27,7 @@ Style the alphabet in the style of Starry Night by Vincent van Gogh:
 .. code-block:: console
 
    $ python svg_render.py x=clipfont prompt='Starry Night by Vincent van gogh' target='./data/alphabet1.svg'
+
+You will get the following result:
+
+.. image:: ../../examples/clipfont/clipfont_alphabet.svg

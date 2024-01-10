@@ -54,9 +54,9 @@ sds:
   crop_size: 512
   augmentations: "affine"
   guidance_scale: 100
-  grad_scale: 1e-5
+  grad_scale: 1e-6
   t_range: [ 0.05, 0.95 ]
-  warmup: 1000
+  warmup: 2000
 
 clip:
   model_name: "RN101"  # RN101, ViT-L/14
