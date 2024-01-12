@@ -8,7 +8,7 @@
 </p>
 
 <div align="center">
-<img src="./assets/logo.png" style="max-width: 30%; max-height: 50%;" alt="Pytorch-SVGRender">
+<img src="./assets/logo.png" style="width: 350px; height: 300px;" alt="Pytorch-SVGRender">
 <p><strong>Pytorch-SVGRender: </strong>The go-to library for differentiable rendering methods for SVG generation.</p>
 </div>
 <p align="center">
