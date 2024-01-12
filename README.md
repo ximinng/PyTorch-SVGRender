@@ -8,7 +8,7 @@
 </p>
 
 <div align="center">
-<img src="./assets/logo.png" style="max-width: 50%; max-height: 80%;" alt="Pytorch-SVGRender">
+<img src="./assets/logo.png" style="max-width: 30%; max-height: 50%;" alt="Pytorch-SVGRender">
 <p><strong>Pytorch-SVGRender: </strong>The go-to library for differentiable rendering methods for SVG generation.</p>
 </div>
 <p align="center">
@@ -155,12 +155,6 @@ python setup.py install
 # iconography style:
 ## sydney opera house
 CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/Sydney' mv=True multirun=True
-## refl 
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.guidance.phi_ReFL=True x.guidance.n_phi_sample=8 x.guidance.phi_sample_step=200 result_path='./svgdreamer/Sydney-ReFL-8' mv=True multirun=True
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.guidance.phi_ReFL=True x.guidance.n_phi_sample=4 x.guidance.phi_sample_step=200 result_path='./svgdreamer/Sydney-ReFL-4' mv=True multirun=True
-## sd21 
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.model_id='sd21' x.guidance.guidance_scale=30 result_path='./svgdreamer/Sydney-sd21' mv=True multirun=True
-
 ## crane
 CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='black and red ink. a crane in chinese style. ink art by MSchiffer. whimsical. rough sketch.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/crane' mv=True multirun=True
 ## wonder Woman
