@@ -43,6 +43,7 @@ hydra:
     app_name: 'SVGRender'
   run:
     # output directory for normal runs
+    # warning: make sure that the L56-58 of '/libs/engine/model_state.py' and 'dir' are modified together
     dir: ./${result_path}/${x.method}-${now:%Y-%m-%d-%H-%M}
 
 # default settings

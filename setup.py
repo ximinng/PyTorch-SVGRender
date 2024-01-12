@@ -6,22 +6,22 @@ from setuptools import setup, find_packages
 
 setup(
     name='PyTorch-SVGRender',
-    packages=find_packages(),
+    packages=find_packages(exclude=["test*"]),
     version='1.0.0',
     license='Mozilla Public License Version 2.0',
     description='SVG Differentiable Rendering: Generating vector graphics using neural networks.',
-    author='XiMing Xing',
+    author='XiMing Xing et al.',
     author_email='ximingxing@gmail.com',
     url='https://github.com/ximinng/PyTorch-SVGRender',
     long_description_content_type='text/markdown',
     keywords=[
         'artificial intelligence',
         'AIGC',
-        'SVG',
         'generative models',
+        'SVG',
     ],
     install_requires=[
-        'hydra-core',
+        'hydra-core',  # configuration processor
         'omegaconf',  # YAML processor
         'accelerate',  # Hugging Face - pytorch distributed configuration
         'diffusers==0.20.2',  # Hugging Face - diffusion models
@@ -52,7 +52,11 @@ setup(
         'opencv-python',  # cv2
         'BeautifulSoup4',
         'freetype-py',  # font
-        'shapely'  # SVG
+        'shapely',  # SVG
+        'fairscale=0.4.13'  # ImageReward
+    ],
+    dependency_links=[
+        "clip @ git+https://github.com/openai/CLIP.git",
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

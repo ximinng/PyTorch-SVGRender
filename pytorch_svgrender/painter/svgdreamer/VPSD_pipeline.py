@@ -9,17 +9,17 @@ from omegaconf import DictConfig
 import torch
 import torch.nn.functional as F
 from diffusers import StableDiffusionPipeline, UNet2DConditionModel
-from diffusers import DDIMScheduler
+from diffusers import DDIMScheduler, DPMSolverMultistepScheduler
 from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import (
     rescale_noise_cfg, StableDiffusionPipelineOutput)
 from diffusers.models.attention_processor import LoRAAttnProcessor
 from diffusers.loaders import AttnProcsLayers
-from methods.diffusers_warp import init_diffusion_pipeline, init_diffusers_unet
+from pytorch_svgrender.diffusers_warp import init_diffusion_pipeline, init_diffusers_unet
 
 
-class DreamVSDPipeline(torch.nn.Module):
+class VectorizedParticleSDSPipeline(torch.nn.Module):
 
-    def __init__(self, args: DictConfig, guidance_cfg: DictConfig, device: torch.device):
+    def __init__(self, args: DictConfig, diffuser_cfg: DictConfig, guidance_cfg: DictConfig, device: torch.device):
         super().__init__()
         self.args = args
         self.device = device
@@ -29,20 +29,21 @@ class DreamVSDPipeline(torch.nn.Module):
         pipe_kwargs = {
             "device": self.device,
             "torch_dtype": torch.float32,
-            "local_files_only": not args.download,
-            "force_download": args.force_download,
-            "resume_download": args.resume_download,
-            "ldm_speed_up": args.ldm_speed_up,
-            "enable_xformers": args.enable_xformers,
-            "gradient_checkpoint": args.gradient_checkpoint
+            "local_files_only": not diffuser_cfg.download,
+            "force_download": diffuser_cfg.force_download,
+            "resume_download": diffuser_cfg.resume_download,
+            "ldm_speed_up": args.x.ldm_speed_up,
+            "enable_xformers": args.x.enable_xformers,
+            "gradient_checkpoint": args.x.gradient_checkpoint
         }
 
         # load pretrained model
         self.sd_pipeline = init_diffusion_pipeline(
-            args.model_id,
+            args.x.model_id,
             custom_pipeline=StableDiffusionPipeline,
+            # custom_scheduler=DDIMScheduler if guidance_cfg.phi_scheduler == 'ddim' else DPMSolverMultistepScheduler,
             custom_scheduler=DDIMScheduler,
-            cpu_offload=args.cpu_offload,
+            cpu_offload=args.x.cpu_offload,
             **pipe_kwargs
         )
         # disable grads
@@ -62,7 +63,7 @@ class DreamVSDPipeline(torch.nn.Module):
                 unet_ = self.unet
             else:
                 # create a new unet model
-                unet_ = init_diffusers_unet(args.model_id, **pipe_kwargs)
+                unet_ = init_diffusers_unet(args.x.model_id, **pipe_kwargs)
 
             # set correct LoRA layers
             self.unet_phi, phi_model_layers = self.set_lora_layers(unet_)
@@ -114,10 +115,14 @@ class DreamVSDPipeline(torch.nn.Module):
             f't_schedule: {self.t_schedule}, \n'
             f'guidance_scale: {self.guidance_scale}, phi_guidance_scale: {self.guidance_scale_lora}'
         )
+        print(f"use lora_cross_attn: {guidance_cfg.use_attn_scale}, "
+              f"lora_attn_scale: {guidance_cfg.lora_attn_scale}.")
+
         # for convenience
         self.num_train_timesteps = self.scheduler.config.num_train_timesteps
         self.alphas = self.scheduler.alphas_cumprod.to(self.device)
         self.text_embeddings = None
+        self.text_embedd_cond, self.text_embedd_uncond = None, None
         self.text_embeddings_phi = None
         self.t = None
 
@@ -392,6 +397,46 @@ class DreamVSDPipeline(torch.nn.Module):
 
         return F.mse_loss(noise_pred, target, reduction="mean")
 
+    def train_phi_model_refl(self,
+                             pred_rgb: torch.Tensor,
+                             weight: float = 1,
+                             new_timesteps: bool = True):
+        # interp to 512x512 to be fed into vae.
+        pred_rgb_ = F.interpolate(pred_rgb, (512, 512), mode='bilinear', align_corners=False)
+        # encode image into latents with vae, requires grad!
+        latents = self.encode2latent(pred_rgb_)
+
+        # get phi particles
+        indices = torch.randperm(latents.size(0))
+        latents_phi = latents[indices[:self.phi_n_particle]]
+        latents_phi = latents_phi.detach()
+
+        # get timestep
+        if new_timesteps:
+            t = torch.randint(0, self.num_train_timesteps, (1,), device=self.device)
+        else:
+            t = self.t
+
+        noise = torch.randn_like(latents_phi)
+        noisy_latents = self.scheduler.add_noise(latents_phi, noise, t)
+
+        if self.scheduler.config.prediction_type == "epsilon":
+            target = noise
+        elif self.scheduler.config.prediction_type == "v_prediction":
+            target = self.scheduler.get_velocity(latents_phi, noise, t)
+        else:
+            raise ValueError(f"Unknown prediction type {self.scheduler.config.prediction_type}")
+
+        # predict the noise residual and compute loss
+        noise_pred = self.unet_phi(
+            noisy_latents, t,
+            encoder_hidden_states=self.text_embedd_cond,
+            cross_attention_kwargs=self.lora_cross_attention_kwargs,
+        ).sample
+
+        rewards = torch.tensor(weight, dtype=torch.float32, device=self.device)
+        return rewards * F.mse_loss(noise_pred, target, reduction="mean")
+
     def schedule_timestep(self, step):
         min_step = int(self.num_train_timesteps * self.t_range[0])
         max_step = int(self.num_train_timesteps * self.t_range[1])
@@ -429,6 +474,7 @@ class DreamVSDPipeline(torch.nn.Module):
 
         # set pretrained model text embedding
         text_embeddings_uncond, text_embeddings_cond = text_embeddings.chunk(2)
+        self.text_embedd_uncond, self.text_embedd_cond = text_embeddings_uncond, text_embeddings_cond
         text_embeddings_unconds = text_embeddings_uncond.repeat_interleave(self.vsd_n_particle, dim=0)
         text_embeddings_conds = text_embeddings_cond.repeat_interleave(self.vsd_n_particle, dim=0)
         text_embeddings = torch.cat([text_embeddings_unconds, text_embeddings_conds])

@@ -1,0 +1,118 @@
+method: "svgdreamer"
+
+image_size: 600 # canvas size
+path_svg: ~  # if you want to load a svg file and train from it
+num_stages: 1 # training stages, you can train x strokes, then freeze them and train another x strokes etc
+skip_sive: True # optimize from scratch without SIVE init
+color_init: 'rand' # if skip_live=True, then use color_init to init target_img
+style: "iconography" # "iconography", "pixelart", "low-poly", "painting", "sketch", "ink"
+
+# lr and optim
+lr_stage_one: # SIVE stage
+  point: 1 # control points
+  width: 0.1 # stroke width
+  color: 0.01 # fill color and stroke color
+  bg: 0.01 # bg in render_warp
+  optim:
+    name: 'adam'
+    betas: [ 0.9, 0.9 ]
+    eps: 1e-6
+  lr_schedule: True # use lr_scheduler
+  schedule:
+    name: 'linear'
+    keep_ratio: 0.2
+    decay_ratio: 0.4
+lr_stage_two: # VPSD stage
+  point: 1
+  width: 0.1
+  color: 0.01
+  bg: 0.01
+  lr_schedule: True # use lr_scheduler
+  optim:
+    name: 'adam'
+    betas: [ 0.9, 0.9 ]
+    eps: 1e-6
+  schedule:
+    name: 'cosine'
+    warmup_steps: 10
+    warmup_start_lr: 0.02
+    warmup_end_lr: 0.8
+    cosine_end_lr: 0.4
+
+# primitives
+num_paths: 256 # number of strokes
+trainable_bg: False # set the background to be trainable
+width: 3 # stroke width
+num_segments: 4
+segment_init: 'circle' # 'random'
+radius: 20
+coord_init: 'random' # 'random', 'naive', place the first control point
+grid: 30 # divide the canvas into n grids
+path_reinit: # reinitializing paths
+  use: True
+  freq: 100 # every 50 iterations
+  stop_step: 700 # for SDS fine-tuning
+  opacity_threshold: 0.05
+  area_threshold: 64
+
+# diffusion
+model_id: "sd21b" # sd14, sd15, sd21, sd21b, sdxl
+ldm_speed_up: False
+enable_xformers: True
+gradient_checkpoint: False
+cpu_offload: True
+num_inference_steps: 50
+guidance_scale: 7.5 # sdxl default 5.0
+K: 4
+lora_path: ~
+
+# VPSD loss
+guidance:
+  use: True
+  type: 'vpsd'
+  n_particle: 1 # 4, 8, 16
+  vsd_n_particle: 1 # the batch size of particles
+  num_iter: 2000
+  guidance_scale: 7.5
+  grad_scale: 1.0
+  grad_clip_val: ~ # 10
+  t_range: [ 0.02, 0.98 ]
+  # 'randint': random time steps
+  # 'max_0.5_900': annealing from 0.98 to 0.5 after 900 steps
+  t_schedule: 'max_0.5_1000' # 'randint'
+  # set phi model
+  phi_single: False # if False new an unet model to estimate noise
+  phi_model: 'lora' # 'lora', 'unet_simple'
+  use_attn_scale: ${x.guidance.phi_single} # use lora_attn_scale or not
+  lora_attn_scale: 1.0 # the scale of the attn based lora layer
+  phi_guidance_scale: 1.0
+  phi_t: False # different t for phi fine-tuning
+  phi_update_step: 1
+  phi_lr: 0.0001
+  n_phi_sample: 1 # the number of samples by phi
+  phi_scheduler: 'dpm-solver' # 'ddim'
+  phi_infer_step: 50 # the phi num_inference_steps
+  phi_sample_step: 500 # the phi log step
+  phi_n_particle: 1 # the batch size of phi_model
+  phi_ReFL: False # enable reward feed back learning
+  phi_optim: # phi model optim
+    name: 'adamw'
+    betas: [ 0.9, 0.999 ]
+    eps: 1e-8
+    weight_decay: ~ # 1e-5
+  phi_schedule:
+    use: False
+    name: 'cosine'
+    warmup_steps: 50
+    warmup_start_lr: 0.00001
+    warmup_end_lr: 0.0001
+    total_step: 800
+    cosine_end_lr: 0.0001
+
+# reward model
+reward_path: './checkpoint'
+
+# xing loss for closed-form paths
+xing_loss:
+  use: False
+  weight: 0.01

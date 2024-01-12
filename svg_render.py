@@ -23,7 +23,8 @@ METHODS = ['live',
            'clipdraw',
            'styleclipdraw',
            'wordasimage',
-           'clipfont']
+           'clipfont',
+           'svgdreamer']
 
 
 @hydra.main(version_base=None, config_path="conf", config_name='config')
@@ -68,6 +69,15 @@ def main(cfg: omegaconf.DictConfig):
             pipe.painterly_rendering(cfg.prompt)
         else:  # generate many SVG at once
             render_batch_fn(pipeline=VectorFusionPipeline, text_prompt=cfg.prompt)
+
+    elif flag == "svgdreamer":  # text2svg
+        from pytorch_svgrender.pipelines.SVGDreamer_pipeline import SVGDreamerPipeline
+
+        if not cfg.multirun:
+            pipe = SVGDreamerPipeline(cfg)
+            pipe.painterly_rendering(cfg.prompt)
+        else:  # generate many SVG at once
+            render_batch_fn(pipeline=SVGDreamerPipeline, text_prompt=cfg.prompt, target_file=None)
 
     elif flag == "clipasso":  # img2sketch
         from pytorch_svgrender.pipelines.CLIPasso_pipeline import CLIPassoPipeline

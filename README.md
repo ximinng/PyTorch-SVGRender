@@ -3,10 +3,14 @@
 <p align="center">
     <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.10-or?logo=python" alt="pyhton"></a>
     <a href="http://mozilla.org/MPL/2.0/"><img src="https://img.shields.io/badge/license-MPL2.0-orange" alt="license"></a>
-    <a href="https://ximinng.github.io/PyTorch-SVGRender/"><img src="https://img.shields.io/badge/website-Gitpage-yellow" alt="website"></a>
+    <a href="https://ximinng.github.io/PyTorch-SVGRender-project/"><img src="https://img.shields.io/badge/website-Gitpage-yellow" alt="website"></a>
     <a href="https://pytorch-svgrender.readthedocs.io/en/latest/index.html"><img src="https://img.shields.io/badge/docs-readthedocs-purple" alt="docs"></a>
 </p>
 
+<div align="center">
+<img src="./assets/logo.png" style="max-width: 50%; max-height: 80%;" alt="Pytorch-SVGRender">
+<p><strong>Pytorch-SVGRender: </strong>The go-to library for differentiable rendering methods for SVG generation.</p>
+</div>
 <p align="center">
     <a href="#recent-updates">Updates</a> •
     <a href="#table-of-contents">Table of Contents</a> •
@@ -18,10 +22,6 @@
     <a href="#citation">Citation</a> •
     <a href="#licence">Licence</a>
 </p>
-
-<h2 align="center">About</h2>
-
-Pytorch-SVGRender is the go-to library for state-of-the-art differentiable rendering methods for SVG generation.
 
 <h2 align="center">Recent Updates</h2>
 
@@ -97,7 +97,7 @@ pip install hydra-core omegaconf
 pip install freetype-py shapely svgutils
 pip install opencv-python scikit-image matplotlib visdom wandb BeautifulSoup4
 pip install triton numba
-pip install numpy scipy timm scikit-fmm einops
+pip install numpy scipy scikit-fmm einops timm fairscale=0.4.13
 pip install accelerate transformers safetensors datasets
 ```
 
@@ -149,10 +149,59 @@ python setup.py install
 <h2 align="center">Quickstart</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
+**SVGDreamer**, synthesizes SVGs in six styles based on text prompts:
+
+```shell
+# iconography style:
+## sydney opera house
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./VPSD/Sydney' mv=True multirun=True
+## refl 
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.guidance.phi_ReFL=True x.guidance.n_phi_sample=8 x.guidance.phi_sample_step=200 result_path='./VPSD/Sydney-ReFL-8' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.guidance.phi_ReFL=True x.guidance.n_phi_sample=4 x.guidance.phi_sample_step=200 result_path='./VPSD/Sydney-ReFL-4' mv=True multirun=True
+
+## sd21 
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.model_id='sd21' x.guidance.guidance_scale=30 result_path='./VPSD/Sydney-sd21' mv=True multirun=True
+## crane
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='black and red ink. a crane in chinese style. ink art by MSchiffer. whimsical. rough sketch.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD/crane' mv=True multirun=True
+## wonder Woman
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A picture of the wonder woman. Gal Gadot.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/WonderWoman' mv=True multirun=True
+## German shepherd
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/GermanShepherd' mv=True multirun=True
+## Hogwarts
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Hermione Granger. Ron. Harry Potter. Hogwarts.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/Hogwarts' mv=True multirun=True
+## ship on seas
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/ship' mv=True multirun=True
+
+# low-ploy style:
+## bald eagle
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A picture of a bald eagle. low-ploy. polygon' x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/eagle' mv=True multirun=True
+
+# pixel-art style:
+## Darth vader
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Darth vader with lightsaber. ultrarealistic.' x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/DarthVader' mv=True multirun=True
+
+# painting style:
+## van gogh
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='The image captures the essence of Vincent van Gogh. the tormented artist who created timeless masterpieces. Van Gogh is portrayed in a classic black and white photograph. which beautifully contrasts with the vibrant. colorful world he painted.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/VanGogh' mv=True multirun=True
+## noche estrellada
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Reinterpretation of the noche estrellada de Van Gogh. como si fuese un anime de studio gibbli' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/NocheEstrellada' mv=True multirun=True
+
+# sketch style:
+## Dragon
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A dragon flying in the sky. full body. minimal 2d line drawing. trending on artstation.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./VPSD-phi-single/dragon' mv=True multirun=True
+## Lamborghini
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./VPSD-phi-single/Lamborghini' mv=True multirun=True
+```
+
 **LIVE**, vectorizes emojis in original PNG format:
 
 ```shell
 python svg_render.py x=live target='./data/simile.png'
+
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=live target='./data/1.png' x.num_paths=128 x.schedule_each=32 result_path='./results/1'
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=live target='./data/1.png' x.num_paths=256 x.schedule_each=32 result_path='./results/1-256'
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=live target='./data/2.png' x.num_paths=16 x.schedule_each=16 result_path='./results/2'
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=live target='./data/2.png' x.num_paths=32 x.schedule_each=16 result_path='./results/2-32'
 ```
 
 **CLIPasso**, synthesizes vectorized sketches from images:
@@ -185,11 +234,11 @@ python svg_render.py x=clipfont prompt='Starry Night by Vincent van gogh' target
 **VectorFusion**, synthesizes SVGs in various styles based on text prompts:
 
 ```shell
-# VectorFusion, iconography
+# Iconography style
 python svg_render.py x=vectorfusion prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'
-# VectorFusion, pixel art
+# PixelArt style
 python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a boat in a pond. pixel art. trending on artstation.'
-# VectorFusion, sketch
+# Sketch style
 python svg_render.py x=vectorfusion x.style='sketch' prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'
 ```
 
@@ -219,17 +268,14 @@ python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter=
 <h2 align="center">TODO</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
-- [ ] integrated SVGDreamer.
+- [x] integrated SVGDreamer.
 
 <h2 align="center">Acknowledgement</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 The project is built based on the following repository:
 
-- [BachiLi/diffvg](https://github.com/BachiLi/diffvg)
-- [huggingface/diffusers](https://github.com/huggingface/diffusers)
-- [yael-vinker/CLIPasso](https://github.com/yael-vinker/CLIPasso)
-- [ximinng/DiffSketcher](https://github.com/ximinng/DiffSketcher)
+[BachiLi/diffvg](https://github.com/BachiLi/diffvg), [huggingface/diffusers](https://github.com/huggingface/diffusers), [yael-vinker/CLIPasso](https://github.com/yael-vinker/CLIPasso), [ximinng/DiffSketcher](https://github.com/ximinng/DiffSketcher), [THUDM/ImageReward](https://github.com/THUDM/ImageReward), [advimman/lama](https://github.com/advimman/lama)
 
 We gratefully thank the authors for their wonderful works.
 
