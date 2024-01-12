@@ -17,7 +17,7 @@ CLIPasso converts an image of an object to a sketch, allowing for varying levels
 
 note: first download the `U2Net <https://huggingface.co/akhaliq/CLIPasso/blob/main/u2net.pth>`_ model, and put the model in :file:`./checkpoint/u2net/u2net.pth`.
 
-Convert an image of a horse from the original PNG format to an abstract sketch:
+Convert an image of *a horse* from the original PNG format to an abstract sketch:
 
 .. code-block:: console
 

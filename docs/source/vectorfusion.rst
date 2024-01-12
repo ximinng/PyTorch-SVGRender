@@ -15,7 +15,7 @@ The abstract from the paper is:
 
 VectorFusion synthesizes SVGs in various styles based on text prompts.
 
-Synthesize an iconographic of a panda rowing a boat in a pond.
+Synthesize an iconographic of *a panda rowing a boat in a pond*.
 
 .. code-block:: console
 
@@ -24,24 +24,38 @@ Synthesize an iconographic of a panda rowing a boat in a pond.
 You will get the following result:
 
 .. image:: ../../examples/vectorfusion/vectorfusion_panda_icon.svg
+   :width: 224
 
-Synthesize a pixel art of a panda rowing a boat in a pond.
+Synthesize an iconographic of *a panda rowing a boat in a pond* from scratch.
 
 .. code-block:: console
 
-   $ python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a boat in a pond. pixel art. trending on artstation.' image_size=512
+   $ python svg_render.py x=vectorfusion x.skip_live=True prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'
+
+You will get the following result:
+
+.. image:: ../../examples/vectorfusion/vectorfusion_panda_icon_scratch.svg
+   :width: 224
+
+Synthesize a pixel art of *a panda rowing a boat in a pond*.
+
+.. code-block:: console
+
+   $ python svg_render.py x=vectorfusion x.style='pixelart' x.image_size=512 prompt='a panda rowing a boat in a pond. pixel art. trending on artstation.'
 
 You will get the following result:
 
 .. image:: ../../examples/vectorfusion/vectorfusion_panda_pixel.svg
+   :width: 224
 
-Synthesize a sketch of a panda rowing a boat in a pond.
+Synthesize a sketch of *a panda rowing a boat in a pond*.
 
 .. code-block:: console
 
-   $ python svg_render.py x=vectorfusion x.style='sketch' prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'
+   $ python svg_render.py x=vectorfusion x.style='sketch' x.skip_live=True prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'
 
 You will get the following result:
 
 .. image:: ../../examples/vectorfusion/vectorfusion_panda_sketch.svg
+   :width: 224
 

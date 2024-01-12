@@ -15,7 +15,7 @@ The abstract from the paper is:
 
 CLIPDraw synthesizes SVGs based on text prompts.
 
-Synthesize a photo of a cat:
+Synthesize *a photo of a cat*:
 
 .. code-block:: console
 
