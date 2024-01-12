@@ -15,7 +15,7 @@ The abstract from the paper is:
 
 LIVE to convert raster images to SVGs and simultaneously maintain its image topology.
 
-Convert emojis from the original PNG format to vector format:
+Convert *emojis* from the original PNG format to vector format:
 
 .. code-block:: console
 
@@ -24,6 +24,7 @@ Convert emojis from the original PNG format to vector format:
 You will get the following result:
 
 .. image:: ../../examples/live/live_smile.svg
+   :width: 224
 
 To improve the SVGs, adjust the ``num_paths`` based on the raster image:
 

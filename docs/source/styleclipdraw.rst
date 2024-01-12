@@ -15,12 +15,13 @@ The abstract from the paper is:
 
 StyleCLIPDraw synthesizes SVG based on a text prompt and a reference image.
 
-Synthesize a photo of a cat in the style of Starry Night by Vincent van Gogh:
+Synthesize *A sheep wearing a top hat* in the style of *Starry Night by Vincent van Gogh*:
 
 .. code-block:: console
 
-   $ python svg_render.py x=styleclipdraw prompt='a photo of a cat' target='./data/starry.png'
+   $ python svg_render.py x=styleclipdraw prompt='A sheep wearing a top hat.' target='./data/starry.png'
 
 You will get the following result:
 
-.. image:: ../../examples/styleclipdraw/styleclipdraw_cat.svg
+.. image:: ../../examples/styleclipdraw/styleclipdraw_sheep.svg
+   :width: 224

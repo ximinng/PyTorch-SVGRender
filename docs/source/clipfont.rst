@@ -22,7 +22,7 @@ performance. Project page: https://github.com/songyiren98/CLIPFont`
 
 StyleCLIPDraw styles vector fonts according to text prompts.
 
-Style the alphabet in the style of Starry Night by Vincent van Gogh:
+Style the *alphabet* in the style of *Starry Night by Vincent van Gogh*:
 
 .. code-block:: console
 

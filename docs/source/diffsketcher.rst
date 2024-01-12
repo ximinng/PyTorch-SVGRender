@@ -15,7 +15,7 @@ The abstract from the paper is:
 
 DiffSketcher synthesizes vector sketches based on text prompts.
 
-Synthesize a sketch of a photo of Sydney opera house:
+Synthesize *a sketch of a photo of Sydney opera house*:
 
 .. code-block:: console
 
@@ -25,7 +25,7 @@ You will get the following result:
 
 .. image:: ../../examples/diffsketcher/diffsketcher_Sydney.svg
 
-Synthesize a sketch of a photo of Sydney opera house, where the width of the strokes is also optimized:
+Synthesize *a sketch of a photo of Sydney opera house*, where the width of the strokes is also optimized:
 
 .. code-block:: console
 
@@ -35,7 +35,7 @@ You will get the following result:
 
 .. image:: ../../examples/diffsketcher/diffsketcher_Sydney_width.svg
 
-Synthesize a colorful sketch of a photo of Sydney opera house, where the width of the strokes is also optimized:
+Synthesize *a colorful sketch of a photo of Sydney opera house*, where the width of the strokes is also optimized:
 
 .. code-block:: console
 
@@ -45,7 +45,7 @@ You will get the following result:
 
 .. image:: ../../examples/diffsketcher/diffsketcher_Sydney_width_color.svg
 
-Synthesize a sketch of a photo of a horse drinking water by the lake, using style of Van Gogh's Starry Night:
+Synthesize a sketch of *a photo of a horse drinking water by the lake* in the style of *Van Gogh's Starry Night*:
 
 .. code-block:: console
 
