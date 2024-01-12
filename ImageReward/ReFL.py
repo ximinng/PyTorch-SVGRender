@@ -27,17 +27,17 @@ from accelerate.utils import ProjectConfiguration, set_seed
 from datasets import load_dataset
 from huggingface_hub import create_repo, upload_folder
 from packaging import version
-from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer
 
-import io
 from PIL import Image
 import ImageReward as RM
 
 from torchvision.transforms import Compose, Resize, CenterCrop, Normalize
+
 try:
     from torchvision.transforms import InterpolationMode
+
     BICUBIC = InterpolationMode.BICUBIC
 except ImportError:
     BICUBIC = Image.BICUBIC
@@ -46,13 +46,8 @@ import diffusers
 from diffusers import AutoencoderKL, DDPMScheduler, StableDiffusionPipeline, UNet2DConditionModel
 from diffusers.optimization import get_scheduler
 from diffusers.training_utils import EMAModel
-from diffusers.utils import check_min_version, deprecate, is_wandb_available
+from diffusers.utils import check_min_version, deprecate
 from diffusers.utils.import_utils import is_xformers_available
-
-
-if is_wandb_available():
-    import wandb
-
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
 check_min_version("0.16.0.dev0")
@@ -206,7 +201,7 @@ def parse_args():
         type=float,
         default=None,
         help="SNR weighting gamma to be used if rebalancing the loss. Recommended value is 5.0. "
-        "More details here: https://arxiv.org/abs/2303.09556.",
+             "More details here: https://arxiv.org/abs/2303.09556.",
     )
     parser.add_argument(
         "--use_8bit_adam", action="store_true", help="Whether or not to use 8-bit Adam from bitsandbytes."
@@ -342,12 +337,12 @@ def parse_args():
 
 
 class Trainer(object):
-    
+
     def __init__(self, pretrained_model_name_or_path, train_data_dir, args):
-            
+
         self.pretrained_model_name_or_path = pretrained_model_name_or_path
         self.train_data_dir = train_data_dir
-            
+
         # Sanity checks
         if args.dataset_name is None and self.train_data_dir is None:
             raise ValueError("Need either a dataset name or a training folder.")
@@ -409,7 +404,8 @@ class Trainer(object):
         self.text_encoder = CLIPTextModel.from_pretrained(
             self.pretrained_model_name_or_path, subfolder="text_encoder", revision=args.revision
         )
-        self.vae = AutoencoderKL.from_pretrained(self.pretrained_model_name_or_path, subfolder="vae", revision=args.revision)
+        self.vae = AutoencoderKL.from_pretrained(self.pretrained_model_name_or_path, subfolder="vae",
+                                                 revision=args.revision)
         self.unet = UNet2DConditionModel.from_pretrained(
             self.pretrained_model_name_or_path, subfolder="unet", revision=args.non_ema_revision
         )
@@ -425,7 +421,8 @@ class Trainer(object):
             self.ema_unet = UNet2DConditionModel.from_pretrained(
                 self.pretrained_model_name_or_path, subfolder="unet", revision=args.revision
             )
-            self.ema_unet = EMAModel(self.ema_unet.parameters(), model_cls=UNet2DConditionModel, model_config=self.ema_unet.config)
+            self.ema_unet = EMAModel(self.ema_unet.parameters(), model_cls=UNet2DConditionModel,
+                                     model_config=self.ema_unet.config)
 
         if args.enable_xformers_memory_efficient_attention:
             if is_xformers_available():
@@ -484,7 +481,7 @@ class Trainer(object):
 
         if args.scale_lr:
             args.learning_rate = (
-                args.learning_rate * args.gradient_accumulation_steps * args.train_batch_size * self.accelerator.num_processes
+                    args.learning_rate * args.gradient_accumulation_steps * args.train_batch_size * self.accelerator.num_processes
             )
 
         # Initialize the optimizer
@@ -569,14 +566,20 @@ class Trainer(object):
                         f"Caption column `{caption_column}` should contain either strings or lists of strings."
                     )
             inputs = tokenizer(
-                captions, max_length=tokenizer.model_max_length, padding="max_length", truncation=True, return_tensors="pt"
+                captions, max_length=tokenizer.model_max_length, padding="max_length", truncation=True,
+                return_tensors="pt"
             )
             return inputs.input_ids
 
         def preprocess_train(examples):
             examples["input_ids"] = tokenize_captions(examples)
-            examples["rm_input_ids"] = self.reward_model.blip.tokenizer(examples[caption_column], padding='max_length', truncation=True, max_length=35, return_tensors="pt").input_ids
-            examples["rm_attention_mask"] = self.reward_model.blip.tokenizer(examples[caption_column], padding='max_length', truncation=True, max_length=35, return_tensors="pt").attention_mask
+            examples["rm_input_ids"] = self.reward_model.blip.tokenizer(examples[caption_column], padding='max_length',
+                                                                        truncation=True, max_length=35,
+                                                                        return_tensors="pt").input_ids
+            examples["rm_attention_mask"] = self.reward_model.blip.tokenizer(examples[caption_column],
+                                                                             padding='max_length', truncation=True,
+                                                                             max_length=35,
+                                                                             return_tensors="pt").attention_mask
             return examples
 
         with self.accelerator.main_process_first():
@@ -652,9 +655,8 @@ class Trainer(object):
             tracker_config.pop("validation_prompts")
             self.accelerator.init_trackers(args.tracker_project_name, tracker_config)
 
-    
     def train(self, args):
-            
+
         # Train!
         total_batch_size = args.train_batch_size * self.accelerator.num_processes * args.gradient_accumulation_steps
 
@@ -694,7 +696,8 @@ class Trainer(object):
                 resume_step = resume_global_step % (self.num_update_steps_per_epoch * args.gradient_accumulation_steps)
 
         # Only show the progress bar once on each machine.
-        progress_bar = tqdm(range(global_step, args.max_train_steps), disable=not self.accelerator.is_local_main_process)
+        progress_bar = tqdm(range(global_step, args.max_train_steps),
+                            disable=not self.accelerator.is_local_main_process)
         progress_bar.set_description("Steps")
 
         for epoch in range(first_epoch, args.num_train_epochs):
@@ -710,7 +713,7 @@ class Trainer(object):
                 with self.accelerator.accumulate(self.unet):
                     encoder_hidden_states = self.text_encoder(batch["input_ids"])[0]
                     latents = torch.randn((args.train_batch_size, 4, 64, 64), device=self.accelerator.device)
-                    
+
                     self.noise_scheduler.set_timesteps(40, device=self.accelerator.device)
                     timesteps = self.noise_scheduler.timesteps
 
@@ -726,16 +729,18 @@ class Trainer(object):
                                 encoder_hidden_states=encoder_hidden_states,
                             ).sample
                             latents = self.noise_scheduler.step(noise_pred, t, latents).prev_sample
-                    
+
                     latent_model_input = latents
-                    latent_model_input = self.noise_scheduler.scale_model_input(latent_model_input, timesteps[mid_timestep])
+                    latent_model_input = self.noise_scheduler.scale_model_input(latent_model_input,
+                                                                                timesteps[mid_timestep])
                     noise_pred = self.unet(
                         latent_model_input,
                         timesteps[mid_timestep],
                         encoder_hidden_states=encoder_hidden_states,
                     ).sample
-                    pred_original_sample = self.noise_scheduler.step(noise_pred, timesteps[mid_timestep], latents).pred_original_sample.to(self.weight_dtype)
-                    
+                    pred_original_sample = self.noise_scheduler.step(noise_pred, timesteps[mid_timestep],
+                                                                     latents).pred_original_sample.to(self.weight_dtype)
+
                     pred_original_sample = 1 / self.vae.config.scaling_factor * pred_original_sample
                     image = self.vae.decode(pred_original_sample.to(self.weight_dtype)).sample
                     image = (image / 2 + 0.5).clamp(0, 1)
@@ -747,12 +752,12 @@ class Trainer(object):
                             CenterCrop(224),
                             Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711)),
                         ])
-                    
+
                     rm_preprocess = _transform()
                     image = rm_preprocess(image).to(self.accelerator.device)
-                    
+
                     rewards = self.reward_model.score_gard(batch["rm_input_ids"], batch["rm_attention_mask"], image)
-                    loss = F.relu(-rewards+2)
+                    loss = F.relu(-rewards + 2)
                     loss = loss.mean() * args.grad_scale
 
                     # Gather the losses across all processes for logging (if we use distributed training).
@@ -823,4 +828,3 @@ class Trainer(object):
                 )
 
         self.accelerator.end_training()
-

@@ -8,12 +8,10 @@
 * https://github.com/salesforce/BLIP
 '''
 
-import os
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from PIL import Image
-from ImageReward.models.BLIP.blip import load_checkpoint
 from ImageReward.models.BLIP.blip_pretrain import BLIP_Pretrain
 from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize
 

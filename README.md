@@ -154,43 +154,49 @@ python setup.py install
 ```shell
 # iconography style:
 ## sydney opera house
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./VPSD/Sydney' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/Sydney' mv=True multirun=True
 ## refl 
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.guidance.phi_ReFL=True x.guidance.n_phi_sample=8 x.guidance.phi_sample_step=200 result_path='./VPSD/Sydney-ReFL-8' mv=True multirun=True
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.guidance.phi_ReFL=True x.guidance.n_phi_sample=4 x.guidance.phi_sample_step=200 result_path='./VPSD/Sydney-ReFL-4' mv=True multirun=True
-
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.guidance.phi_ReFL=True x.guidance.n_phi_sample=8 x.guidance.phi_sample_step=200 result_path='./svgdreamer/Sydney-ReFL-8' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.guidance.phi_ReFL=True x.guidance.n_phi_sample=4 x.guidance.phi_sample_step=200 result_path='./svgdreamer/Sydney-ReFL-4' mv=True multirun=True
 ## sd21 
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.model_id='sd21' x.guidance.guidance_scale=30 result_path='./VPSD/Sydney-sd21' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 x.model_id='sd21' x.guidance.guidance_scale=30 result_path='./svgdreamer/Sydney-sd21' mv=True multirun=True
+
 ## crane
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='black and red ink. a crane in chinese style. ink art by MSchiffer. whimsical. rough sketch.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD/crane' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='black and red ink. a crane in chinese style. ink art by MSchiffer. whimsical. rough sketch.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/crane' mv=True multirun=True
 ## wonder Woman
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A picture of the wonder woman. Gal Gadot.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/WonderWoman' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A picture of the wonder woman. Gal Gadot.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/WonderWoman' mv=True multirun=True
 ## German shepherd
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/GermanShepherd' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd' mv=True multirun=True
 ## Hogwarts
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Hermione Granger. Ron. Harry Potter. Hogwarts.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/Hogwarts' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Hermione Granger. Ron. Harry Potter. Hogwarts.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/Hogwarts' mv=True multirun=True
 ## ship on seas
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/ship' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/ship' mv=True multirun=True
 
 # low-ploy style:
 ## bald eagle
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A picture of a bald eagle. low-ploy. polygon' x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/eagle' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A picture of a bald eagle. low-ploy. polygon' x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/eagle' mv=True multirun=True
 
 # pixel-art style:
 ## Darth vader
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Darth vader with lightsaber. ultrarealistic.' x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/DarthVader' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Darth vader with lightsaber. ultrarealistic.' x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/DarthVader' mv=True multirun=True
 
 # painting style:
 ## van gogh
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='The image captures the essence of Vincent van Gogh. the tormented artist who created timeless masterpieces. Van Gogh is portrayed in a classic black and white photograph. which beautifully contrasts with the vibrant. colorful world he painted.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/VanGogh' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='The image captures the essence of Vincent van Gogh. the tormented artist who created timeless masterpieces. Van Gogh is portrayed in a classic black and white photograph. which beautifully contrasts with the vibrant. colorful world he painted.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/VanGogh' mv=True multirun=True
 ## noche estrellada
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Reinterpretation of the noche estrellada de Van Gogh. como si fuese un anime de studio gibbli' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./VPSD-phi-single/NocheEstrellada' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Reinterpretation of the noche estrellada de Van Gogh. como si fuese un anime de studio gibbli' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/NocheEstrellada' mv=True multirun=True
 
 # sketch style:
 ## Dragon
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A dragon flying in the sky. full body. minimal 2d line drawing. trending on artstation.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./VPSD-phi-single/dragon' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A dragon flying in the sky. full body. minimal 2d line drawing. trending on artstation.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./svgdreamer/dragon' mv=True multirun=True
 ## Lamborghini
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./VPSD-phi-single/Lamborghini' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./svgdreamer/Lamborghini' mv=True multirun=True
+
+# ink and wash style:
+## Big Wild Goose Pagoda
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda, ink style, Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=168 x.width=8 result_path='./svgdreamer/BigWildGoosePagoda' mv=True multirun=True
+## villages
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sepia ink wash landscape of ancient villages, Minimalist abstract art grayscale watercolor. on a white background.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=256 x.width=6 result_path='./svgdreamer/InkVillages' mv=True multirun=True
 ```
 
 **LIVE**, vectorizes emojis in original PNG format:
