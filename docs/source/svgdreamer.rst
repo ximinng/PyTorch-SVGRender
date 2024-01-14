@@ -29,6 +29,16 @@ Synthesize the SVGs of the Sydney Opera House in the style of Van Gogh's oil pai
 
 You will get the following result:
 
+.. image:: ../../examples/svgdreamer/icon_GermanShepherd_1.png
+   :width: 224
+   :align: center
+   :caption: 野火logo
+
+.. image:: ../../examples/svgdreamer/icon_GermanShepherd_1.png
+   :caption: 野火logo
+
+.. image:: ../../examples/svgdreamer/icon_GermanShepherd_1.png
+
 .. raw:: html
 
     <div align="center">
