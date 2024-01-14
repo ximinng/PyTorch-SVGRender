@@ -100,6 +100,8 @@ the [Install.md](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Install.
 <h2 align="center">Quickstart</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
+**For more information, [read the docs](https://pytorch-svgrender.readthedocs.io/en/latest/index.html).**
+
 **SVGDreamer** generates various styles of SVG based on text prompts. It supports the use of six vector primitives,
 including Iconography, Sketch, Pixel Art, Low-Poly, Painting, and Ink and Wash.
 
@@ -207,6 +209,9 @@ python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter=
 
 <h2 align="center">FAQ</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
+
+- Q: Where can I get more scripts and visualizations?
+- A: check the [pytorch-svgrender.readthedocs.io](https://pytorch-svgrender.readthedocs.io/en/latest/index.html).
 
 <h2 align="center">TODO</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
