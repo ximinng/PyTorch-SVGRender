@@ -149,7 +149,7 @@ python setup.py install
 <h2 align="center">Quickstart</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
-**SVGDreamer**, synthesizes SVGs in six styles based on text prompts:
+**SVGDreamer** generates various styles of SVG based on text prompts. It supports the use of six vector primitives, including Iconography, Sketch, Pixel Art, Low-Poly, Painting, and Ink and Wash.
 
 ```shell
 # iconography style:
@@ -157,8 +157,6 @@ python setup.py install
 CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/Sydney' mv=True multirun=True
 ## crane
 CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='black and red ink. a crane in chinese style. ink art by MSchiffer. whimsical. rough sketch.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/crane' mv=True multirun=True
-## wonder Woman
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A picture of the wonder woman. Gal Gadot.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/WonderWoman' mv=True multirun=True
 ## German shepherd
 CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd' mv=True multirun=True
 ## Hogwarts
@@ -172,7 +170,7 @@ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A picture of a 
 
 # pixel-art style:
 ## Darth vader
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Darth vader with lightsaber. ultrarealistic.' x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/DarthVader' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Darth vader with lightsaber. ultrarealistic.' x.style='pixelart' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/DarthVader' mv=True multirun=True
 
 # painting style:
 ## van gogh
@@ -188,23 +186,18 @@ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A free-hand dra
 
 # ink and wash style:
 ## Big Wild Goose Pagoda
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda, ink style, Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=168 x.width=8 result_path='./svgdreamer/BigWildGoosePagoda' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=168 x.width=8 result_path='./svgdreamer/BigWildGoosePagoda' mv=True multirun=True
 ## villages
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sepia ink wash landscape of ancient villages, Minimalist abstract art grayscale watercolor. on a white background.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=256 x.width=6 result_path='./svgdreamer/InkVillages' mv=True multirun=True
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sepia ink wash landscape of ancient villages. Minimalist abstract art grayscale watercolor. on a white background.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=256 x.width=6 result_path='./svgdreamer/InkVillages' mv=True multirun=True
 ```
 
-**LIVE**, vectorizes emojis in original PNG format:
+**LIVE** vectorizes raster images (the emojis in original PNG format):
 
 ```shell
 python svg_render.py x=live target='./data/simile.png'
-
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=live target='./data/1.png' x.num_paths=128 x.schedule_each=32 result_path='./results/1'
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=live target='./data/1.png' x.num_paths=256 x.schedule_each=32 result_path='./results/1-256'
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=live target='./data/2.png' x.num_paths=16 x.schedule_each=16 result_path='./results/2'
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=live target='./data/2.png' x.num_paths=32 x.schedule_each=16 result_path='./results/2-32'
 ```
 
-**CLIPasso**, synthesizes vectorized sketches from images:
+**CLIPasso** synthesizes vectorized sketches from images:
 
 **note:** first download the [U2Net model](https://huggingface.co/akhaliq/CLIPasso/blob/main/u2net.pth), and put the
 model in `./checkpoint/u2net/u2net.pth`.
@@ -213,25 +206,25 @@ model in `./checkpoint/u2net/u2net.pth`.
 python svg_render.py x=clipasso target='./data/horse.png'
 ```
 
-**CLIPDraw**, synthesizes SVGs based on text prompts:
+**CLIPDraw** synthesizes SVGs based on text prompts:
 
 ```shell
 python svg_render.py x=clipdraw prompt='a photo of a cat'
 ```
 
-**StyleCLIPDraw**, synthesizes SVG based on a text prompt and a reference image:
+**StyleCLIPDraw** synthesizes SVG based on a text prompt and a reference image:
 
 ```shell
 python svg_render.py x=styleclipdraw prompt='a photo of a cat' target='./data/starry.png'
 ```
 
-**CLIPFont**, styles vector fonts according to text prompts:
+**CLIPFont** styles vector fonts according to text prompts:
 
 ```shell
 python svg_render.py x=clipfont prompt='Starry Night by Vincent van gogh' target='./data/alphabet1.svg'
 ```
 
-**VectorFusion**, synthesizes SVGs in various styles based on text prompts:
+**VectorFusion** synthesizes SVGs in various styles based on text prompts:
 
 ```shell
 # Iconography style
@@ -242,7 +235,7 @@ python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a 
 python svg_render.py x=vectorfusion x.style='sketch' prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'
 ```
 
-**DiffSketcher**, synthesizes vector sketches based on text prompts:
+**DiffSketcher** synthesizes vector sketches based on text prompts:
 
 ```shell
 # DiffSketcher
@@ -255,7 +248,7 @@ python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.tok
 python svg_render.py x=stylediffsketcher prompt='A horse is drinking water by the lake' x.token_ind=5 target='./data/starry.png' seed=998
 ```
 
-**Word-As-Image**, follow a text prompt to style a letter in a word:
+**Word-As-Image** follow a text prompt to style a letter in a word:
 
 ```shell
 # Inject the meaning of the word bunny into the 'Y' in the word 'BUNNY'

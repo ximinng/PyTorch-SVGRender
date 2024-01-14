@@ -51,7 +51,7 @@ grid: 30 # divide the canvas into n grids
 path_reinit: # reinitializing paths
   use: True
   freq: 100 # every 50 iterations
-  stop_step: 700 # for SDS fine-tuning
+  stop_step: 1000 # for VPSD fine-tuning
   opacity_threshold: 0.05
   area_threshold: 64
 
@@ -72,10 +72,11 @@ guidance:
   type: 'vpsd'
   n_particle: 1 # 4, 8, 16
   vsd_n_particle: 1 # the batch size of particles
+  particle_aug: False # do data enhancement for the input particles
   num_iter: 2000
-  guidance_scale: 7.5
+  guidance_scale: 7.5 # CFG value
   grad_scale: 1.0
-  grad_clip_val: ~ # 10
+  grad_clip_val: ~ # eg: 10, clip the gradient of VPSD
   t_range: [ 0.02, 0.98 ]
   # 'randint': random time steps
   # 'max_0.5_900': annealing from 0.98 to 0.5 after 900 steps
@@ -90,7 +91,7 @@ guidance:
   phi_update_step: 1
   phi_lr: 0.0001
   n_phi_sample: 1 # the number of samples by phi
-  phi_scheduler: 'dpm-solver' # 'ddim'
+  phi_scheduler: 'ddim' # 'dpm-solver'
   phi_infer_step: 50 # the phi num_inference_steps
   phi_sample_step: 500 # the phi log step
   phi_n_particle: 1 # the batch size of phi_model
@@ -110,7 +111,7 @@ guidance:
     cosine_end_lr: 0.0001
 
 # reward model
-reward_path: './checkpoint'
+reward_path: './checkpoint/ImageReward'
 
 # xing loss for closed-form paths
 xing_loss:

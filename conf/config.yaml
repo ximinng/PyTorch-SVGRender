@@ -7,8 +7,8 @@ neg_prompt: ~ # negative prompt
 state:
   cpu: False # use cpu
   mprec: no # mixed precision, choices: 'no', 'fp16', 'bf16'
-  wandb: False
-  tensorboard: False
+#  wandb: False
+#  tensorboard: False
 
 # Diffusers config
 diffuser:

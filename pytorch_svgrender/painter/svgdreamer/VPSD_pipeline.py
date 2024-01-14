@@ -8,6 +8,7 @@ from omegaconf import DictConfig
 
 import torch
 import torch.nn.functional as F
+from torchvision import transforms
 from diffusers import StableDiffusionPipeline, UNet2DConditionModel
 from diffusers import DDIMScheduler, DPMSolverMultistepScheduler
 from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import (
@@ -96,6 +97,9 @@ class VectorizedParticleSDSPipeline(torch.nn.Module):
             ).to(device)
             self.phi_params = list(self.unet_phi.parameters())
             self.vae_phi = self.vae
+            # reset lora
+            guidance_cfg.use_attn_scale = False
+            guidance_cfg.lora_attn_scale = False
 
         # hyper-params
         self.phi_single = guidance_cfg.phi_single
@@ -107,16 +111,17 @@ class VectorizedParticleSDSPipeline(torch.nn.Module):
         self.t_schedule: str = guidance_cfg.t_schedule
         self.t_range = list(guidance_cfg.t_range)
         print(
-            f'number of particles: {guidance_cfg.n_particle}, '
-            f'n_particles of VSD: {self.vsd_n_particle}, '
-            f'n_particles of phi_model: {self.phi_n_particle}, '
-            f'phi_model: {guidance_cfg.phi_model}, \n'
+            f'n_particles: {guidance_cfg.n_particle}, '
+            f'enhance_particles: {guidance_cfg.particle_aug}, '
+            f'n_particles of score: {self.vsd_n_particle}, '
+            f'n_particles of phi_model: {self.phi_n_particle}, \n'
             f't_range: {self.t_range}, '
             f't_schedule: {self.t_schedule}, \n'
-            f'guidance_scale: {self.guidance_scale}, phi_guidance_scale: {self.guidance_scale_lora}'
+            f'guidance_scale: {self.guidance_scale}, phi_guidance_scale: {self.guidance_scale_lora}.'
         )
-        print(f"use lora_cross_attn: {guidance_cfg.use_attn_scale}, "
-              f"lora_attn_scale: {guidance_cfg.lora_attn_scale}.")
+        print(f"phi_model: {guidance_cfg.phi_model}, "
+              f"use lora_cross_attn: {guidance_cfg.use_attn_scale}, "
+              f"lora_attn_scale: {guidance_cfg.lora_attn_scale}. \n")
 
         # for convenience
         self.num_train_timesteps = self.scheduler.config.num_train_timesteps
@@ -483,14 +488,27 @@ class VectorizedParticleSDSPipeline(torch.nn.Module):
         # set phi model text embedding
         self.text_embeddings_phi = text_embeddings_cond.repeat_interleave(self.phi_n_particle, dim=0)
 
+    def x_augment(self, x: torch.Tensor, img_size: int = 512):
+        augment_compose = transforms.Compose([
+            transforms.RandomPerspective(distortion_scale=0.5, p=0.7),
+            transforms.RandomCrop(size=(img_size, img_size), pad_if_needed=True, padding_mode='reflect')
+        ])
+        return augment_compose(x)
+
     def variational_score_distillation(self,
-                                       step: int,
                                        pred_rgb: torch.Tensor,
+                                       step: int,
                                        prompt: Union[List, str],
                                        negative_prompt: Union[List, str] = None,
                                        grad_scale: float = 1.0,
+                                       enhance_particle: bool = False,
+                                       im_size: int = 512,
                                        as_latent: bool = False):
         bz = pred_rgb.shape[0]
+
+        # data enhancement for the input particles
+        pred_rgb = self.x_augment(pred_rgb, im_size) if enhance_particle else pred_rgb
+
         # interp to 512x512 to be fed into vae.
         if as_latent:
             latents = F.interpolate(pred_rgb, (64, 64), mode='bilinear', align_corners=False) * 2 - 1
@@ -553,6 +571,6 @@ class VectorizedParticleSDSPipeline(torch.nn.Module):
         # re-parameterization trick:
         # d(loss)/d(latents) = latents - target = latents - (latents - grad) = grad
         target = (latents_vsd - grad).detach()
-        loss_vsd = 0.5 * F.mse_loss(latents_vsd, target, reduction="sum")
+        loss_vpsd = 0.5 * F.mse_loss(latents_vsd, target, reduction="sum")
 
-        return loss_vsd, grad.norm(), latents, self.t
+        return loss_vpsd, grad.norm(), latents, self.t

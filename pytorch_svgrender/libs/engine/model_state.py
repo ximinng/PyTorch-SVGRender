@@ -64,11 +64,12 @@ class ModelState:
             self.result_path = self.result_path / f"{config_name_only}"
 
         """init visualized tracker"""
+        # TODO: monitor with WANDB or TENSORBOARD
         self.log_with = []
-        if self.state_cfg.wandb:
-            self.log_with.append(LoggerType.WANDB)
-        if self.state_cfg.tensorboard:
-            self.log_with.append(LoggerType.TENSORBOARD)
+        # if self.state_cfg.wandb:
+        #     self.log_with.append(LoggerType.WANDB)
+        # if self.state_cfg.tensorboard:
+        #     self.log_with.append(LoggerType.TENSORBOARD)
 
         """HuggingFace Accelerator"""
         self.accelerator = Accelerator(

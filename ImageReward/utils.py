@@ -14,10 +14,13 @@
 import os
 import urllib
 from typing import Union, List
-from .ImageReward import ImageReward
+import pathlib
+
 import torch
 from tqdm import tqdm
 from huggingface_hub import hf_hub_download, try_to_load_from_cache
+
+from .ImageReward import ImageReward
 from .models.CLIPScore import CLIPScore
 from .models.BLIPScore import BLIPScore
 from .models.AestheticScore import AestheticScore
@@ -36,29 +39,25 @@ def ImageReward_download(url: str, root: str):
     os.makedirs(root, exist_ok=True)
     filename = os.path.basename(url)
     download_target = os.path.join(root, filename)
-    try:
-        try_to_load_from_cache(repo_id="THUDM/ImageReward", filename=filename, cache_dir=download_target)
-    except Exception as e:
-        print(f"saving ImageReward in: '{download_target}' ")
-        hf_hub_download(repo_id="THUDM/ImageReward", filename=filename, local_dir=root)
+    hf_hub_download(repo_id="THUDM/ImageReward", filename=filename, local_dir=root)
     return download_target
 
 
 def load(name: str = "ImageReward-v1.0",
-         device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", download_root: str = None,
+         device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu",
+         download_root: str = None,
          med_config: str = None):
     """Load a ImageReward model
 
     Parameters
     ----------
-    name : str
+    name: str
         A model name listed by `ImageReward.available_models()`, or the path to a model checkpoint containing the state_dict
-
-    device : Union[str, torch.device]
+    device: Union[str, torch.device]
         The device to put the loaded model
-
     download_root: str
         path to download the model files; by default, it uses "~/.cache/ImageReward"
+    med_config: str
 
     Returns
     -------
@@ -66,23 +65,27 @@ def load(name: str = "ImageReward-v1.0",
         The ImageReward model
     """
     if name in _MODELS:
-        model_path = ImageReward_download(_MODELS[name], download_root or os.path.expanduser("~/.cache/ImageReward"))
+        model_root = download_root or os.path.expanduser("~/.cache/ImageReward")
+        if not pathlib.Path(model_root).exists():
+            model_path = ImageReward_download(_MODELS[name], root=model_root)
     elif os.path.isfile(name):
         model_path = name
     else:
         raise RuntimeError(f"Model {name} not found; available models = {available_models()}")
 
-    print('-> load ImageReward from %s' % model_path)
+    print('-> load ImageReward model from %s' % model_path)
     state_dict = torch.load(model_path, map_location='cpu')
 
     # med_config
     if med_config is None:
-        med_config = ImageReward_download("https://huggingface.co/THUDM/ImageReward/blob/main/med_config.json",
-                                          download_root or os.path.expanduser("~/.cache/ImageReward"))
+        med_config_root = download_root or os.path.expanduser("~/.cache/ImageReward")
+        if not pathlib.Path(med_config_root).exists():
+            med_config = ImageReward_download("https://huggingface.co/THUDM/ImageReward/blob/main/med_config.json",
+                                              root=med_config_root)
+        print('-> load ImageReward med_config from %s' % model_path)
 
     model = ImageReward(device=device, med_config=med_config).to(device)
     msg = model.load_state_dict(state_dict, strict=False)
-    print("-> ImageReward loaded")
     model.eval()
 
     return model

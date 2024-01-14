@@ -22,6 +22,7 @@ from pytorch_svgrender.painter.svgdreamer import VectorizedParticleSDSPipeline
 from pytorch_svgrender.plt import log_input
 from pytorch_svgrender.utils.color_attrs import init_tensor_with_color
 from pytorch_svgrender.token2attn.ptp_utils import view_images
+from pytorch_svgrender.diffusers_warp import model2res
 
 import ImageReward as RM
 
@@ -82,8 +83,8 @@ class SVGDreamerPipeline(ModelState):
 
         self.style = self.x_cfg.style
         if self.style == "pixelart":
-            args.lr_stage_one.lr_schedule = False
-            args.lr_stage_two.lr_schedule = False
+            self.x_cfg.lr_stage_one.lr_schedule = False
+            self.x_cfg.lr_stage_two.lr_schedule = False
 
     def target_file_preprocess(self, tar_path: AnyStr):
         process_comp = transforms.Compose([
@@ -196,7 +197,7 @@ class SVGDreamerPipeline(ModelState):
         self.print(f"-> Painter width Params: {len(renderers[0].get_width_parameters())}")
 
         L_reward = torch.tensor(0.)
-        L_add = torch.tensor(0.)
+
         self.step = 0  # reset global step
         self.print(f"\ntotal VSD optimization steps: {total_step}")
         with tqdm(initial=self.step, total=total_step, disable=not self.accelerator.is_main_process) as pbar:
@@ -210,14 +211,17 @@ class SVGDreamerPipeline(ModelState):
                     self.frame_idx += 1
 
                 L_guide, grad, latents, t_step = self.pipeline.variational_score_distillation(
+                    raster_imgs,
                     self.step,
-                    pred_rgb=raster_imgs,
                     prompt=[text_prompt],
                     negative_prompt=self.args.neg_prompt,
                     grad_scale=guidance_cfg.grad_scale,
+                    enhance_particle=guidance_cfg.particle_aug,
+                    im_size=model2res(self.x_cfg.model_id)
                 )
 
                 # Xing Loss for Self-Interaction Problem
+                L_add = torch.tensor(0.)
                 if self.style == "iconography" or self.x_cfg.xing_loss.use:
                     for r in renderers:
                         L_add += xing_loss_fn(r.get_point_parameters()) * self.x_cfg.xing_loss.weight
@@ -239,18 +243,15 @@ class SVGDreamerPipeline(ModelState):
                     L_lora.backward()
                     phi_optimizer.step()
 
-                    if phi_scheduler is not None:
-                        phi_scheduler.step()
-
                 # reward learning
                 if guidance_cfg.phi_ReFL and self.step % guidance_cfg.phi_sample_step == 0:
                     with torch.no_grad():
                         phi_outputs = []
                         phi_sample_paths = []
                         for idx in range(guidance_cfg.n_phi_sample):
-                            phi_output = self.pipeline.sample_lora(text_prompt,
-                                                                   num_inference_steps=guidance_cfg.phi_infer_step,
-                                                                   generator=self.g_device)
+                            phi_output = self.pipeline.sample(text_prompt,
+                                                              num_inference_steps=guidance_cfg.phi_infer_step,
+                                                              generator=self.g_device)
                             sample_path = (self.phi_samples_dir / f'iter{idx}.png').as_posix()
                             phi_output.images[0].save(sample_path)
                             phi_sample_paths.append(sample_path)
@@ -258,7 +259,7 @@ class SVGDreamerPipeline(ModelState):
                             phi_output_np = np.array(phi_output.images[0])
                             phi_outputs.append(phi_output_np)
                         # save all samples
-                        view_images(phi_outputs, save_image=True,
+                        view_images(phi_outputs, save_image=True, num_rows=guidance_cfg.phi_sample_step // 2,
                                     fp=self.phi_samples_dir / f'samples_iter{self.step}.png')
 
                     ranking, rewards = self.reward_model.inference_rank(text_prompt, phi_sample_paths)
@@ -272,7 +273,11 @@ class SVGDreamerPipeline(ModelState):
                         L_reward.backward()
                         phi_optimizer.step()
 
-                # curve-regular
+                # update the learning rate of the phi_model
+                if phi_scheduler is not None:
+                    phi_scheduler.step()
+
+                # curve regularization
                 for r in renderers:
                     r.clip_curve_shape()
 
@@ -304,7 +309,7 @@ class SVGDreamerPipeline(ModelState):
                     f"L_add: {L_add.item():.4e}, "
                     f"L_lora: {L_lora.item():.4f}, "
                     f"L_reward: {L_reward.item():.4f}, "
-                    f"vsd: {grad.item():.4e}"
+                    f"vpsd: {grad.item():.4e}"
                 )
 
                 if self.step % self.args.save_step == 0 and self.accelerator.is_main_process:
