@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='PyTorch-SVGRender',
-    packages=find_packages(exclude=["test*", "docs"]),
+    packages=find_packages(exclude=["test*", "docs", "examples"]),
     version='1.0.0',
     license='Mozilla Public License Version 2.0',
     description='SVG Differentiable Rendering: Generating vector graphics using neural networks.',

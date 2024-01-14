@@ -29,12 +29,30 @@ Synthesize the SVGs of the Sydney Opera House in the style of Van Gogh's oil pai
 
 You will get the following result:
 
-.. image:: ../../examples/svgdreamer/vectorfusion_panda_icon.svg
-   :width: 224
-   :alt: Alternative text for the image
+.. image:: ../../examples/svgdreamer/icon_sydney_opera_house_1.png
+   :alt: icon sydney opera, iconography
 
    Number of vector particles: 6
 
+.. image:: ../../examples/svgdreamer/icon_sydney_opera_house_2.png
+   :alt: icon sydney opera, iconography
+
+   Number of vector particles: 6
+
+------------
+
+Synthesize a German shepherd in vector art,
+
+.. code-block:: console
+
+   $ python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd'
+
+You will get the following result:
+
+.. image:: ../../examples/svgdreamer/icon_GermanShepherd_1.png
+   :alt: German shepherd in vector art, iconography
+
+   Number of vector particles: 6
 
 Sketch
 """"""""""""
@@ -42,8 +60,34 @@ Sketch
 Pixel Art
 """"""""""""
 
+Synthesize German shepherds in vector art,
+
+.. code-block:: console
+
+   $ python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd'
+
+You will get the following result:
+
+.. image:: ../../examples/svgdreamer/icon_GermanShepherd_1.png
+   :alt: German shepherd in vector art, pixel art
+
+   Number of vector particles: 6
+
 Low-Poly
 """"""""""""
+
+Synthesize bald eagles in low-poly,
+
+.. code-block:: console
+
+   $ python svg_render.py x=svgdreamer prompt='A picture of a bald eagle. low-ploy. polygon' x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/eagle'
+
+You will get the following result:
+
+.. image:: ../../examples/svgdreamer/lowpoly_eagle_1.png
+   :alt: bald eagle, low-poly
+
+   Number of vector particles: 6
 
 Painting
 """"""""""""

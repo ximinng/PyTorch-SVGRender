@@ -1,7 +1,12 @@
 Welcome to PyTorch-SVGRender documentation!
 ===================================
 
-**Pytorch-SVGRender** is the go-to library for state-of-the-art differentiable rendering methods for image vectorization.
+.. raw:: html
+
+    <div align="center">
+        <img src="../../assets/logo.png" style="width: 350px; height: 300px;" alt="Pytorch-SVGRender">
+        **Pytorch-SVGRender** is the go-to library for state-of-the-art differentiable rendering methods for image vectorization.
+    </div>
 
 .. note::
 
@@ -27,6 +32,22 @@ Table of Contents
 Installation
 ----------
 
+You can follow the steps below to quickly get up and running with PyTorch-SVGRender.
+These steps will let you run quick inference locally.
+
+In the top level directory run,
+
+.. code-block:: console
+
+   $ sh script/install.sh
+
+Note: Make sure that the script file has execution **permissions** (you can give them using ``chmod +x script.sh``), and
+then run the script.
+
+------------
+
+**If you want to install it yourself step by step, you can refer to the following content,**
+
 Create a new conda environment:
 
 .. code-block:: console
@@ -40,10 +61,10 @@ Install pytorch and the following libraries:
 
    (svgrender) $ conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
    (svgrender) $ pip install hydra-core omegaconf
-   (svgrender) $ pip install hydra-core omegaconfpip install freetype-py shapely svgutils
+   (svgrender) $ pip install freetype-py shapely svgutils
    (svgrender) $ pip install opencv-python scikit-image matplotlib visdom wandb BeautifulSoup4
    (svgrender) $ pip install triton numba
-   (svgrender) $ pip install numpy scipy timm scikit-fmm einops
+   (svgrender) $ pip install numpy scipy scikit-fmm einops timm fairscale=0.4.13
    (svgrender) $ pip install accelerate transformers safetensors datasets
 
 Install LaMa:

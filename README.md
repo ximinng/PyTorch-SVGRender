@@ -91,7 +91,11 @@ In the top level directory run,
 sh script/install.sh
 ```
 
-For more information, please refer to the [Install.md](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Install.md).
+Note: Make sure that the script file has execution **permissions** (you can give them using `chmod +x script.sh`), and
+then run the script.
+
+For more information, please refer to
+the [Install.md](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Install.md).
 
 <h2 align="center">Quickstart</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
@@ -100,13 +104,11 @@ For more information, please refer to the [Install.md](https://github.com/ximinn
 including Iconography, Sketch, Pixel Art, Low-Poly, Painting, and Ink and Wash.
 
 ```shell
-# iconography style:
-## sydney opera house
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/Sydney' mv=True multirun=True
-## crane
-CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='black and red ink. a crane in chinese style. ink art by MSchiffer. whimsical. rough sketch.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/crane' mv=True multirun=True
+# primitive: iconography:
 ## German shepherd
 CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd' mv=True multirun=True
+## sydney opera house
+CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sydney opera house. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/Sydney' mv=True multirun=True
 ## Hogwarts
 CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Hermione Granger. Ron. Harry Potter. Hogwarts.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/Hogwarts' mv=True multirun=True
 ## ship on seas
