@@ -29,29 +29,11 @@ Synthesize the SVGs of the Sydney Opera House in the style of Van Gogh's oil pai
 
 You will get the following result:
 
-.. image:: ../../examples/svgdreamer/icon_GermanShepherd_1.png
-   :width: 224
-   :align: center
-   :caption: 野火logo
-
-.. image:: ../../examples/svgdreamer/icon_GermanShepherd_1.png
-   :caption: 野火logo
-
-.. image:: ../../examples/svgdreamer/icon_GermanShepherd_1.png
-
+.. image:: ../../examples/svgdreamer/icon_sydney_opera_house_1.png
+.. image:: ../../examples/svgdreamer/icon_sydney_opera_house_2.png
 .. raw:: html
 
-    <div align="center">
-    <img src="_images/icon_sydney_opera_house_1.png" alt="Pytorch-SVGRender">
-    <p><strong>Fig. </strong>The oil paintings of Sydney Opera House by Van Gogh's. iconography. Number of vector particles: 6</p>
-    </div>
-
-.. raw:: html
-
-    <div align="center">
-    <img src="../examples/svgdreamer/icon_sydney_opera_house_2.png" alt="Pytorch-SVGRender">
-    <p><strong>Fig. </strong>The oil paintings of Sydney Opera House by Van Gogh's. iconography. Number of vector particles: 6</p>
-    </div>
+    <p style="text-align: center;"><strong>Fig. </strong>The oil paintings of Sydney Opera House by Van Gogh's. iconography. Number of vector particles: 6</p>
 
 ------------
 
@@ -63,12 +45,11 @@ Synthesize a German shepherd in vector art,
 
 You will get the following result:
 
+.. image:: ../../examples/svgdreamer/icon_GermanShepherd_1.png
 .. raw:: html
 
-    <div align="center">
-    <img src="../../examples/svgdreamer/icon_GermanShepherd_1.png" alt="German shepherd in vector art, iconography">
-    <p><strong>Fig. </strong>German shepherd in vector art. iconography. Number of vector particles: 6</p>
-    </div>
+    <p style="text-align: center;"><strong>Fig. </strong>German shepherd in vector art. iconography. Number of vector particles: 6</p>
+
 
 Sketch
 """"""""""""
@@ -84,12 +65,10 @@ Synthesize German shepherds in vector art,
 
 You will get the following result:
 
+.. image:: ../../examples/svgdreamer/pixelart_DarthVader_1.png
 .. raw:: html
 
-    <div align="center">
-    <img src="../../../examples/svgdreamer/icon_GermanShepherd_1.png" alt="Darth vader, pixel art">
-    <p><strong>Fig. </strong>Darth vader. pixel art. Number of vector particles: 6</p>
-    </div>
+    <p style="text-align: center;"><strong>Fig. </strong>Darth vader. pixel art. Number of vector particles: 6</p>
 
 Low-Poly
 """"""""""""
@@ -102,12 +81,10 @@ Synthesize bald eagles in low-poly,
 
 You will get the following result:
 
+.. image:: ../../examples/svgdreamer/lowpoly_eagle_1.png
 .. raw:: html
 
-    <div align="center">
-    <img src="../../examples/svgdreamer/lowpoly_eagle_1.png" alt="bald eagle, low-poly">
-    <p><strong>Fig. </strong>Bald eagle. low-poly. Number of vector particles: 6</p>
-    </div>
+    <p style="text-align: center;"><strong>Fig. </strong>Bald eagle. low-poly. Number of vector particles: 6</p>
 
 Painting
 """"""""""""
