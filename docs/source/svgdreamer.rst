@@ -50,9 +50,39 @@ You will get the following result:
 
     <p style="text-align: center;"><strong>Fig. </strong>German shepherd in vector art. iconography. Number of vector particles: 6</p>
 
+------------
+
+Synthesize a ship on the high seas,
+
+.. code-block:: console
+
+   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/ship' mv=True multirun=True
+
 
 Sketch
 """"""""""""
+
+Synthesize the free-hand sketches of the Lamborghini,
+
+.. code-block:: console
+
+   $ python svg_render.py x=svgdreamer prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./svgdreamer/Lamborghini'
+
+You will get the following result:
+
+.. image:: ../../examples/svgdreamer/sketch_Lamborghini_1.png
+.. raw:: html
+
+    <p style="text-align: center;"><strong>Fig. </strong>Lamborghini. sketch. Number of vector particles: 6</p>
+
+------------
+
+Synthesize the free-hand sketches of a dragon,
+
+.. code-block:: console
+
+   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A dragon flying in the sky. full body. minimal 2d line drawing. trending on artstation.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./svgdreamer/dragon' mv=True multirun=True
+
 
 Pixel Art
 """"""""""""
@@ -89,5 +119,28 @@ You will get the following result:
 Painting
 """"""""""""
 
+Synthesize bald eagles in low-poly,
+
+.. code-block:: console
+
+   $ python svg_render.py x=svgdreamer prompt='a phoenix coming out of the fire drawing. lineal color. trending on artstation.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=384 result_path='./svgdreamer/phoenix'
+
+
 Ink and Wash
 """"""""""""
+
+Synthesize the Big Wild Goose Pagoda,
+
+.. code-block:: console
+
+   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=168 x.width=8 result_path='./svgdreamer/BigWildGoosePagoda' mv=True multirun=True
+
+
+------------
+
+Synthesize the ancient villages,
+
+.. code-block:: console
+
+   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sepia ink wash landscape of ancient villages. Minimalist abstract art grayscale watercolor. on a white background.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=256 x.width=6 result_path='./svgdreamer/InkVillages' mv=True multirun=True
+
