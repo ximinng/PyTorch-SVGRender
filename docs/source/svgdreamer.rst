@@ -32,14 +32,14 @@ You will get the following result:
 .. raw:: html
 
     <div align="center">
-    <img src="./examples/svgdreamer/icon_sydney_opera_house_1.png" alt="Pytorch-SVGRender">
+    <img src="examples/svgdreamer/icon_sydney_opera_house_1.png" alt="Pytorch-SVGRender">
     <p><strong>Fig. </strong>The oil paintings of Sydney Opera House by Van Gogh's. iconography. Number of vector particles: 6</p>
     </div>
 
 .. raw:: html
 
     <div align="center">
-    <img src="../../examples/svgdreamer/icon_sydney_opera_house_2.png" alt="Pytorch-SVGRender">
+    <img src="../examples/svgdreamer/icon_sydney_opera_house_2.png" alt="Pytorch-SVGRender">
     <p><strong>Fig. </strong>The oil paintings of Sydney Opera House by Van Gogh's. iconography. Number of vector particles: 6</p>
     </div>
 
@@ -77,7 +77,7 @@ You will get the following result:
 .. raw:: html
 
     <div align="center">
-    <img src="../../examples/svgdreamer/icon_GermanShepherd_1.png" alt="Darth vader, pixel art">
+    <img src="../../../examples/svgdreamer/icon_GermanShepherd_1.png" alt="Darth vader, pixel art">
     <p><strong>Fig. </strong>Darth vader. pixel art. Number of vector particles: 6</p>
     </div>
 
