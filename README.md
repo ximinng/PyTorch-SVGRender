@@ -91,7 +91,7 @@ In the top level directory run,
 sh script/install.sh
 ```
 
-For more information, please refer to the [Install.md](https://github.com/ximinng/DiffSketcher/blob/main/Install.md).
+For more information, please refer to the [Install.md](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Install.md).
 
 <h2 align="center">Quickstart</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
