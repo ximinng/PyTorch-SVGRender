@@ -32,7 +32,7 @@ You will get the following result:
 .. raw:: html
 
     <div align="center">
-    <img src="../../examples/svgdreamer/icon_sydney_opera_house_1.png" alt="Pytorch-SVGRender">
+    <img src="./examples/svgdreamer/icon_sydney_opera_house_1.png" alt="Pytorch-SVGRender">
     <p><strong>Fig. </strong>The oil paintings of Sydney Opera House by Van Gogh's. iconography. Number of vector particles: 6</p>
     </div>
 
