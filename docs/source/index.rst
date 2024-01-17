@@ -2,6 +2,8 @@ Welcome to PyTorch-SVGRender documentation!
 ===================================
 
 .. image:: ../../assets/logo.png
+   :width: 350
+
 .. raw:: html
 
     <p style="text-align: center;"><strong>Pytorch-SVGRender</strong> is the go-to library for state-of-the-art differentiable rendering methods for image vectorization.</p>

@@ -18,7 +18,7 @@ import pathlib
 
 import torch
 from tqdm import tqdm
-from huggingface_hub import hf_hub_download, try_to_load_from_cache
+from huggingface_hub import hf_hub_download
 
 from .ImageReward import ImageReward
 from .models.CLIPScore import CLIPScore
@@ -46,7 +46,7 @@ def ImageReward_download(url: str, root: str):
 def load(name: str = "ImageReward-v1.0",
          device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu",
          download_root: str = None,
-         med_config: str = None):
+         med_config_path: str = None):
     """Load a ImageReward model
 
     Parameters
@@ -57,7 +57,7 @@ def load(name: str = "ImageReward-v1.0",
         The device to put the loaded model
     download_root: str
         path to download the model files; by default, it uses "~/.cache/ImageReward"
-    med_config: str
+    med_config_path: str
 
     Returns
     -------
@@ -65,9 +65,12 @@ def load(name: str = "ImageReward-v1.0",
         The ImageReward model
     """
     if name in _MODELS:
-        model_root = download_root or os.path.expanduser("~/.cache/ImageReward")
-        if not pathlib.Path(model_root).exists():
-            model_path = ImageReward_download(_MODELS[name], root=model_root)
+        download_root = download_root or "~/.cache/ImageReward"
+        download_root = pathlib.Path(download_root)
+        model_path = pathlib.Path(download_root) / 'ImageReward.pt'
+
+        if not model_path.exists():
+            model_path = ImageReward_download(_MODELS[name], root=download_root.as_posix())
     elif os.path.isfile(name):
         model_path = name
     else:
@@ -77,14 +80,17 @@ def load(name: str = "ImageReward-v1.0",
     state_dict = torch.load(model_path, map_location='cpu')
 
     # med_config
-    if med_config is None:
-        med_config_root = download_root or os.path.expanduser("~/.cache/ImageReward")
-        if not pathlib.Path(med_config_root).exists():
-            med_config = ImageReward_download("https://huggingface.co/THUDM/ImageReward/blob/main/med_config.json",
-                                              root=med_config_root)
-        print('-> load ImageReward med_config from %s' % model_path)
+    if med_config_path is None:
+        med_config_root = download_root or "~/.cache/ImageReward"
+        med_config_root = pathlib.Path(med_config_root)
+        med_config_path = med_config_root / 'med_config.json'
 
-    model = ImageReward(device=device, med_config=med_config).to(device)
+        if not med_config_path.exists():
+            med_config_path = ImageReward_download("https://huggingface.co/THUDM/ImageReward/blob/main/med_config.json",
+                                                   root=med_config_root.as_posix())
+        print('-> load ImageReward med_config from %s' % med_config_path)
+
+    model = ImageReward(device=device, med_config=med_config_path).to(device)
     msg = model.load_state_dict(state_dict, strict=False)
     model.eval()
 

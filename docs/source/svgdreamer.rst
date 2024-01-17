@@ -119,11 +119,24 @@ You will get the following result:
 Painting
 """"""""""""
 
-Synthesize bald eagles in low-poly,
+Synthesize phoenixes coming out of the fire drawing,
 
 .. code-block:: console
 
    $ python svg_render.py x=svgdreamer prompt='a phoenix coming out of the fire drawing. lineal color. trending on artstation.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=384 result_path='./svgdreamer/phoenix'
+
+You will get the following result:
+
+.. image:: ../../examples/svgdreamer/painting_phoenix_1.png
+.. raw:: html
+
+Synthesize bald eagles in low-poly,
+
+.. code-block:: console
+
+   $ CUDA_VISIBLE_DEVICES=4 python svg_render.py x=svgdreamer prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait'
+   $ CUDA_VISIBLE_DEVICES=5 python svg_render.py x=svgdreamer prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.particle_aug=True x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait_aug'
+   $ CUDA_VISIBLE_DEVICES=6 python svg_render.py x=svgdreamer prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.phi_ReFL=True x.guidance.n_phi_sample=6 x.guidance.phi_sample_step=50 x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait_ReFL6'
 
 
 Ink and Wash
@@ -134,7 +147,7 @@ Synthesize the Big Wild Goose Pagoda,
 .. code-block:: console
 
    $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=168 x.width=8 result_path='./svgdreamer/BigWildGoosePagoda' mv=True multirun=True
-
+   $ CUDA_VISIBLE_DEVICES=6 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 x.width=6 result_path='./svgdreamer/BigWildGoosePagoda'
 
 ------------
 
