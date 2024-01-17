@@ -123,9 +123,6 @@ class CLIPLoss(torch.nn.Module):
             sketch_augs.append(augmented_pair[0].unsqueeze(0))
 
         sketch_batch = torch.cat(sketch_augs)
-        # sketch_utils.plot_batch(img_batch, sketch_batch, self.args, self.counter, use_wandb=False, title="fc_aug{}_iter{}_{}.jpg".format(1, self.counter, mode))
-        # if self.counter % 100 == 0:
-        # sketch_utils.plot_batch(img_batch, sketch_batch, self.args, self.counter, use_wandb=False, title="aug{}_iter{}_{}.jpg".format(1, self.counter, mode))
 
         sketch_features = self.model.encode_image(sketch_batch)
 
