@@ -81,7 +81,7 @@ guidance:
   # 'randint': random time steps
   # 'max_0.5_900': annealing from 0.98 to 0.5 after 900 steps
   t_schedule: 'max_0.5_1000' # 'randint'
-  # set phi model
+  # phi model config
   phi_single: False # if False new an unet model to estimate noise
   phi_model: 'lora' # 'lora', 'unet_simple'
   use_attn_scale: ${x.guidance.phi_single} # use lora_attn_scale or not
@@ -90,17 +90,20 @@ guidance:
   phi_t: False # different t for phi fine-tuning
   phi_update_step: 1
   phi_lr: 0.0001
-  n_phi_sample: 1 # the number of samples by phi
   phi_scheduler: 'ddim' # 'dpm-solver'
-  phi_infer_step: 50 # the phi num_inference_steps
-  phi_sample_step: 500 # the phi log step
   phi_n_particle: 1 # the batch size of phi_model
+  # ReFL config
   phi_ReFL: False # enable reward feed back learning
-  phi_optim: # phi model optim
+  n_phi_sample: 1 # number of samples used in ReFL
+  phi_sample_step: 200 # the phi log step
+  phi_infer_step: 50 # the phi num_inference_steps
+  # phi model optim
+  phi_optim:
     name: 'adamw'
     betas: [ 0.9, 0.999 ]
     eps: 1e-8
     weight_decay: ~ # 1e-5
+  # phi model lr learning schedule
   phi_schedule:
     use: False
     name: 'cosine'

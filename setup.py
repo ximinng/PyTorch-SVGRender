@@ -10,7 +10,7 @@ setup(
     version='1.0.0',
     license='Mozilla Public License Version 2.0',
     description='SVG Differentiable Rendering: Generating vector graphics using neural networks.',
-    author='XiMing Xing et al.',
+    author='XiMing Xing, Junchegn Hun et al.',
     author_email='ximingxing@gmail.com',
     url='https://github.com/ximinng/PyTorch-SVGRender',
     long_description_content_type='text/markdown',
