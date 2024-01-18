@@ -56,7 +56,7 @@ Synthesize a ship on the high seas,
 
 .. code-block:: console
 
-   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/ship' mv=True multirun=True
+   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=30 x.guidance.n_particle=4 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=4 x.num_paths=512 result_path='./svgdreamer/ship' mv=True multirun=True
 
 
 Sketch
@@ -116,6 +116,12 @@ You will get the following result:
 
     <p style="text-align: center;"><strong>Fig. </strong>Bald eagle. low-poly. Number of vector particles: 6</p>
 
+Synthesize scarlet macaws in low-poly,
+
+.. code-block:: console
+
+   $ CUDA_VISIBLE_DEVICES=3 python svg_render.py x=svgdreamer prompt='A picture of a scarlet macaw. low-ploy. polygon' x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/ScarletMacaw'
+
 Painting
 """"""""""""
 
@@ -146,7 +152,6 @@ Synthesize the Big Wild Goose Pagoda,
 
 .. code-block:: console
 
-   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=168 x.width=8 result_path='./svgdreamer/BigWildGoosePagoda' mv=True multirun=True
    $ CUDA_VISIBLE_DEVICES=6 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 x.width=6 result_path='./svgdreamer/BigWildGoosePagoda'
 
 ------------

@@ -22,11 +22,12 @@ echo "The basic dependency library is installed."
 pip install easydict scikit-learn pytorch_lightning webdataset
 pip install albumentations==0.5.2
 pip install kornia==0.5.0
-pip install wldhx.yadisk-direct
+
+# Noting: you can download the lama model when you need it,
+# download LaMa model weights:
 
 cd lama
-# download LaMa model weights
-curl -L $(yadisk-direct https://disk.yandex.ru/d/kHJkc7bs7mKIVA) -o big-lama.zip
+curl -O -L https://huggingface.co/xingxm/PyTorch-SVGRender-models/resolve/main/big-lama.zip
 unzip big-lama.zip
 
 echo "LaMa installation is complete."
