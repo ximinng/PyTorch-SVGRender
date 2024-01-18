@@ -34,7 +34,7 @@ Install LaMa:
    (svgrender) $ pip install wldhx.yadisk-direct
 
    (svgrender) $ cd lama
-   (svgrender) $ curl -L $(yadisk-direct https://disk.yandex.ru/d/kHJkc7bs7mKIVA) -o big-lama.zip
+   (svgrender) $ curl -O -L https://huggingface.co/xingxm/PyTorch-SVGRender-models/resolve/main/big-lama.zip
    (svgrender) $ unzip big-lama.zip
 
 Install CLIP:
