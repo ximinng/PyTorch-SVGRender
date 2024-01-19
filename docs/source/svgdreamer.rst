@@ -56,7 +56,7 @@ Synthesize a ship on the high seas,
 
 .. code-block:: console
 
-   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/ship' mv=True multirun=True
+   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=30 x.guidance.n_particle=4 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=4 x.num_paths=512 result_path='./svgdreamer/ship' mv=True multirun=True
 
 
 Sketch
@@ -116,6 +116,21 @@ You will get the following result:
 
     <p style="text-align: center;"><strong>Fig. </strong>Bald eagle. low-poly. Number of vector particles: 6</p>
 
+------------
+
+Synthesize scarlet macaws in low-poly,
+
+.. code-block:: console
+
+   $ python svg_render.py x=svgdreamer prompt='A picture of a scarlet macaw. low-ploy. polygon' x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/ScarletMacaw'
+
+You will get the following result:
+
+.. image:: ../../examples/svgdreamer/lowpoly_ScarletMacaw.png
+.. raw:: html
+
+    <p style="text-align: center;"><strong>Fig. </strong>Scarlet Macaw. low-poly. Number of vector particles: 6</p>
+
 Painting
 """"""""""""
 
@@ -130,14 +145,22 @@ You will get the following result:
 .. image:: ../../examples/svgdreamer/painting_phoenix_1.png
 .. raw:: html
 
-Synthesize bald eagles in low-poly,
+    <p style="text-align: center;"><strong>Fig. </strong>Phoenixes. Painting. Number of vector particles: 6</p>
+
+------------
+
+Synthesize self-portraits of Van Gogh,
 
 .. code-block:: console
 
-   $ CUDA_VISIBLE_DEVICES=4 python svg_render.py x=svgdreamer prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait'
-   $ CUDA_VISIBLE_DEVICES=5 python svg_render.py x=svgdreamer prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.particle_aug=True x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait_aug'
-   $ CUDA_VISIBLE_DEVICES=6 python svg_render.py x=svgdreamer prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.phi_ReFL=True x.guidance.n_phi_sample=6 x.guidance.phi_sample_step=50 x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait_ReFL6'
+   $ python svg_render.py x=svgdreamer prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait'
 
+You will get the following result:
+
+.. image:: ../../examples/svgdreamer/painting_VanGogh_portrait.png
+.. raw:: html
+
+    <p style="text-align: center;"><strong>Fig. </strong>self-portraits of Van Gogh. Painting. Number of vector particles: 6</p>
 
 Ink and Wash
 """"""""""""
@@ -146,14 +169,11 @@ Synthesize the Big Wild Goose Pagoda,
 
 .. code-block:: console
 
-   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=168 x.width=8 result_path='./svgdreamer/BigWildGoosePagoda' mv=True multirun=True
-   $ CUDA_VISIBLE_DEVICES=6 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 x.width=6 result_path='./svgdreamer/BigWildGoosePagoda'
+   $ python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='max_0.5_2000' x.num_paths=128 x.width=6 result_path='./svgdreamer/BigWildGoosePagoda'
 
-------------
+You will get the following result:
 
-Synthesize the ancient villages,
+.. image:: ../../examples/svgdreamer/ink_BigWildGoosePagoda.png
+.. raw:: html
 
-.. code-block:: console
-
-   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Sepia ink wash landscape of ancient villages. Minimalist abstract art grayscale watercolor. on a white background.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=256 x.width=6 result_path='./svgdreamer/InkVillages' mv=True multirun=True
-
+    <p style="text-align: center;"><strong>Fig. </strong>Big Wild Goose Pagoda. Ink and Wash. Number of vector particles: 6</p>

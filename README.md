@@ -131,8 +131,7 @@ python svg_render.py x=live target='./data/simile.png'
 
 **CLIPasso** synthesizes vectorized sketches from images:
 
-**note:** first download the [U2Net model](https://huggingface.co/akhaliq/CLIPasso/blob/main/u2net.pth), and put the
-model in `./checkpoint/u2net/u2net.pth`.
+**note:** first download the U2Net model `sh script/download_u2net.sh`.
 
 ```shell
 python svg_render.py x=clipasso target='./data/horse.png'
