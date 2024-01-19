@@ -55,7 +55,7 @@ def log_input(inputs, output_dir, output_prefix="input", dpi=100):
     ndarr = grid.mul(255).add_(0.5).clamp_(0, 255).permute(1, 2, 0).to("cpu", torch.uint8).numpy()
     plt.imshow(ndarr)
     plt.axis("off")
-    plt.tight_layout()
+    plt.tight_layout(pad=0)
     plt.savefig(f"{output_dir}/{output_prefix}.png", dpi=dpi)
     plt.close()
 
