@@ -11,7 +11,7 @@ from pytorch_svgrender.libs.engine import ModelState
 from pytorch_svgrender.painter.wordasimage import Painter, PainterOptimizer
 from pytorch_svgrender.painter.wordasimage.losses import ToneLoss, ConformalLoss
 from pytorch_svgrender.painter.vectorfusion import LSDSPipeline
-from pytorch_svgrender.plt import log_input, plot_batch
+from pytorch_svgrender.plt import plot_img, plot_couple
 from pytorch_svgrender.diffusers_warp import init_diffusion_pipeline
 from pytorch_svgrender.svgtools import FONT_LIST
 
@@ -84,7 +84,7 @@ class WordAsImagePipeline(ModelState):
 
         # init letter shape
         img_init = renderer.init_shape(self.target_letter)
-        log_input(img_init, self.result_path, output_prefix="word_init")
+        plot_img(img_init, self.result_path, fname="word_init")
 
         # save init letter
         renderer.pretty_save_svg(self.result_path / "letter_init.svg")
@@ -113,7 +113,7 @@ class WordAsImagePipeline(ModelState):
                 raster_img = renderer.get_image(step=i)
 
                 if self.make_video and (i % self.args.framefreq == 0 or i == n_iter - 1):
-                    log_input(raster_img, self.frame_log_dir, output_prefix=f"iter{self.step}")
+                    plot_img(raster_img, self.frame_log_dir, fname=f"iter{self.step}")
 
                 L_sds, grad = self.diffusion.score_distillation_sampling(
                     raster_img,
@@ -151,12 +151,12 @@ class WordAsImagePipeline(ModelState):
                     optimizer.update_lr()
 
                 if self.step % self.args.save_step == 0 and self.accelerator.is_main_process:
-                    plot_batch(init_letter,
-                               raster_img,
-                               self.step,
-                               save_path=self.png_log_dir.as_posix(),
-                               name=f"iter{self.step}",
-                               prompt=prompt)
+                    plot_couple(init_letter,
+                                raster_img,
+                                self.step,
+                                output_dir=self.png_log_dir.as_posix(),
+                                fname=f"iter{self.step}",
+                                prompt=prompt)
                     renderer.pretty_save_svg(self.svg_log_dir / f"svg_iter{self.step}.svg")
 
                 self.step += 1

@@ -21,7 +21,7 @@ from pytorch_svgrender.libs.metric.piq.perceptual import DISTS as DISTS_PIQ
 from pytorch_svgrender.libs.metric.clip_score import CLIPScoreWrapper
 from pytorch_svgrender.painter.diffsketcher import (
     Painter, SketchPainterOptimizer, Token2AttnMixinASDSPipeline, Token2AttnMixinASDSSDXLPipeline)
-from pytorch_svgrender.plt import log_input, plot_batch
+from pytorch_svgrender.plt import plot_img, plot_couple
 from pytorch_svgrender.painter.diffsketcher.sketch_utils import plt_attn
 from pytorch_svgrender.painter.clipasso.sketch_utils import get_mask_u2net, fix_image_scale
 from pytorch_svgrender.token2attn.attn_control import AttentionStore, EmptyControl
@@ -261,7 +261,7 @@ class DiffSketcherPipeline(ModelState):
         # init img
         img = renderer.init_image(stage=0)
         self.print("init_image shape: ", img.shape)
-        log_input(img, self.result_path, output_prefix="init_sketch")
+        plot_img(img, self.result_path, fname="init_sketch")
         # load optimizer
         optimizer = SketchPainterOptimizer(renderer,
                                            self.x_cfg.lr,
@@ -287,7 +287,7 @@ class DiffSketcherPipeline(ModelState):
                 raster_sketch = renderer.get_image().to(self.device)
 
                 if self.make_video and (self.step % self.args.framefreq == 0 or self.step == total_iter - 1):
-                    log_input(raster_sketch, self.frame_log_dir, output_prefix=f"iter{self.frame_idx}")
+                    plot_img(raster_sketch, self.frame_log_dir, fname=f"iter{self.frame_idx}")
                     self.frame_idx += 1
 
                 # ASDS loss
@@ -362,12 +362,12 @@ class DiffSketcherPipeline(ModelState):
                 # log raster and svg
                 if self.step % self.args.save_step == 0 and self.accelerator.is_main_process:
                     # log png
-                    plot_batch(inputs,
-                               raster_sketch,
-                               self.step,
-                               prompt=prompt,
-                               save_path=self.png_logs_dir.as_posix(),
-                               name=f"iter{self.step}")
+                    plot_couple(inputs,
+                                raster_sketch,
+                                self.step,
+                                prompt=prompt,
+                                output_dir=self.png_logs_dir.as_posix(),
+                                fname=f"iter{self.step}")
                     # log svg
                     renderer.save_svg(self.svg_logs_dir.as_posix(), f"svg_iter{self.step}")
                     # log cross attn
@@ -392,12 +392,12 @@ class DiffSketcherPipeline(ModelState):
                         if abs(cur_delta) > min_delta and cur_delta < 0:
                             best_visual_loss = loss_eval.item()
                             best_iter_v = self.step
-                            plot_batch(inputs,
-                                       raster_sketch,
-                                       best_iter_v,
-                                       prompt=prompt,
-                                       save_path=self.result_path.as_posix(),
-                                       name="visual_best")
+                            plot_couple(inputs,
+                                        raster_sketch,
+                                        best_iter_v,
+                                        prompt=prompt,
+                                        output_dir=self.result_path.as_posix(),
+                                        fname="visual_best")
                             renderer.save_svg(self.result_path.as_posix(), "visual_best")
 
                         # semantic metric
@@ -408,12 +408,12 @@ class DiffSketcherPipeline(ModelState):
                         if abs(cur_delta) > min_delta and cur_delta < 0:
                             best_semantic_loss = loss_eval.item()
                             best_iter_s = self.step
-                            plot_batch(inputs,
-                                       raster_sketch,
-                                       best_iter_s,
-                                       prompt=prompt,
-                                       save_path=self.result_path.as_posix(),
-                                       name="semantic_best")
+                            plot_couple(inputs,
+                                        raster_sketch,
+                                        best_iter_s,
+                                        prompt=prompt,
+                                        output_dir=self.result_path.as_posix(),
+                                        fname="semantic_best")
                             renderer.save_svg(self.result_path.as_posix(), "semantic_best")
 
                 # log attention, just once
@@ -431,9 +431,9 @@ class DiffSketcherPipeline(ModelState):
         renderer.save_svg(self.result_path.as_posix(), "final_svg")
 
         final_raster_sketch = renderer.get_image().to(self.device)
-        log_input(final_raster_sketch,
-                  output_dir=self.result_path,
-                  output_prefix='final_render')
+        plot_img(final_raster_sketch,
+                 output_dir=self.result_path,
+                 fname='final_render')
 
         if self.make_video:
             from subprocess import call

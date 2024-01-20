@@ -16,7 +16,7 @@ from pytorch_svgrender.libs.engine import ModelState
 from pytorch_svgrender.painter.style_clipdraw import (
     Painter, PainterOptimizer, VGG16Extractor, StyleLoss, sample_indices
 )
-from pytorch_svgrender.plt import log_input, plot_batch
+from pytorch_svgrender.plt import plot_img, plot_couple
 
 
 class StyleCLIPDrawPipeline(ModelState):
@@ -109,7 +109,7 @@ class StyleCLIPDrawPipeline(ModelState):
                            device=self.device)
         img = renderer.init_image(stage=0)
         self.print("init_image shape: ", img.shape)
-        log_input(img, self.result_path, output_prefix="init_img")
+        plot_img(img, self.result_path, fname="init_img")
 
         optimizer = PainterOptimizer(renderer, self.x_cfg.lr, self.x_cfg.width_lr, self.x_cfg.color_lr)
         optimizer.init_optimizers()
@@ -123,7 +123,7 @@ class StyleCLIPDrawPipeline(ModelState):
                 rendering = renderer.get_image(self.step).to(self.device)
 
                 if self.make_video and (self.step % self.args.framefreq == 0 or self.step == total_step - 1):
-                    log_input(rendering, self.frame_log_dir, output_prefix=f"iter{self.frame_idx}")
+                    plot_img(rendering, self.frame_log_dir, fname=f"iter{self.frame_idx}")
                     self.frame_idx += 1
 
                 rendering_aug = self.drawing_augment(rendering)
@@ -165,23 +165,23 @@ class StyleCLIPDrawPipeline(ModelState):
                     optimizer.update_lr(self.step)
 
                 if self.step % self.args.save_step == 0 and self.accelerator.is_main_process:
-                    plot_batch(style_img,
-                               rendering,
-                               self.step,
-                               prompt=prompt,
-                               save_path=self.png_logs_dir.as_posix(),
-                               name=f"iter{self.step}")
+                    plot_couple(style_img,
+                                rendering,
+                                self.step,
+                                prompt=prompt,
+                                output_dir=self.png_logs_dir.as_posix(),
+                                fname=f"iter{self.step}")
                     renderer.save_svg(self.svg_logs_dir.as_posix(), f"svg_iter{self.step}")
 
                 self.step += 1
                 pbar.update(1)
 
-        plot_batch(style_img,
-                   rendering,
-                   self.step,
-                   prompt=prompt,
-                   save_path=self.result_path.as_posix(),
-                   name=f"final_iter")
+        plot_couple(style_img,
+                    rendering,
+                    self.step,
+                    prompt=prompt,
+                    output_dir=self.result_path.as_posix(),
+                    fname=f"final_iter")
         renderer.save_svg(self.result_path.as_posix(), "final_svg")
 
         if self.make_video:

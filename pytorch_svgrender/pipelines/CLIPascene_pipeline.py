@@ -9,7 +9,7 @@ from pytorch_svgrender.libs.engine import ModelState
 from pytorch_svgrender.painter.clipascene import Painter, PainterOptimizer, Loss
 from pytorch_svgrender.painter.clipascene.scripts_utils import read_svg
 from pytorch_svgrender.painter.clipascene.sketch_utils import plot_attn, get_mask_u2net, fix_image_scale
-from pytorch_svgrender.plt import log_input, plot_batch
+from pytorch_svgrender.plt import plot_img, plot_couple
 from skimage.transform import resize
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
@@ -95,7 +95,7 @@ class CLIPascenePipeline(ModelState):
                                        self.args.x.mask_object,
                                        self.args.x.fix_scale,
                                        self.device)
-        log_input(inputs, output_dir)
+        plot_img(inputs, output_dir, fname="target")
         loss_func = Loss(self.x_cfg, mask, self.device)
         # init renderer
         renderer = self.load_renderer(inputs, mask)
@@ -126,7 +126,7 @@ class CLIPascenePipeline(ModelState):
                 optimizer.zero_grad_()
                 sketches = renderer.get_image().to(self.device)
                 if self.make_video and (step % self.args.framefreq == 0 or step == total_step - 1):
-                    log_input(sketches, self.frame_log_dir, output_prefix=f"iter{self.frame_idx}")
+                    plot_img(sketches, self.frame_log_dir, fname=f"iter{self.frame_idx}")
                     self.frame_idx += 1
 
                 losses_dict_weighted, _, _ = loss_func(sketches, inputs.detach(), step,
@@ -138,11 +138,11 @@ class CLIPascenePipeline(ModelState):
                 optimizer.step_()
 
                 if step % self.args.x.save_step == 0:
-                    plot_batch(inputs,
-                               sketches,
-                               self.step,
-                               save_path=png_log_dir.as_posix(),
-                               name=f"iter{step}")
+                    plot_couple(inputs,
+                                sketches,
+                                self.step,
+                                output_dir=png_log_dir.as_posix(),
+                                fname=f"iter{step}")
                     renderer.save_svg(svg_log_dir.as_posix(), f"svg_iter{step}")
 
                 if step % self.args.x.eval_step == 0:
@@ -162,11 +162,11 @@ class CLIPascenePipeline(ModelState):
                             if cur_delta < 0:
                                 best_loss = loss_eval.item()
                                 best_iter = step
-                                plot_batch(inputs,
-                                           sketches,
-                                           best_iter,
-                                           save_path=output_dir.as_posix(),
-                                           name="best_iter")
+                                plot_couple(inputs,
+                                            sketches,
+                                            best_iter,
+                                            output_dir=output_dir.as_posix(),
+                                            fname="best_iter")
                                 renderer.save_svg(output_dir.as_posix(), "best_iter")
 
                 if step == 0 and self.x_cfg.attention_init and self.accelerator.is_main_process:
@@ -263,4 +263,4 @@ class CLIPascenePipeline(ModelState):
 
         raster_b[mask == 1] = 1
         raster_b[raster_o != 1] = raster_o[raster_o != 1]
-        log_input(raster_b, self.result_path, output_prefix="combined")
+        plot_img(raster_b, self.result_path, fname="combined")

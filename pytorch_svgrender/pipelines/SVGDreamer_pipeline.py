@@ -19,7 +19,7 @@ from pytorch_svgrender.painter.svgdreamer import Painter, PainterOptimizer
 from pytorch_svgrender.painter.svgdreamer.painter_params import CosineWithWarmupLRLambda
 from pytorch_svgrender.painter.live import xing_loss_fn
 from pytorch_svgrender.painter.svgdreamer import VectorizedParticleSDSPipeline
-from pytorch_svgrender.plt import log_input
+from pytorch_svgrender.plt import plot_img
 from pytorch_svgrender.utils.color_attrs import init_tensor_with_color
 from pytorch_svgrender.token2attn.ptp_utils import view_images
 from pytorch_svgrender.diffusers_warp import model2res
@@ -128,7 +128,7 @@ class SVGDreamerPipeline(ModelState):
                 self.print(f"color: {self.x_cfg.color_init}")
 
             # log init target_img
-            log_input(target_img, self.result_path, output_prefix='init_target_img')
+            plot_img(target_img, self.result_path, fname='init_target_img')
             final_svg_path = None
         elif init_from_target:
             # mode 2: load the SVG file and finetune it
@@ -148,7 +148,7 @@ class SVGDreamerPipeline(ModelState):
             target_img, final_svg_path = self.SIVE_stage(text_prompt)
             self.x_cfg.path_svg = final_svg_path
             self.print("\n SVG fine-tuning via VPSD...")
-            log_input(target_img, self.result_path, output_prefix='init_target_img')
+            plot_img(target_img, self.result_path, fname='init_target_img')
 
         # create svg renderer
         renderers = [self.load_renderer(final_svg_path) for _ in range(n_particle)]
@@ -163,7 +163,7 @@ class SVGDreamerPipeline(ModelState):
         # log init images
         for i, r in enumerate(renderers):
             init_imgs = r.init_image(stage=0, num_paths=self.x_cfg.num_paths)
-            log_input(init_imgs, self.init_stage_two_dir, output_prefix=f"init_img_stage_two_{i}")
+            plot_img(init_imgs, self.init_stage_two_dir, fname=f"init_img_stage_two_{i}")
 
         # init renderer optimizer
         optimizers = []
@@ -207,7 +207,7 @@ class SVGDreamerPipeline(ModelState):
                 raster_imgs = torch.cat(particles, dim=0)
 
                 if self.make_video and (self.step % self.args.framefreq == 0 or self.step == total_step - 1):
-                    log_input(raster_imgs, self.frame_log_dir, output_prefix=f"iter{self.frame_idx}")
+                    plot_img(raster_imgs, self.frame_log_dir, fname=f"iter{self.frame_idx}")
                     self.frame_idx += 1
 
                 L_guide, grad, latents, t_step = self.pipeline.variational_score_distillation(

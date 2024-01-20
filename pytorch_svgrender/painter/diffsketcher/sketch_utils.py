@@ -2,9 +2,9 @@
 # Copyright (c) XiMing Xing. All rights reserved.
 # Author: XiMing Xing
 # Description:
+
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
 import torch
 from torchvision.utils import make_grid
 
@@ -15,8 +15,8 @@ def plt_triplet(
         style: torch.Tensor,
         step: int,
         prompt: str,
-        save_path: str,
-        name: str,
+        output_dir: str,
+        fname: str,  # file name
         dpi: int = 300
 ):
     if photos.shape != sketch.shape:
@@ -59,11 +59,15 @@ def plt_triplet(
     plt.suptitle(insert_newline(prompt), fontsize=10)
 
     plt.tight_layout()
-    plt.savefig(f"{save_path}/{name}.png", dpi=dpi)
+    plt.savefig(f"{output_dir}/{fname}.png", dpi=dpi)
     plt.close()
 
 
-def plt_attn(attn, threshold_map, inputs, inds, output_path):
+def plt_attn(attn: np.arry,
+             threshold_map: np.array,
+             inputs: torch.Tensor,
+             inds: np.array,
+             output_path: str):
     # currently supports one image (and not a batch)
     plt.figure(figsize=(10, 5))
 
