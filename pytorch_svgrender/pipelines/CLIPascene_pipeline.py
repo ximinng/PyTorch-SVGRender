@@ -255,10 +255,10 @@ class CLIPascenePipeline(ModelState):
         mask = imageio.imread(mask_path)
         mask = resize(mask, (output_size, output_size), anti_aliasing=False)
 
-        object_svg_path = foreground_output_dir / "best.svg"
+        object_svg_path = foreground_output_dir / "best_iter.svg"
         raster_o = read_svg(object_svg_path, resize_obj=1, params=params, multiply=1.8, device=device)
 
-        background_svg_path = background_output_dir / "best.svg"
+        background_svg_path = background_output_dir / "best_iter.svg"
         raster_b = read_svg(background_svg_path, resize_obj=0, params=params, multiply=1.8, device=device)
 
         raster_b[mask == 1] = 1
