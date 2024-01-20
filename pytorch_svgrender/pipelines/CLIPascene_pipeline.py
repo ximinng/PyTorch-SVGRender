@@ -27,7 +27,7 @@ class CLIPascenePipeline(ModelState):
     def painterly_rendering(self, im_name):
         background_output_dir = self.run_background(im_name)
         foreground_output_dir = self.run_foreground(im_name)
-        self.combine(background_output_dir, foreground_output_dir, self.device, output_size=self.args.x.image_size)
+        self.combine(background_output_dir, foreground_output_dir, self.device)
         self.close(msg="painterly rendering complete.")
 
     def run_background(self, im_name):
