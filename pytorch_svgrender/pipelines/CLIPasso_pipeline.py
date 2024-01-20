@@ -13,7 +13,7 @@ from torchvision.datasets.folder import is_image_file
 from pytorch_svgrender.libs.engine import ModelState
 from pytorch_svgrender.painter.clipasso import Painter, PainterOptimizer, Loss
 from pytorch_svgrender.painter.clipasso.sketch_utils import plot_attn, get_mask_u2net, fix_image_scale
-from pytorch_svgrender.plt import log_input, plot_batch, plt_tensor_img
+from pytorch_svgrender.plt import plot_img, plot_couple, plot_img_title
 
 
 class CLIPassoPipeline(ModelState):
@@ -52,13 +52,13 @@ class CLIPassoPipeline(ModelState):
                                        self.x_cfg.mask_object,
                                        self.x_cfg.fix_scale,
                                        self.device)
-        log_input(inputs, self.result_path)
+        plot_img(inputs, self.result_path)
 
         # init renderer
         renderer = self.load_renderer(inputs, mask)
         img = renderer.init_image(stage=0)
         self.print("init_image shape: ", img.shape)
-        log_input(img, self.result_path, output_prefix="init_img")
+        plot_img(img, self.result_path, fname="init_img")
 
         # init optimizer
         optimizer = PainterOptimizer(renderer, self.x_cfg.num_iter, self.x_cfg.lr,
@@ -74,7 +74,7 @@ class CLIPassoPipeline(ModelState):
                 sketches = renderer.get_image().to(self.device)
 
                 if self.make_video and (self.step % self.args.framefreq == 0 or self.step == total_step - 1):
-                    log_input(sketches, self.frame_log_dir, output_prefix=f"iter{self.frame_idx}")
+                    plot_img(sketches, self.frame_log_dir, fname=f"iter{self.frame_idx}")
                     self.frame_idx += 1
 
                 losses_dict = loss_func(sketches,
@@ -95,11 +95,11 @@ class CLIPassoPipeline(ModelState):
                     optimizer.update_lr()
 
                 if self.step % self.args.save_step == 0 and self.accelerator.is_main_process:
-                    plot_batch(inputs,
-                               sketches,
-                               self.step,
-                               save_path=self.png_logs_dir.as_posix(),
-                               name=f"iter{self.step}")
+                    plot_couple(inputs,
+                                sketches,
+                                self.step,
+                                output_dir=self.png_logs_dir.as_posix(),
+                                fname=f"iter{self.step}")
                     renderer.save_svg(self.svg_logs_dir.as_posix(), f"svg_iter{self.step}")
 
                 if self.step % self.args.eval_step == 0 and self.accelerator.is_main_process:
@@ -119,11 +119,11 @@ class CLIPassoPipeline(ModelState):
                         if abs(cur_delta) > min_delta and cur_delta < 0:
                             best_loss = loss_eval.item()
                             best_iter = self.step
-                            plot_batch(inputs,
-                                       sketches,
-                                       best_iter,
-                                       save_path=self.result_path.as_posix(),
-                                       name="best_iter")
+                            plot_couple(inputs,
+                                        sketches,
+                                        best_iter,
+                                        output_dir=self.result_path.as_posix(),
+                                        fname="best_iter")
                             renderer.save_svg(self.result_path.as_posix(), "best_iter")
 
                 if self.step == 0 and self.x_cfg.attention_init and self.accelerator.is_main_process:
@@ -140,10 +140,10 @@ class CLIPassoPipeline(ModelState):
         # log final results
         renderer.save_svg(self.result_path.as_posix(), "final_svg")
         final_raster_sketch = renderer.get_image().to(self.device)
-        plt_tensor_img(final_raster_sketch,
+        plot_img_title(final_raster_sketch,
                        title=f'final result - {self.step} step',
-                       save_path=self.result_path,
-                       name='final_render')
+                       output_dir=self.result_path,
+                       fname='final_render')
 
         if self.make_video:
             from subprocess import call

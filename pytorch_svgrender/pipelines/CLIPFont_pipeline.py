@@ -13,7 +13,7 @@ from tqdm.auto import tqdm
 from svgutils.transform import fromfile
 
 from pytorch_svgrender.libs.engine import ModelState
-from pytorch_svgrender.plt import log_input, plot_batch, plt_tensor_img
+from pytorch_svgrender.plt import plot_img, plot_couple, plot_img_title
 from pytorch_svgrender.painter.clipfont import (imagenet_templates, compose_text_with_templates, Painter,
                                                 PainterOptimizer)
 from pytorch_svgrender.libs.metric.clip_score import CLIPScoreWrapper
@@ -95,7 +95,7 @@ class CLIPFontPipeline(ModelState):
         # init shapes and shape groups
         init_img = renderer.init_shapes(svg_path.as_posix(), reinit_cfg=self.x_cfg.font)
         self.print("init_image shape: ", init_img.shape)
-        log_input(init_img, self.result_path, output_prefix="init_img")
+        plot_img(init_img, self.result_path, fname="init_img")
 
         # load init file
         with torch.no_grad():
@@ -122,7 +122,7 @@ class CLIPFontPipeline(ModelState):
                 img_t = renderer.get_image().to(self.device)
 
                 if self.make_video and (self.step % self.args.framefreq == 0 or self.step == total_step - 1):
-                    log_input(img_t, self.frame_log_dir, output_prefix=f"iter{self.frame_idx}")
+                    plot_img(img_t, self.frame_log_dir, fname=f"iter{self.frame_idx}")
                     self.frame_idx += 1
 
                 # style loss
@@ -185,11 +185,11 @@ class CLIPFontPipeline(ModelState):
                     optimizer.update_lr(self.step)
 
                 if self.step % self.args.save_step == 0 and self.accelerator.is_main_process:
-                    plot_batch(init_img,
-                               img_t,
-                               self.step,
-                               save_path=self.png_logs_dir.as_posix(),
-                               name=f"iter{self.step}")
+                    plot_couple(init_img,
+                                img_t,
+                                self.step,
+                                output_dir=self.png_logs_dir.as_posix(),
+                                fname=f"iter{self.step}")
                     renderer.pretty_save_svg(self.svg_logs_dir / f"svg_iter{self.step}.svg")
 
                 self.step += 1
@@ -198,10 +198,10 @@ class CLIPFontPipeline(ModelState):
         # log final results
         renderer.pretty_save_svg(self.result_path / "final_svg.svg")
         final_raster_sketch = renderer.get_image().to(self.device)
-        plt_tensor_img(final_raster_sketch,
+        plot_img_title(final_raster_sketch,
                        title=f'final result - {self.step} step',
-                       save_path=self.result_path,
-                       name='final_render')
+                       output_dir=self.result_path,
+                       fname='final_render')
 
         if self.make_video:
             from subprocess import call

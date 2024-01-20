@@ -18,7 +18,7 @@ from pytorch_svgrender.libs.engine import ModelState
 from pytorch_svgrender.painter.vectorfusion import LSDSPipeline, LSDSSDXLPipeline, Painter, PainterOptimizer
 from pytorch_svgrender.painter.vectorfusion import channel_saturation_penalty_loss as pixel_penalty_loss
 from pytorch_svgrender.painter.live import xing_loss_fn
-from pytorch_svgrender.plt import log_input, plot_batch
+from pytorch_svgrender.plt import plot_img, plot_couple
 from pytorch_svgrender.token2attn.ptp_utils import view_images
 from pytorch_svgrender.diffusers_warp import init_diffusion_pipeline, model2res
 
@@ -200,7 +200,7 @@ class VectorFusionPipeline(ModelState):
                 pathn_record.append(pathn)
                 # init graphic
                 img = renderer.init_image(stage=0, num_paths=pathn)
-                log_input(img, self.result_path, output_prefix=f"init_img_{path_idx}")
+                plot_img(img, self.result_path, fname=f"init_img_{path_idx}")
                 # rebuild optimizer
                 optimizer_list[path_idx].init_optimizers(pid_delta=int(path_idx * pathn))
 
@@ -212,7 +212,7 @@ class VectorFusionPipeline(ModelState):
                     raster_img = renderer.get_image(step=t).to(self.device)
 
                     if self.make_video and (self.step % self.args.framefreq == 0 or self.step == total_step - 1):
-                        log_input(raster_img, self.frame_log_dir, output_prefix=f"iter{self.frame_idx}")
+                        plot_img(raster_img, self.frame_log_dir, fname=f"iter{self.frame_idx}")
                         self.frame_idx += 1
 
                     if self.x_cfg.use_distance_weighted_loss and not (self.style == "pixelart"):
@@ -260,12 +260,12 @@ class VectorFusionPipeline(ModelState):
                             optimizer_list[i].update_lr()
 
                     if self.step % self.args.save_step == 0 and self.accelerator.is_main_process:
-                        plot_batch(target_img,
-                                   raster_img,
-                                   self.step,
-                                   prompt=text_prompt,
-                                   save_path=self.png_logs_dir.as_posix(),
-                                   name=f"iter{self.step}")
+                        plot_couple(target_img,
+                                    raster_img,
+                                    self.step,
+                                    prompt=text_prompt,
+                                    output_dir=self.png_logs_dir.as_posix(),
+                                    fname=f"iter{self.step}")
                         renderer.pretty_save_svg(self.svg_logs_dir / f"svg_iter{self.step}.svg")
 
                     self.step += 1
@@ -315,7 +315,7 @@ class VectorFusionPipeline(ModelState):
             renderer.component_wise_path_init(target_img, pred=None, init_type='random')
 
         img = renderer.init_image(stage=0, num_paths=self.x_cfg.num_paths)
-        log_input(img, self.result_path, output_prefix=f"init_img_stage_two")
+        plot_img(img, self.result_path, fname=f"init_img_stage_two")
 
         optimizer = PainterOptimizer(renderer, self.style,
                                      self.x_cfg.sds.num_iter,
@@ -337,7 +337,7 @@ class VectorFusionPipeline(ModelState):
                 raster_img = renderer.get_image(step=self.step).to(self.device)
 
                 if self.make_video and (self.step % self.args.framefreq == 0 or self.step == total_step - 1):
-                    log_input(raster_img, self.frame_log_dir, output_prefix=f"iter{self.frame_idx}")
+                    plot_img(raster_img, self.frame_log_dir, fname=f"iter{self.frame_idx}")
                     self.frame_idx += 1
 
                 L_sds, grad = self.diffusion.score_distillation_sampling(
@@ -389,12 +389,12 @@ class VectorFusionPipeline(ModelState):
                 )
 
                 if self.step % self.args.save_step == 0 and self.accelerator.is_main_process:
-                    plot_batch(target_img,
-                               raster_img,
-                               self.step,
-                               prompt=text_prompt,
-                               save_path=self.ft_png_logs_dir.as_posix(),
-                               name=f"iter{self.step}")
+                    plot_couple(target_img,
+                                raster_img,
+                                self.step,
+                                prompt=text_prompt,
+                                output_dir=self.ft_png_logs_dir.as_posix(),
+                                fname=f"iter{self.step}")
                     renderer.pretty_save_svg(self.ft_svg_logs_dir / f"svg_iter{self.step}.svg")
 
                 self.step += 1

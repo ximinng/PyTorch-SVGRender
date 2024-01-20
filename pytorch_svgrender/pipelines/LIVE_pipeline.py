@@ -15,7 +15,7 @@ from torchvision import transforms
 
 from pytorch_svgrender.libs.engine import ModelState
 from pytorch_svgrender.painter.live import Painter, PainterOptimizer, xing_loss_fn
-from pytorch_svgrender.plt import log_input, plot_batch
+from pytorch_svgrender.plt import plot_img, plot_couple
 
 
 class LIVEPipeline(ModelState):
@@ -106,7 +106,7 @@ class LIVEPipeline(ModelState):
                 pathn_record.append(pathn)
                 # init graphic
                 img = renderer.init_image(num_paths=pathn)
-                log_input(img, self.result_path, output_prefix=f"init_img_{path_idx}")
+                plot_img(img, self.result_path, fname=f"init_img_{path_idx}")
                 # rebuild optimizer
                 optimizer_list[path_idx].init_optimizers()
 
@@ -117,7 +117,7 @@ class LIVEPipeline(ModelState):
                     raster_img = renderer.get_image(step=t).to(self.device)
 
                     if self.make_video and (t % self.args.framefreq == 0 or t == num_iter - 1):
-                        log_input(raster_img, self.frame_log_dir, output_prefix=f"iter{self.frame_idx}")
+                        plot_img(raster_img, self.frame_log_dir, fname=f"iter{self.frame_idx}")
                         self.frame_idx += 1
 
                     if self.x_cfg.use_distance_weighted_loss:
@@ -158,11 +158,11 @@ class LIVEPipeline(ModelState):
                             optimizer_list[i].update_lr()
 
                     if self.step % self.args.save_step == 0 and self.accelerator.is_main_process:
-                        plot_batch(target_img,
-                                   raster_img,
-                                   self.step,
-                                   save_path=self.png_logs_dir.as_posix(),
-                                   name=f"iter{self.step}")
+                        plot_couple(target_img,
+                                    raster_img,
+                                    self.step,
+                                    output_dir=self.png_logs_dir.as_posix(),
+                                    fname=f"iter{self.step}")
                         renderer.save_svg(self.svg_logs_dir / f"svg_iter{self.step}.svg")
 
                     self.step += 1
