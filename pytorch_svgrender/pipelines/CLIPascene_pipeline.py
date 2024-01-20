@@ -1,12 +1,16 @@
 import os
 from pathlib import Path
 
+import imageio
+import numpy as np
 import torch
 from PIL import Image
 from pytorch_svgrender.libs.engine import ModelState
 from pytorch_svgrender.painter.clipascene import Painter, PainterOptimizer, Loss
+from pytorch_svgrender.painter.clipascene.scripts_utils import read_svg
 from pytorch_svgrender.painter.clipascene.sketch_utils import plot_attn, get_mask_u2net, fix_image_scale
 from pytorch_svgrender.plt import log_input, plot_batch
+from skimage.transform import resize
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
 from tqdm.auto import tqdm
@@ -21,8 +25,10 @@ class CLIPascenePipeline(ModelState):
         self.path_to_input_images = Path("./data")
 
     def painterly_rendering(self, im_name):
-        self.run_background(im_name)
-        self.run_foreground(im_name)
+        background_output_dir = self.run_background(im_name)
+        foreground_output_dir = self.run_foreground(im_name)
+        self.combine(background_output_dir, foreground_output_dir, self.device, output_size=self.args.x.image_size)
+        self.close(msg="painterly rendering complete.")
 
     def run_background(self, im_name):
         print("=====Start background=====")
@@ -42,6 +48,8 @@ class CLIPascenePipeline(ModelState):
         if self.accelerator.is_main_process:
             output_dir.mkdir(parents=True, exist_ok=True)
         self.paint(target_file, output_dir, self.args.x.background_num_iter)
+        print("=====End background=====")
+        return output_dir
 
     def run_foreground(self, im_name):
         print("=====Start foreground=====")
@@ -64,6 +72,8 @@ class CLIPascenePipeline(ModelState):
         if self.accelerator.is_main_process:
             output_dir.mkdir(parents=True, exist_ok=True)
         self.paint(target_file, output_dir, self.args.x.foreground_num_iter)
+        print("=====End foreground=====")
+        return output_dir
 
     def paint(self, target, output_dir, num_iter):
         png_log_dir = output_dir / "png_logs"
@@ -135,8 +145,7 @@ class CLIPascenePipeline(ModelState):
                                name=f"iter{step}")
                     renderer.save_svg(svg_log_dir.as_posix(), f"svg_iter{step}")
 
-                if step % self.args.x.eval_step == 0 and step >= self.args.x.min_eval_iter:
-
+                if step % self.args.x.eval_step == 0:
                     with torch.no_grad():
                         losses_dict_weighted_eval, _, _ = loss_func(
                             sketches,
@@ -216,7 +225,7 @@ class CLIPascenePipeline(ModelState):
         target = target.convert("RGB")
 
         # U^2 net mask
-        masked_im, mask = get_mask_u2net(target, output_dir, u2net_path, device)
+        masked_im, mask = get_mask_u2net(target, output_dir, self.args.x.resize_obj, u2net_path, device)
         if mask_object:
             target = masked_im
 
@@ -236,3 +245,22 @@ class CLIPascenePipeline(ModelState):
         data_transforms = transforms.Compose(transforms_)
         target_ = data_transforms(target).unsqueeze(0).to(self.device)
         return target_, mask
+
+    def combine(self, background_output_dir, foreground_output_dir, device, output_size=224):
+        params_path = foreground_output_dir / "resize_params.npy"
+        params = None
+        if os.path.exists(params_path):
+            params = np.load(params_path, allow_pickle=True)[()]
+        mask_path = foreground_output_dir / "mask.png"
+        mask = imageio.imread(mask_path)
+        mask = resize(mask, (output_size, output_size), anti_aliasing=False)
+
+        object_svg_path = foreground_output_dir / "best.svg"
+        raster_o = read_svg(object_svg_path, resize_obj=1, params=params, multiply=1.8, device=device)
+
+        background_svg_path = background_output_dir / "best.svg"
+        raster_b = read_svg(background_svg_path, resize_obj=0, params=params, multiply=1.8, device=device)
+
+        raster_b[mask == 1] = 1
+        raster_b[raster_o != 1] = raster_o[raster_o != 1]
+        log_input(raster_b, self.result_path, output_prefix="combined")

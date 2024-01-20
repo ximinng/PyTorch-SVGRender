@@ -34,7 +34,7 @@ class Painter(DiffVGState):
         self.num_segments = method_cfg.num_segments
         self.width = method_cfg.width
         self.control_points_per_seg = method_cfg.control_points_per_seg
-        self.num_control_points = torch.zeros(self.num_segments, dtype = torch.int32) + (self.control_points_per_seg - 2)
+        self.num_control_points = torch.zeros(self.num_segments, dtype=torch.int32) + (self.control_points_per_seg - 2)
 
         self.opacity_optim = method_cfg.force_sparse
         self.num_stages = method_cfg.num_stages
@@ -337,6 +337,15 @@ class Painter(DiffVGState):
         if self.width_optim:
             return self.points_vars, self.mlp_width.parameters()
         return self.points_vars
+
+    def get_mlp(self):
+        return self.mlp
+
+    def get_width_mlp(self):
+        if self.width_optim_global:
+            return self.mlp_width
+        else:
+            return None
 
     def set_color_parameters(self):
         # for storkes' color optimization (opacity)
