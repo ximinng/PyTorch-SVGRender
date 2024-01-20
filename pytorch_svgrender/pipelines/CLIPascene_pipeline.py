@@ -246,7 +246,7 @@ class CLIPascenePipeline(ModelState):
         target_ = data_transforms(target).unsqueeze(0).to(self.device)
         return target_, mask
 
-    def combine(self, background_output_dir, foreground_output_dir, device, output_size=224):
+    def combine(self, background_output_dir, foreground_output_dir, device, output_size=448):
         params_path = foreground_output_dir / "resize_params.npy"
         params = None
         if os.path.exists(params_path):

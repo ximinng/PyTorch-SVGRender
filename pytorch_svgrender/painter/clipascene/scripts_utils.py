@@ -100,13 +100,8 @@ def get_ratios_dict(path_to_initial_sketches, folder_name_l, layer, im_name, obj
 
 
 def read_svg(path_svg, multiply=0, resize_obj=False, params=None, opacity=1, device=None):
-    if device is None:
-        print("setting device")
-        device = torch.device("cuda" if (
-                torch.cuda.is_available() and torch.cuda.device_count() > 0) else "cpu")
     pydiffvg.set_device(device)
-    canvas_width, canvas_height, shapes, shape_groups = pydiffvg.svg_to_scene(
-        path_svg)
+    canvas_width, canvas_height, shapes, shape_groups = pydiffvg.svg_to_scene(path_svg)
     for group in shape_groups:
         group.stroke_color = torch.tensor([0, 0, 0, opacity])
     if resize_obj and params:
