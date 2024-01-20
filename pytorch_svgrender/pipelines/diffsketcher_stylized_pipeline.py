@@ -390,8 +390,8 @@ class StylizedDiffSketcherPipeline(ModelState):
                                 style_img,
                                 self.step,
                                 prompt,
-                                save_path=self.png_logs_dir.as_posix(),
-                                name=f"iter{self.step}")
+                                output_dir=self.png_logs_dir.as_posix(),
+                                fname=f"iter{self.step}")
                     # log svg
                     renderer.save_svg(self.svg_logs_dir.as_posix(), f"svg_iter{self.step}")
                     # log cross attn
@@ -421,8 +421,8 @@ class StylizedDiffSketcherPipeline(ModelState):
                                         style_img,
                                         best_iter_v,
                                         prompt,
-                                        save_path=self.result_path.as_posix(),
-                                        name="visual_best")
+                                        output_dir=self.result_path.as_posix(),
+                                        fname="visual_best")
                             renderer.save_svg(self.result_path.as_posix(), "visual_best")
 
                         # semantic metric
@@ -438,8 +438,8 @@ class StylizedDiffSketcherPipeline(ModelState):
                                         style_img,
                                         best_iter_s,
                                         prompt,
-                                        save_path=self.result_path.as_posix(),
-                                        name="semantic_best")
+                                        output_dir=self.result_path.as_posix(),
+                                        fname="semantic_best")
                             renderer.save_svg(self.result_path.as_posix(), "semantic_best")
 
                 # log attention, for once
