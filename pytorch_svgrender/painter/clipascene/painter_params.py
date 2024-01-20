@@ -338,19 +338,6 @@ class Painter(DiffVGState):
             return self.points_vars, self.mlp_width.parameters()
         return self.points_vars
 
-    def get_mlp(self):
-        return self.mlp
-
-    def get_width_mlp(self):
-        if self.width_optim_global:
-            return self.mlp_width
-        else:
-            return None
-
-    def get_points_parans(self):
-        return dict(list(self.mlp.named_parameters()))
-        # return self.points_vars
-
     def set_color_parameters(self):
         # for storkes' color optimization (opacity)
         self.color_vars = []
@@ -409,7 +396,6 @@ class Painter(DiffVGState):
             stroke_color = torch.tensor([0.0, 0.0, 0.0, 1.0])
             new_shapes, new_shape_groups = [], []
             for path in self.shapes:
-                # is_in_canvas_ = self.is_in_canvas(self.canvas_width, self.canvas_height, path)
                 is_in_canvas_ = True
                 w = path.stroke_width / 1.5
                 if w > 0.7 and is_in_canvas_:
@@ -594,7 +580,7 @@ class Painter(DiffVGState):
         return self.mask
 
     def set_random_noise(self, epoch):
-        if epoch % self.args.save_interval == 0:
+        if epoch % self.args.save_step == 0:
             self.add_random_noise = False
         else:
             self.add_random_noise = "noise" in self.args.augemntations

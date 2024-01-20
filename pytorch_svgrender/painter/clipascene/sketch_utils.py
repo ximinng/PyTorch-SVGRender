@@ -5,13 +5,10 @@ import numpy as np
 import pydiffvg
 import torch
 from PIL import Image
-from pytorch_svgrender.diffvg_warp import DiffVGState
 from pytorch_svgrender.painter.clipasso.u2net import U2NET
 from skimage.transform import resize
 from torchvision import transforms
 from torchvision.utils import make_grid
-
-from .painter_params import MLP, WidthMLP
 
 
 def plot_attn_dino(attn, threshold_map, inputs, inds, output_path):
@@ -151,99 +148,6 @@ def get_mask_u2net(pil_im, output_dir, u2net_path, device="cpu"):
     torch.cuda.empty_cache()
 
     return im_final, predict
-
-
-def log_best_normalised_sketch(configs_to_save, output_dir, eval_interval, min_eval_iter):
-    np.save(f"{output_dir}/config.npy", configs_to_save)
-    losses_eval = {}
-    for k in configs_to_save.keys():
-        if "_original_eval" in k and "normalization" not in k:
-            cur_arr = np.array(configs_to_save[k])
-            mu = cur_arr.mean()
-            std = cur_arr.std()
-            losses_eval[k] = (cur_arr - mu) / std
-
-    final_normalise_losses = sum(list(losses_eval.values()))
-    sorted_iters = np.argsort(final_normalise_losses)
-    index = 0
-    best_iter = sorted_iters[index]
-    best_normalised_loss = final_normalise_losses[best_iter]
-    best_num_strokes = configs_to_save["num_strokes"][best_iter]
-
-    iter_ = best_iter * eval_interval + min_eval_iter
-    configs_to_save["best_normalised_iter"] = iter_
-    configs_to_save["best_normalised_loss"] = best_normalised_loss
-    configs_to_save["best_normalised_num_strokes"] = best_num_strokes
-    copyfile(output_dir / "mlps" / f"points_mlp{iter_}.pt", output_dir / "points_mlp.pt")
-    copyfile(output_dir / "mlps" / f"width_mlp{iter_}.pt", output_dir / "width_mlp.pt")
-
-
-def inference_sketch(args, output_dir, eps=1e-4, device="cpu"):
-    mlp_points_weights_path = output_dir / "points_mlp.pt"
-    mlp_width_weights_path = output_dir / "width_mlp.pt"
-    sketch_init_path = output_dir / "svg_logs" / "init_svg.svg"
-    output_path = output_dir
-
-    num_paths = args.num_paths
-    control_points_per_seg = args.control_points_per_seg
-    width_ = 1.5
-    num_control_points = torch.zeros(1, dtype=torch.int32) + (control_points_per_seg - 2)
-    init_widths = torch.ones((num_paths)).to(device) * width_
-
-    mlp = MLP(num_strokes=num_paths, num_cp=control_points_per_seg).to(device)
-    checkpoint = torch.load(mlp_points_weights_path)
-    mlp.load_state_dict(checkpoint['model_state_dict'])
-
-    if args.width_optim:
-        mlp_width = WidthMLP(num_strokes=num_paths, num_cp=control_points_per_seg).to(device)
-        checkpoint = torch.load(mlp_width_weights_path)
-        mlp_width.load_state_dict(checkpoint['model_state_dict'])
-
-    points_vars, canvas_width, canvas_height = get_init_points(sketch_init_path)
-    points_vars = torch.stack(points_vars).unsqueeze(0).to(device)
-    points_vars = points_vars / canvas_width
-    points_vars = 2 * points_vars - 1
-    points = mlp(points_vars)
-
-    all_points = 0.5 * (points + 1.0) * canvas_width
-    all_points = all_points + eps * torch.randn_like(all_points)
-    all_points = all_points.reshape((-1, num_paths, control_points_per_seg, 2))
-
-    if args.width_optim:  # first iter use just the location mlp
-        widths_ = mlp_width(init_widths).clamp(min=1e-8)
-        mask_flipped = (1 - widths_).clamp(min=1e-8)
-        v = torch.stack((torch.log(widths_), torch.log(mask_flipped)), dim=-1)
-        hard_mask = torch.nn.functional.gumbel_softmax(v, 0.2, False)
-        stroke_probs = hard_mask[:, 0]
-        widths = stroke_probs * init_widths
-
-    shapes = []
-    shape_groups = []
-    for p in range(num_paths):
-        width = torch.tensor(width_)
-        if args.width_optim:
-            width = widths[p]
-        w = width / 1.5
-        path = pydiffvg.Path(
-            num_control_points=num_control_points, points=all_points[:, p].reshape((-1, 2)),
-            stroke_width=width, is_closed=False)
-        is_in_canvas_ = is_in_canvas(canvas_width, canvas_height, path, device)
-        if is_in_canvas_ and w > 0.7:
-            shapes.append(path)
-            path_group = pydiffvg.ShapeGroup(
-                shape_ids=torch.tensor([len(shapes) - 1]),
-                fill_color=None,
-                stroke_color=torch.tensor([0, 0, 0, 1]))
-            shape_groups.append(path_group)
-    pydiffvg.save_svg(output_path / "best_iter.svg", canvas_width, canvas_height, shapes, shape_groups)
-
-
-def get_init_points(path_svg):
-    points_init = []
-    canvas_width, canvas_height, shapes, shape_groups = DiffVGState.load_svg(path_svg)
-    for path in shapes:
-        points_init.append(path.points)
-    return points_init, canvas_width, canvas_height
 
 
 def is_in_canvas(canvas_width, canvas_height, path, device):

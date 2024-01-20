@@ -4,29 +4,23 @@ im_name: ""
 image_size: 224
 u2net_path: "./checkpoint/u2net/u2net.pth"
 
-background:
-  layers: "2,8,11"
-  divs: "0.35,0.5,0.85"
-  fidelity:
-    num_iter: 1501
+background_layer: 2 # 2, 8, 11
+background_div: 0.35 # 0.35, 0.5, 0.85
+background_num_iter: 1501
 
-foreground:
-  layers: "2,8,11"
-  divs: "0.4,0.5,0.9"
-  fidelity:
-    num_iter_ge_8: 1000
-    num_iter_lt_8: 600
+foreground_layer: 2 # 2, 8, 11
+foreground_div: 0.4 # 0.4, 0.5, 0.9
+foreground_num_iter: 600 # 1000 if foreground_layer >= 8 else 600
 
 # general
 target: null
 output_dir: null
-path_svg: None
+path_svg: "none"
 mask_object: 0
 resize_obj: 0
 fix_scale: 0
 display_logs: 0
 display: 0
-num_sketches: 2
 test_name: "test"
 
 # training
@@ -38,9 +32,8 @@ color_lr: 0.01
 width_lr: 0.0001
 color_vars_threshold: 0.0
 batch_size: 1
-save_interval: 100
-eval_interval: 20
-min_eval_iter: 100
+save_step: 100
+eval_step: 20
 loss_mask: "none"
 dilated_mask: 0
 mask_cls: None
@@ -59,8 +52,8 @@ mask_object_attention: 0
 softmax_temp: 0.3
 mlp_train: 1
 width_optim: 0
-mlp_width_weights_path: None
-mlp_points_weights_path: None
+mlp_width_weights_path: "none"
+mlp_points_weights_path: "none"
 switch_loss: 0
 gumbel_temp: 0.2
 width_loss_weight: 0
