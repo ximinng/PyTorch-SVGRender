@@ -18,6 +18,7 @@ from pytorch_svgrender.utils import render_batch_wrap, get_seed_range
 METHODS = ['live',
            'vectorfusion',
            'clipasso',
+           'clipascene',
            'diffsketcher',
            'stylediffsketcher',
            'clipdraw',
@@ -83,6 +84,12 @@ def main(cfg: omegaconf.DictConfig):
         from pytorch_svgrender.pipelines.CLIPasso_pipeline import CLIPassoPipeline
 
         pipe = CLIPassoPipeline(cfg)
+        pipe.painterly_rendering(cfg.target)
+
+    elif flag == 'clipascene':
+        from pytorch_svgrender.pipelines.CLIPascene_pipeline import CLIPascenePipeline
+
+        pipe = CLIPascenePipeline(cfg)
         pipe.painterly_rendering(cfg.target)
 
     elif flag == "clipdraw":  # text2svg

@@ -12,8 +12,12 @@ The abstract from the paper is:
 `Diffusion models have shown impressive results in text-to-image synthesis. Using massive datasets of captioned images, diffusion models learn to generate raster images of highly diverse objects and scenes. However, designers frequently use vector representations of images like Scalable Vector Graphics (SVGs) for digital icons or art. Vector graphics can be scaled to any size, and are compact. We show that a text-conditioned diffusion model trained on pixel representations of images can be used to generate SVGexportable vector graphics. We do so without access to large datasets of captioned SVGs. By optimizing a differentiable vector graphics rasterizer, our method, VectorFusion, distills abstract semantic knowledge out of a pretrained diffusion model. Inspired by recent text-to-3D work, we learn an SVG consistent with a caption using Score Distillation Sampling. To accelerate generation and improve fidelity, VectorFusion also initializes from an image sample. Experiments show greater quality than prior work, and demonstrate a range of styles including pixel art and sketches.`
 
 **Examples:**
+^^^^^^^^^^^
 
 VectorFusion synthesizes SVGs in various styles based on text prompts.
+
+Iconography
+""""""""""""
 
 Synthesize an iconographic of *a panda rowing a boat in a pond*.
 
@@ -37,6 +41,9 @@ You will get the following result:
 .. image:: ../../examples/vectorfusion/vectorfusion_panda_icon_scratch.svg
    :width: 224
 
+Pixel Art
+""""""""""""
+
 Synthesize a pixel art of *a panda rowing a boat in a pond*.
 
 .. code-block:: console
@@ -47,6 +54,9 @@ You will get the following result:
 
 .. image:: ../../examples/vectorfusion/vectorfusion_panda_pixel.svg
    :width: 224
+
+Sketch
+""""""""""""
 
 Synthesize a sketch of *a panda rowing a boat in a pond*.
 

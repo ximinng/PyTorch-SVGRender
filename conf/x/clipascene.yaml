@@ -1,0 +1,87 @@
+method: 'clipascene'
+
+im_name: ""
+image_size: 224
+u2net_path: "./checkpoint/u2net/u2net.pth"
+
+background_layer: 2 # 2, 8, 11
+background_div: 0.35 # 0.35, 0.5, 0.85
+background_num_iter: 1501
+
+foreground_layer: 2 # 2, 8, 11
+foreground_div: 0.4 # 0.4, 0.5, 0.9
+foreground_num_iter: 600 # 1000 if foreground_layer >= 8 else 600
+
+# general
+target: null
+output_dir: null
+path_svg: "none"
+mask_object: 0
+resize_obj: 0
+fix_scale: 0
+display_logs: 0
+display: 0
+test_name: "test"
+
+# training
+num_iter: 2001
+num_stages: 1
+lr_scheduler: 0
+lr: 0.0001
+color_lr: 0.01
+width_lr: 0.0001
+color_vars_threshold: 0.0
+batch_size: 1
+save_step: 100
+eval_step: 20
+loss_mask: "none"
+dilated_mask: 0
+mask_cls: None
+mask_attention: 0
+
+# strokes params
+num_paths: 64
+width: 1.5
+control_points_per_seg: 4
+num_segments: 1
+attention_init: 1
+saliency_model: "clip"
+saliency_clip_model: "ViT-B/32"
+xdog_intersec: 1
+mask_object_attention: 0
+softmax_temp: 0.3
+mlp_train: 1
+width_optim: 0
+mlp_width_weights_path: "none"
+mlp_points_weights_path: "none"
+switch_loss: 0
+gumbel_temp: 0.2
+width_loss_weight: 0
+width_loss_type: "L1"
+optimize_points: 1
+load_points_opt_weights: 0
+gradnorm: 0
+width_weights_lst: ""
+ratio_loss: 0
+
+# loss
+percep_loss: "none"
+perceptual_weight: 0
+train_with_clip: 0
+clip_weight: 0
+start_clip: 0
+num_aug_clip: 4
+include_target_in_aug: 0
+augment_both: 1
+augemntations: "affine"
+noise_thresh: 0.5
+aug_scale_min: 0.7
+force_sparse: 0
+clip_conv_loss: 1
+clip_mask_loss: 0
+clip_conv_loss_type: "L2"
+clip_conv_layer_weights: "0,0,1.0,1.0,0"
+clip_model_name: "ViT-B/32"
+clip_fc_loss_weight: 0
+clip_text_guide: 0
+text_target: None

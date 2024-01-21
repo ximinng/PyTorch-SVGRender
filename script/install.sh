@@ -14,7 +14,7 @@ pip install hydra-core omegaconf
 pip install freetype-py shapely svgutils
 pip install opencv-python scikit-image matplotlib visdom wandb BeautifulSoup4
 pip install triton numba
-pip install numpy scipy scikit-fmm einops timm fairscale=0.4.13
+pip install numpy scipy scikit-fmm einops timm fairscale==0.4.13
 pip install accelerate transformers safetensors datasets
 
 echo "The basic dependency library is installed."
