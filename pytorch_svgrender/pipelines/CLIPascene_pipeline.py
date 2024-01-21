@@ -263,4 +263,5 @@ class CLIPascenePipeline(ModelState):
 
         raster_b[mask == 1] = 1
         raster_b[raster_o != 1] = raster_o[raster_o != 1]
+        raster_b = torch.from_numpy(raster_b).unsqueeze(0).permute(0, 3, 1, 2).to(device)
         plot_img(raster_b, self.result_path, fname="combined")
