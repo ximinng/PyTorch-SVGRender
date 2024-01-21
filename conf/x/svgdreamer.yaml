@@ -73,14 +73,14 @@ guidance:
   n_particle: 1 # 4, 8, 16
   vsd_n_particle: 1 # the batch size of particles
   particle_aug: False # do data enhancement for the input particles
-  num_iter: 2000
+  num_iter: 2000 # total iterations
   guidance_scale: 7.5 # CFG value
-  grad_scale: 1.0
+  grad_scale: 1.0 # increase or decrease the gradient
   grad_clip_val: ~ # eg: 10, clip the gradient of VPSD
   t_range: [ 0.02, 0.98 ]
-  # 'randint': random time steps
-  # 'max_0.5_900': annealing from 0.98 to 0.5 after 900 steps
-  t_schedule: 'max_0.5_1000' # 'randint'
+  # 'randint': random time steps, this may have a more authentic style.
+  # 'max_0.5_900': annealing from 0.98 to 0.5 after 900 steps, this may have a more colorful results.
+  t_schedule: 'max_0.5_1000' # or 'randint'
   # phi model config
   phi_single: False # if False new an unet model to estimate noise
   phi_model: 'lora' # 'lora', 'unet_simple'
@@ -88,8 +88,8 @@ guidance:
   lora_attn_scale: 1.0 # the scale of the attn based lora layer
   phi_guidance_scale: 1.0
   phi_t: False # different t for phi fine-tuning
-  phi_update_step: 1
-  phi_lr: 0.0001
+  phi_update_step: 1 # enable multi-update phi model or not
+  phi_lr: 0.0001 # learning rate of phi model
   phi_scheduler: 'ddim' # 'dpm-solver'
   phi_n_particle: 1 # the batch size of phi_model
   # ReFL config
