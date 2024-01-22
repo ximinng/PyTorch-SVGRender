@@ -139,7 +139,8 @@ python svg_render.py x=clipasso target='./data/horse.png'
 
 **CLIPascene** synthesizes vectorized sketches from images:
 
-**note:** first download the U2Net model `sh script/download_u2net.sh`, and make sure the `./data/background` folder and the `./data/scene` folder exist with target images.
+**note:** first download the U2Net model `sh script/download_u2net.sh`, and make sure the `./data/background` folder and
+the `./data/scene` folder exist with target images.
 
 ```shell
 python svg_render.py x=clipascene target='ballerina.png'
@@ -212,7 +213,13 @@ python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter=
 
 The project is built based on the following repository:
 
-[BachiLi/diffvg](https://github.com/BachiLi/diffvg), [huggingface/diffusers](https://github.com/huggingface/diffusers), [yael-vinker/CLIPasso](https://github.com/yael-vinker/CLIPasso), [ximinng/DiffSketcher](https://github.com/ximinng/DiffSketcher), [THUDM/ImageReward](https://github.com/THUDM/ImageReward), [advimman/lama](https://github.com/advimman/lama)
+[BachiLi/diffvg](https://github.com/BachiLi/diffvg),
+[huggingface/diffusers](https://github.com/huggingface/diffusers),
+[threestudio-project/threestudio](https://github.com/threestudio-project/threestudio),
+[yael-vinker/CLIPasso](https://github.com/yael-vinker/CLIPasso),
+[ximinng/DiffSketcher](https://github.com/ximinng/DiffSketcher),
+[THUDM/ImageReward](https://github.com/THUDM/ImageReward),
+[advimman/lama](https://github.com/advimman/lama)
 
 We gratefully thank the authors for their wonderful works.
 
