@@ -137,6 +137,14 @@ python svg_render.py x=live target='./data/simile.png'
 python svg_render.py x=clipasso target='./data/horse.png'
 ```
 
+**CLIPascene** synthesizes vectorized sketches from images:
+
+**note:** first download the U2Net model `sh script/download_u2net.sh`, and make sure the `./data/background` folder and the `./data/scene` folder exist with target images.
+
+```shell
+python svg_render.py x=clipascene target='ballerina.png'
+```
+
 **CLIPDraw** synthesizes SVGs based on text prompts:
 
 ```shell

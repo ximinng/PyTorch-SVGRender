@@ -5,6 +5,7 @@ import torch
 from PIL import Image
 from pytorch_svgrender.painter.clipascene import u2net_utils
 from pytorch_svgrender.painter.clipasso.u2net import U2NET
+from scipy import ndimage
 from skimage import morphology
 from skimage.measure import label
 from skimage.transform import resize
@@ -134,7 +135,7 @@ def cut_and_resize(im, x0, x1, y0, y1, new_height, new_width):
     return new_mask
 
 
-def get_mask_u2net(pil_im, output_dir, resize_obj, u2net_path, device="cpu"):
+def get_mask_u2net(pil_im, output_dir, u2net_path, resize_obj=0, preprocess=False, device="cpu"):
     w, h = pil_im.size[0], pil_im.size[1]
 
     test_salobj_dataset = u2net_utils.SalObjDataset(imgs_list=[pil_im],
@@ -164,6 +165,21 @@ def get_mask_u2net(pil_im, output_dir, resize_obj, u2net_path, device="cpu"):
     predict[predict < 0.5] = 0
     predict[predict >= 0.5] = 1
 
+    if preprocess:
+        predict = torch.tensor(
+            ndimage.binary_dilation(predict[0].cpu().numpy(), structure=np.ones((11, 11))).astype(int)).unsqueeze(0)
+
+        mask = torch.cat([predict, predict, predict], axis=0).permute(1, 2, 0)
+        mask = mask.cpu().numpy()
+        max_val = mask.max()
+        mask[mask > max_val / 2] = 255
+        mask = mask.astype(np.uint8)
+        mask = resize(mask, (h, w), anti_aliasing=False, order=0)
+        mask[mask < 0.5] = 0
+        mask[mask >= 0.5] = 1
+
+        return mask
+
     mask = torch.cat([predict, predict, predict], axis=0).permute(1, 2, 0)
     mask = mask.cpu().numpy()
     mask = resize(mask, (h, w), anti_aliasing=False)
@@ -175,8 +191,8 @@ def get_mask_u2net(pil_im, output_dir, resize_obj, u2net_path, device="cpu"):
     im_np = np.array(pil_im)
     im_np = im_np / im_np.max()
 
-    params = {}
     if resize_obj:
+        params = {}
         mask_np = mask[:, :, 0].astype(int)
         target_np = im_np
         min_size = int(get_size_of_largest_cc(mask_np) / 3)
@@ -208,12 +224,13 @@ def get_mask_u2net(pil_im, output_dir, resize_obj, u2net_path, device="cpu"):
             params["scale_w"] = new_width / im_width
             params["scale_h"] = new_height / im_height
 
+        np.save(output_dir / "resize_params.npy", params)
+
     im_np = mask * im_np
     im_np[mask == 0] = 1
     im_final = (im_np / im_np.max() * 255).astype(np.uint8)
     im_final = Image.fromarray(im_final)
 
-    np.save(output_dir / "resize_params.npy", params)
     return im_final, mask
 
 

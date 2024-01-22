@@ -1,4 +1,4 @@
-import os
+import shutil
 from pathlib import Path
 
 import imageio
@@ -7,6 +7,7 @@ import torch
 from PIL import Image
 from pytorch_svgrender.libs.engine import ModelState
 from pytorch_svgrender.painter.clipascene import Painter, PainterOptimizer, Loss
+from pytorch_svgrender.painter.clipascene.lama_utils import apply_inpaint
 from pytorch_svgrender.painter.clipascene.scripts_utils import read_svg
 from pytorch_svgrender.painter.clipascene.sketch_utils import plot_attn, get_mask_u2net, fix_image_scale
 from pytorch_svgrender.plt import plot_img, plot_couple
@@ -19,24 +20,45 @@ from tqdm.auto import tqdm
 class CLIPascenePipeline(ModelState):
     def __init__(self, args):
         logdir_ = f"sd{args.seed}" \
-                  f"-im{args.target}" \
+                  f"-im{args.x.image_size}" \
                   f"-P{args.x.num_paths}W{args.x.width}"
         super().__init__(args, log_path_suffix=logdir_)
-        self.path_to_input_images = Path("./data")
 
-    def painterly_rendering(self, im_name):
-        background_output_dir = self.run_background(im_name)
-        foreground_output_dir = self.run_foreground(im_name)
+    def painterly_rendering(self, image_path):
+        foreground_target, background_target = self.preprocess_image(image_path)
+        background_output_dir = self.run_background(background_target)
+        foreground_output_dir = self.run_foreground(foreground_target)
         self.combine(background_output_dir, foreground_output_dir, self.device)
         self.close(msg="painterly rendering complete.")
 
-    def run_background(self, im_name):
+    def preprocess_image(self, image_path):
+        image_path = Path(image_path)
+        scene_path = self.result_path / "scene"
+        background_path = self.result_path / "background"
+        if self.accelerator.is_main_process:
+            scene_path.mkdir(parents=True, exist_ok=True)
+            background_path.mkdir(parents=True, exist_ok=True)
+
+        im = Image.open(image_path)
+        max_size = max(im.size[0], im.size[1])
+        scaled_path = scene_path / f"{image_path.stem}.png"
+        if max_size > 512:
+            im = Image.open(image_path).convert("RGB").resize((512, 512))
+            im.save(scaled_path)
+        else:
+            shutil.copyfile(image_path, scaled_path)
+
+        scaled_img = Image.open(scaled_path)
+        mask = get_mask_u2net(scaled_img, scene_path, self.args.x.u2net_path, preprocess=True, device=self.device)
+        masked_path = scene_path / f"{image_path.stem}_mask.png"
+        imageio.imsave(masked_path, mask)
+
+        apply_inpaint(scene_path, background_path, self.device)
+        return scaled_path, background_path / f"{image_path.stem}_mask.png"
+
+    def run_background(self, target_file):
         print("=====Start background=====")
         self.args.x.resize_obj = 0
-
-        folder_ = self.path_to_input_images / "background"
-        im_filename = f"{im_name}_mask.png"
-        target_file = folder_ / im_filename
         self.args.x.mask_object = 0
 
         clip_conv_layer_weights_int = [0 for _ in range(12)]
@@ -44,20 +66,16 @@ class CLIPascenePipeline(ModelState):
         clip_conv_layer_weights_str = [str(j) for j in clip_conv_layer_weights_int]
         self.args.x.clip_conv_layer_weights = ','.join(clip_conv_layer_weights_str)
 
-        output_dir = self.result_path / f"background_l{self.args.x.background_layer}_{os.path.splitext(im_filename)[0]}"
+        output_dir = self.result_path / "background"
         if self.accelerator.is_main_process:
             output_dir.mkdir(parents=True, exist_ok=True)
         self.paint(target_file, output_dir, self.args.x.background_num_iter)
         print("=====End background=====")
         return output_dir
 
-    def run_foreground(self, im_name):
+    def run_foreground(self, target_file):
         print("=====Start foreground=====")
         self.args.x.resize_obj = 1
-
-        folder_ = self.path_to_input_images / "scene"
-        im_filename = f"{im_name}.png"
-        target_file = folder_ / im_filename
         if self.args.x.foreground_layer != 4:
             self.args.x.gradnorm = 1
         self.args.x.mask_object = 1
@@ -68,7 +86,7 @@ class CLIPascenePipeline(ModelState):
         clip_conv_layer_weights_str = [str(j) for j in clip_conv_layer_weights_int]
         self.args.x.clip_conv_layer_weights = ','.join(clip_conv_layer_weights_str)
 
-        output_dir = self.result_path / f"object_l{self.args.x.foreground_layer}_{os.path.splitext(im_filename)[0]}"
+        output_dir = self.result_path / "object"
         if self.accelerator.is_main_process:
             output_dir.mkdir(parents=True, exist_ok=True)
         self.paint(target_file, output_dir, self.args.x.foreground_num_iter)
@@ -91,6 +109,7 @@ class CLIPascenePipeline(ModelState):
         inputs, mask = self.get_target(target,
                                        self.args.x.image_size,
                                        output_dir,
+                                       self.args.x.resize_obj,
                                        self.args.x.u2net_path,
                                        self.args.x.mask_object,
                                        self.args.x.fix_scale,
@@ -209,6 +228,7 @@ class CLIPascenePipeline(ModelState):
                    target_file,
                    image_size,
                    output_dir,
+                   resize_obj,
                    u2net_path,
                    mask_object,
                    fix_scale,
@@ -225,7 +245,7 @@ class CLIPascenePipeline(ModelState):
         target = target.convert("RGB")
 
         # U^2 net mask
-        masked_im, mask = get_mask_u2net(target, output_dir, self.args.x.resize_obj, u2net_path, device)
+        masked_im, mask = get_mask_u2net(target, output_dir, u2net_path, resize_obj=resize_obj, device=device)
         if mask_object:
             target = masked_im
 
@@ -249,7 +269,7 @@ class CLIPascenePipeline(ModelState):
     def combine(self, background_output_dir, foreground_output_dir, device, output_size=448):
         params_path = foreground_output_dir / "resize_params.npy"
         params = None
-        if os.path.exists(params_path):
+        if params_path.exists():
             params = np.load(params_path, allow_pickle=True)[()]
         mask_path = foreground_output_dir / "mask.png"
         mask = imageio.imread(mask_path)
