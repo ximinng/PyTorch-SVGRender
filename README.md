@@ -118,7 +118,7 @@ python svg_render.py x=svgdreamer prompt='Darth vader with lightsaber. ultrareal
 # primitive: painting:
 python svg_render.py x=svgdreamer prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait'
 # primitive: sketch
-python svg_render.py x=svgdreamer prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./svgdreamer/Lamborghini'
+python svg_render.py x=svgdreamer prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=128 result_path='./svgdreamer/Lamborghini'
 # primitive: ink and wash:
 python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=128 x.width=6 result_path='./svgdreamer/BigWildGoosePagoda'
 ```
@@ -174,6 +174,8 @@ python svg_render.py x=vectorfusion x.style='pixelart' prompt='a panda rowing a 
 python svg_render.py x=vectorfusion x.style='sketch' prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'
 ```
 
+Following SVGDreamer, we've added three additional styles (`Paining`, `Ink and Wash` and `low-ploy`) to VectorFusion.
+
 **DiffSketcher** synthesizes vector sketches based on text prompts:
 
 ```shell
@@ -184,7 +186,7 @@ python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.tok
 # DiffSketcher RGBA version
 python svg_render.py x=diffsketcher prompt='a photo of Sydney opera house' x.token_ind=5 x.optim_width=True x.optim_rgba=True x.optim_opacity=False seed=8019
 # DiffSketcher + style transfer
-python svg_render.py x=stylediffsketcher prompt='A horse is drinking water by the lake' x.token_ind=5 target='./data/starry.png' seed=998
+python svg_render.py x=stylediffsketcher prompt='The French Revolution. highly detailed. 8k. ornate. intricate. cinematic. dehazed. atmospheric. oil painting. by Van Gogh' x.token_ind=4 x.num_paths=2000 target='./data/starry.png' seed=876809
 ```
 
 **Word-As-Image** follow a text prompt to style a letter in a word:

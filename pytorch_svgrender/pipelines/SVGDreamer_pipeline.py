@@ -259,7 +259,8 @@ class SVGDreamerPipeline(ModelState):
                             phi_output_np = np.array(phi_output.images[0])
                             phi_outputs.append(phi_output_np)
                         # save all samples
-                        view_images(phi_outputs, save_image=True, num_rows=guidance_cfg.n_phi_sample // 2,
+                        view_images(phi_outputs, save_image=True,
+                                    num_rows=max(len(phi_outputs) // 6, 1),
                                     fp=self.phi_samples_dir / f'samples_iter{self.step}.png')
 
                     ranking, rewards = self.reward_model.inference_rank(text_prompt, phi_sample_paths)

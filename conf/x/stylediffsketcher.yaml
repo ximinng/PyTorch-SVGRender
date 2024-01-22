@@ -18,7 +18,7 @@ width_lr: 0.1
 max_width: 50 # stroke width
 
 # SVG path attrs
-num_paths: 128 # number of strokes
+num_paths: 512 # number of strokes
 width: 1.5 # init stroke width
 control_points_per_seg: 4
 num_segments: 1
@@ -29,7 +29,7 @@ optim_rgba: True # if True, the stroke RGBA is optimized
 # init strokes
 attention_init: True # if True, use the attention heads of Dino model to set the location of the initial strokes
 xdog_intersec: True # initialize along the edge, mix XDoG and attn up
-softmax_temp: 0.5
+softmax_temp: 0.4
 cross_attn_res: 16
 self_attn_res: 32
 max_com: 20
@@ -54,7 +54,7 @@ sds:
   crop_size: 512
   augmentations: "affine"
   guidance_scale: 100
-  grad_scale: 1e-5
+  grad_scale: 0
   t_range: [ 0.05, 0.95 ]
   warmup: 120
 

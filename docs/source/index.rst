@@ -3,6 +3,7 @@ Welcome to PyTorch-SVGRender documentation!
 
 .. image:: ../../assets/logo.png
    :width: 350
+   :align: center
 
 .. raw:: html
 
