@@ -52,12 +52,19 @@ You will get the following result:
 
 ------------
 
-Synthesize a ship on the high seas,
+Synthesize a ship on the high sea,
 
 .. code-block:: console
 
-   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=30 x.guidance.n_particle=4 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=4 x.num_paths=512 result_path='./svgdreamer/ship' mv=True multirun=True
+   $ python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=60 x.guidance.n_particle=4 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=4 x.num_paths=512 result_path='./svgdreamer/ship'
 
+You will get the following result:
+
+.. image:: ../../examples/svgdreamer/icon_ship_1.png
+.. image:: ../../examples/svgdreamer/icon_ship_randT_1.png
+.. raw:: html
+
+    <p style="text-align: center;"><strong>Fig. </strong>A ship on the high sea. iconography. Number of vector particles: 4</p>
 
 Sketch
 """"""""""""
@@ -77,12 +84,18 @@ You will get the following result:
 
 ------------
 
-Synthesize the free-hand sketches of a dragon,
+Synthesize the free-hand sketches of elephants,
 
 .. code-block:: console
 
-   $ CUDA_VISIBLE_DEVICES=0 python svg_render.py x=svgdreamer prompt='A dragon flying in the sky. full body. minimal 2d line drawing. trending on artstation.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./svgdreamer/dragon' mv=True multirun=True
+   $ python svg_render.py x=svgdreamer prompt='a freehand drawing of an elephant. white background. minimal 2d line drawing. trending on artstation.' x.style='sketch' save_step=60 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=256 x.guidance.t_schedule='randint' result_path='./svgdreamer/sketch_elephant' multirun=True
 
+You will get the following result:
+
+.. image:: ../../examples/svgdreamer/sketch_elephant_P256.png
+.. raw:: html
+
+    <p style="text-align: center;"><strong>Fig. </strong>Elephants. sketch. Number of vector particles: 6</p>
 
 Pixel Art
 """"""""""""
@@ -173,7 +186,8 @@ Synthesize the Big Wild Goose Pagoda,
 
 You will get the following result:
 
-.. image:: ../../examples/svgdreamer/ink_BigWildGoosePagoda.png
+.. image:: ../../examples/svgdreamer/ink_BigWildGoosePagoda_1.png
+.. image:: ../../examples/svgdreamer/ink_BigWildGoosePagoda_2.png
 .. raw:: html
 
     <p style="text-align: center;"><strong>Fig. </strong>Big Wild Goose Pagoda. Ink and Wash. Number of vector particles: 6</p>
