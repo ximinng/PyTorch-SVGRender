@@ -78,6 +78,7 @@ Synthesize the free-hand sketches of the Lamborghini,
 You will get the following result:
 
 .. image:: ../../examples/svgdreamer/sketch_Lamborghini_1.png
+.. image:: ../../examples/svgdreamer/sketch_Lamborghini_randT_1.png
 .. raw:: html
 
     <p style="text-align: center;"><strong>Fig. </strong>Lamborghini. sketch. Number of vector particles: 6</p>
