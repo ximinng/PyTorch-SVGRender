@@ -21,7 +21,7 @@ Convert an image of *ballerina* from the original PNG format to an abstract sket
 
 .. code-block:: console
 
-   $ python svg_render.py x=clipascene target='ballerina'
+   $ python svg_render.py x=clipascene target='./data/ballerina.png'
 
 You will get the following result:
 
@@ -32,7 +32,7 @@ Convert an image of *ballerina* from the original PNG format to a sketch with a 
 
 .. code-block:: console
 
-   $ python svg_render.py x=clipascene target='ballerina' x.num_paths=32
+   $ python svg_render.py x=clipascene target='./data/ballerina.png' x.num_paths=32
 
 You will get the following result:
 
