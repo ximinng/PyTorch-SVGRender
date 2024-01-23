@@ -25,6 +25,7 @@ num_segments: 1
 optim_opacity: True # if True, the stroke opacity is optimized
 optim_width: False  # if True, the stroke width is optimized
 optim_rgba: False # if True, the stroke RGBA is optimized
+opacity_delta: 0 # stroke pruning
 
 # init strokes
 attention_init: True # if True, use the attention heads of Dino model to set the location of the initial strokes

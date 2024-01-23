@@ -102,6 +102,8 @@ the [Install.md](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Install.
 
 **For more information, [read the docs](https://pytorch-svgrender.readthedocs.io/en/latest/index.html).**
 
+### 1. Basic Usage
+
 **SVGDreamer** generates various styles of SVG based on text prompts. It supports the use of six vector primitives,
 including Iconography, Sketch, Pixel Art, Low-Poly, Painting, and Ink and Wash.
 
@@ -195,6 +197,27 @@ python svg_render.py x=stylediffsketcher prompt='The French Revolution. highly d
 ```shell
 # Inject the meaning of the word bunny into the 'Y' in the word 'BUNNY'
 python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'
+```
+
+### 2. SDS Loss based Approach
+
+This is achieved by utilizing a pretrained text-to-image diffusion model as a strong image prior to supervise the
+training of the PyDiffVG, enabling rendering SVG alignment with the text. This remarkable capability is fundamentally
+grounded in the use of Score Distillation Sampling (SDS). SDS acts as the core mechanism that lifts raster images from
+diffusion models to the SVG domain, enabling the training of SVG parameters without images.
+This includes the methods VectorFusion, DiffSketcher and SVGDreamer.
+
+We only compare the performance of SDS, which means that no other loss is used:
+
+```shell
+# SDS loss
+python svg_render.py x=vectorfusion prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'
+# Input Augmentation SDS loss (LSDS loss)
+python svg_render.py x=vectorfusion x.style='sketch' prompt='an elephant. minimal 2d line drawing. trending on artstation.'
+# Input Augmentation SDS loss (ASDS loss)
+python svg_render.py x=diffsketcher prompt='an elephant. minimal 2d line drawing. trending on artstation.' x.token_ind=2 x.sds.grad_scale=1 x.sds.num_aug=4 x.clip.vis_loss=0 x.perceptual.coeff=0 x.opacity_delta=0.3 
+# Vectorized Particle-based Score Distillation (VPSD loss)
+python svg_render.py x=svgdreamer prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.' save_step=60 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 
 ```
 
 <h2 align="center">FAQ</h2>

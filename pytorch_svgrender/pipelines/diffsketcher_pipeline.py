@@ -24,6 +24,7 @@ from pytorch_svgrender.painter.diffsketcher import (
 from pytorch_svgrender.plt import plot_img, plot_couple
 from pytorch_svgrender.painter.diffsketcher.sketch_utils import plt_attn
 from pytorch_svgrender.painter.clipasso.sketch_utils import get_mask_u2net, fix_image_scale
+from pytorch_svgrender.painter.diffsketcher.stroke_pruning import paths_pruning
 from pytorch_svgrender.token2attn.attn_control import AttentionStore, EmptyControl
 from pytorch_svgrender.token2attn.ptp_utils import view_images
 from pytorch_svgrender.diffusers_warp import init_diffusion_pipeline, model2res
@@ -428,7 +429,11 @@ class DiffSketcherPipeline(ModelState):
                 pbar.update(1)
 
         # saving final result
-        renderer.save_svg(self.result_path.as_posix(), "final_svg")
+        renderer.save_svg(self.svg_logs_dir.as_posix(), "final_svg_tmp")
+        # stroke pruning
+        if self.args.opacity_delta != 0:
+            paths_pruning(self.svg_logs_dir / "final_svg_tmp.svg", self.result_path / "final_result.svg",
+                          self.x_cfg.opacity_delta)
 
         final_raster_sketch = renderer.get_image().to(self.device)
         plot_img(final_raster_sketch,
