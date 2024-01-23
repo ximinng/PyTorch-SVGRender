@@ -10,12 +10,12 @@ import torch
 import torch.nn.functional as F
 from torchvision import transforms
 from diffusers import StableDiffusionPipeline, UNet2DConditionModel
-from diffusers import DDIMScheduler, DPMSolverMultistepScheduler
+from diffusers import DDIMScheduler
 from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import (
     rescale_noise_cfg, StableDiffusionPipelineOutput)
 from diffusers.models.attention_processor import LoRAAttnProcessor
 from diffusers.loaders import AttnProcsLayers
-from pytorch_svgrender.diffusers_warp import init_diffusion_pipeline, init_diffusers_unet
+from pytorch_svgrender.diffusers_warp import init_StableDiffusion_pipeline, init_diffusers_unet
 
 
 class VectorizedParticleSDSPipeline(torch.nn.Module):
@@ -35,16 +35,16 @@ class VectorizedParticleSDSPipeline(torch.nn.Module):
             "resume_download": diffuser_cfg.resume_download,
             "ldm_speed_up": args.x.ldm_speed_up,
             "enable_xformers": args.x.enable_xformers,
-            "gradient_checkpoint": args.x.gradient_checkpoint
+            "gradient_checkpoint": args.x.gradient_checkpoint,
+            "cpu_offload": args.x.cpu_offload,
+            "vae_slicing": False
         }
 
         # load pretrained model
-        self.sd_pipeline = init_diffusion_pipeline(
+        self.sd_pipeline = init_StableDiffusion_pipeline(
             args.x.model_id,
             custom_pipeline=StableDiffusionPipeline,
-            # custom_scheduler=DDIMScheduler if guidance_cfg.phi_scheduler == 'ddim' else DPMSolverMultistepScheduler,
             custom_scheduler=DDIMScheduler,
-            cpu_offload=args.x.cpu_offload,
             **pipe_kwargs
         )
         # disable grads

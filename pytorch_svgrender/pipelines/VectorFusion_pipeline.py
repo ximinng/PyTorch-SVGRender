@@ -20,7 +20,7 @@ from pytorch_svgrender.painter.vectorfusion import channel_saturation_penalty_lo
 from pytorch_svgrender.painter.live import xing_loss_fn
 from pytorch_svgrender.plt import plot_img, plot_couple
 from pytorch_svgrender.token2attn.ptp_utils import view_images
-from pytorch_svgrender.diffusers_warp import init_diffusion_pipeline, model2res
+from pytorch_svgrender.diffusers_warp import init_StableDiffusion_pipeline, model2res
 
 
 class VectorFusionPipeline(ModelState):
@@ -75,7 +75,7 @@ class VectorFusionPipeline(ModelState):
             custom_pipeline = LSDSPipeline
             custom_scheduler = diffusers.PNDMScheduler
 
-        self.diffusion = init_diffusion_pipeline(
+        self.diffusion = init_StableDiffusion_pipeline(
             self.x_cfg.model_id,
             custom_pipeline=custom_pipeline,
             custom_scheduler=custom_scheduler,

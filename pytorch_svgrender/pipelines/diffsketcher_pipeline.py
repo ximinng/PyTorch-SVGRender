@@ -27,7 +27,7 @@ from pytorch_svgrender.painter.clipasso.sketch_utils import get_mask_u2net, fix_
 from pytorch_svgrender.painter.diffsketcher.stroke_pruning import paths_pruning
 from pytorch_svgrender.token2attn.attn_control import AttentionStore, EmptyControl
 from pytorch_svgrender.token2attn.ptp_utils import view_images
-from pytorch_svgrender.diffusers_warp import init_diffusion_pipeline, model2res
+from pytorch_svgrender.diffusers_warp import init_StableDiffusion_pipeline, model2res
 
 
 class DiffSketcherPipeline(ModelState):
@@ -74,7 +74,7 @@ class DiffSketcherPipeline(ModelState):
             custom_pipeline = Token2AttnMixinASDSPipeline
             custom_scheduler = diffusers.DDIMScheduler
 
-        self.diffusion = init_diffusion_pipeline(
+        self.diffusion = init_StableDiffusion_pipeline(
             self.x_cfg.model_id,
             custom_pipeline=custom_pipeline,
             custom_scheduler=custom_scheduler,

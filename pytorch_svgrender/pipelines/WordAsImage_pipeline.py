@@ -12,7 +12,7 @@ from pytorch_svgrender.painter.wordasimage import Painter, PainterOptimizer
 from pytorch_svgrender.painter.wordasimage.losses import ToneLoss, ConformalLoss
 from pytorch_svgrender.painter.vectorfusion import LSDSPipeline
 from pytorch_svgrender.plt import plot_img, plot_couple
-from pytorch_svgrender.diffusers_warp import init_diffusion_pipeline
+from pytorch_svgrender.diffusers_warp import init_StableDiffusion_pipeline
 from pytorch_svgrender.svgtools import FONT_LIST
 
 
@@ -52,7 +52,7 @@ class WordAsImagePipeline(ModelState):
             self.frame_log_dir = self.result_path / "frame_logs"
             self.frame_log_dir.mkdir(parents=True, exist_ok=True)
 
-        self.diffusion = init_diffusion_pipeline(
+        self.diffusion = init_StableDiffusion_pipeline(
             self.x_cfg.model_id,
             custom_pipeline=LSDSPipeline,
             device=self.device,

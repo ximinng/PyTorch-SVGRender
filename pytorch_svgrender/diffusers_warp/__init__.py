@@ -34,20 +34,21 @@ def model2res(model_id: str):
     return _model2resolution.get(model_id, 512)
 
 
-def init_diffusion_pipeline(model_id: AnyStr,
-                            custom_pipeline: UNet2DConditionModel,
-                            custom_scheduler: SchedulerMixin = None,
-                            device: torch.device = "cuda",
-                            torch_dtype: torch.dtype = torch.float32,
-                            local_files_only: bool = True,
-                            force_download: bool = False,
-                            resume_download: bool = False,
-                            ldm_speed_up: bool = False,
-                            enable_xformers: bool = True,
-                            gradient_checkpoint: bool = False,
-                            cpu_offload: bool = False,
-                            lora_path: AnyStr = None,
-                            unet_path: AnyStr = None) -> StableDiffusionPipeline:
+def init_StableDiffusion_pipeline(model_id: AnyStr,
+                                  custom_pipeline: StableDiffusionPipeline,
+                                  custom_scheduler: SchedulerMixin = None,
+                                  device: torch.device = "cuda",
+                                  torch_dtype: torch.dtype = torch.float32,
+                                  local_files_only: bool = True,
+                                  force_download: bool = False,
+                                  resume_download: bool = False,
+                                  ldm_speed_up: bool = False,
+                                  enable_xformers: bool = True,
+                                  gradient_checkpoint: bool = False,
+                                  cpu_offload: bool = False,
+                                  vae_slicing: bool = False,
+                                  lora_path: AnyStr = None,
+                                  unet_path: AnyStr = None) -> StableDiffusionPipeline:
     """
     A tool for initial diffusers pipeline.
 
@@ -64,6 +65,7 @@ def init_diffusion_pipeline(model_id: AnyStr,
         enable_xformers: enable memory efficient attention from [xFormers]
         gradient_checkpoint: activates gradient checkpointing for the current model
         cpu_offload: enable sequential cpu offload
+        vae_slicing: enable sliced VAE decoding
         lora_path: load LoRA checkpoint
         unet_path: load unet checkpoint
 
@@ -145,6 +147,9 @@ def init_diffusion_pipeline(model_id: AnyStr,
 
     if cpu_offload:
         pipeline.enable_sequential_cpu_offload()
+
+    if vae_slicing:
+        pipeline.enable_vae_slicing()
 
     print(pipeline.scheduler)
     return pipeline
