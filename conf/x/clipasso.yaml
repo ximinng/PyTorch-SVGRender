@@ -14,7 +14,7 @@ color_lr: 0.01
 color_vars_threshold: 0.0
 
 # SVG path attr
-num_paths: 32 # number of strokes
+num_paths: 24 # number of strokes
 width: 1.5 # stroke width
 control_points_per_seg: 4
 num_segments: 1

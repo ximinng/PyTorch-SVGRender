@@ -180,9 +180,9 @@ class Painter(DiffVGState):
     def get_color_parameters(self):
         return self.color_vars
 
-    def save_svg(self, output_dir, name):
-        pydiffvg.save_svg('{}/{}.svg'.format(output_dir, name), self.canvas_width, self.canvas_height,
-                          self.shapes, self.shape_groups)
+    def save_svg(self, output_dir: str, name: str):
+        pydiffvg.save_svg(f'{output_dir}/{name}.svg',
+                          self.canvas_width, self.canvas_height, self.shapes, self.shape_groups)
 
     def clip_preprocess(self, target_im):
         model, preprocess = clip.load(self.saliency_clip_model, device=self.device, jit=False)

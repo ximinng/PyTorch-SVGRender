@@ -8,21 +8,20 @@ from . import modified_clip as clip
 
 
 class Loss(nn.Module):
-
     def __init__(self, args, device):
         super(Loss, self).__init__()
         self.args = args
         self.device = device
-        self.percep_loss = args.percep_loss
 
+        self.percep_loss = args.percep_loss
         self.train_with_clip = args.train_with_clip
         self.clip_weight = args.clip_weight
         self.start_clip = args.start_clip
 
-        self.clip_conv_loss = args.clip_conv_loss
         self.args.clip_conv_layer_weights = [
             float(item) for item in args.clip_conv_layer_weights.split(',')
         ]
+        self.clip_conv_loss = args.clip_conv_loss
         self.clip_fc_loss_weight = args.clip_fc_loss_weight
         self.clip_text_guide = args.clip_text_guide
 
@@ -53,6 +52,7 @@ class Loss(nn.Module):
                     self.losses_to_apply.append("clip")
 
     def forward(self, sketches, targets, color_parameters, renderer, epoch, points_optim=None, mode="train"):
+        loss = 0
         self.update_losses_to_apply(epoch)
 
         losses_dict = dict.fromkeys(self.losses_to_apply, torch.tensor([0.0]).to(self.device))
@@ -72,26 +72,28 @@ class Loss(nn.Module):
 
         for key in self.losses_to_apply:
             losses_dict[key] = losses_dict[key] * loss_coeffs[key]
-
+        # print(losses_dict)
         return losses_dict
 
 
 class CLIPLoss(torch.nn.Module):
-
     def __init__(self, args, device):
         super(CLIPLoss, self).__init__()
 
         self.args = args
-        self.model, clip_preprocess = clip.load('ViT-B/32', device, jit=False)
+        self.device = device
+        self.model, clip_preprocess = clip.load('ViT-B/32', self.device, jit=False)
         self.model.eval()
         self.preprocess = transforms.Compose([clip_preprocess.transforms[-1]])  # clip normalisation
-        self.device = device
         self.NUM_AUGS = args.num_aug_clip
-
         augemntations = []
         if "affine" in args.augemntations:
-            augemntations.append(transforms.RandomPerspective(fill=0, p=1.0, distortion_scale=0.5))
-            augemntations.append(transforms.RandomResizedCrop(224, scale=(0.8, 0.8), ratio=(1.0, 1.0)))
+            augemntations.append(
+                transforms.RandomPerspective(fill=0, p=1.0, distortion_scale=0.5)
+            )
+            augemntations.append(
+                transforms.RandomResizedCrop(224, scale=(0.8, 0.8), ratio=(1.0, 1.0))
+            )
         augemntations.append(
             transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711))
         )
@@ -128,10 +130,8 @@ class CLIPLoss(torch.nn.Module):
 
         for n in range(self.NUM_AUGS):
             loss_clip += (1. - torch.cosine_similarity(sketch_features[n:n + 1], self.targets_features, dim=1))
-
         self.counter += 1
         return loss_clip
-        # return 1. - torch.cosine_similarity(sketches_features, self.targets_features)
 
 
 class LPIPS(torch.nn.Module):
@@ -271,7 +271,9 @@ class CLIPVisualEncoder(nn.Module):
         self.featuremaps = None
 
         for i in range(12):  # 12 resblocks in VIT visual transformer
-            self.clip_model.visual.transformer.resblocks[i].register_forward_hook(self.make_hook(i))
+            self.clip_model.visual.transformer.resblocks[i].register_forward_hook(
+                self.make_hook(i)
+            )
 
     def make_hook(self, name):
         def hook(module, input, output):
@@ -310,9 +312,10 @@ def cos_layers(xs_conv_features, ys_conv_features, clip_model_name):
 
 
 class CLIPConvLoss(torch.nn.Module):
-
     def __init__(self, args, device):
         super(CLIPConvLoss, self).__init__()
+        self.args = args
+        self.device = device
         self.clip_model_name = args.clip_model_name
         assert self.clip_model_name in [
             "RN50",
@@ -339,8 +342,7 @@ class CLIPConvLoss(torch.nn.Module):
                 "Cos": cos_layers
             }
 
-        import clip
-        self.model, clip_preprocess = clip.load(self.clip_model_name, device, jit=False)
+        self.model, clip_preprocess = clip.load(self.clip_model_name, self.device, jit=False)
 
         if self.clip_model_name.startswith("ViT"):
             self.visual_encoder = CLIPVisualEncoder(self.model)
@@ -355,8 +357,6 @@ class CLIPConvLoss(torch.nn.Module):
             self.layer4 = layers[11]
             self.att_pool2d = layers[12]
 
-        self.args = args
-
         self.img_size = clip_preprocess.transforms[1].size
         self.model.eval()
         self.target_transform = transforms.Compose([
@@ -369,7 +369,6 @@ class CLIPConvLoss(torch.nn.Module):
         ])
 
         self.model.eval()
-        self.device = device
         self.num_augs = self.args.num_aug_clip
 
         augemntations = []
@@ -377,7 +376,8 @@ class CLIPConvLoss(torch.nn.Module):
             augemntations.append(transforms.RandomPerspective(fill=0, p=1.0, distortion_scale=0.5))
             augemntations.append(transforms.RandomResizedCrop(224, scale=(0.8, 0.8), ratio=(1.0, 1.0)))
         augemntations.append(
-            transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711)))
+            transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711))
+        )
         self.augment_trans = transforms.Compose(augemntations)
 
         self.clip_fc_layer_dims = None  # self.args.clip_fc_layer_dims
@@ -392,7 +392,7 @@ class CLIPConvLoss(torch.nn.Module):
         sketch: Torch Tensor [1, C, H, W]
         target: Torch Tensor [1, C, H, W]
         """
-        # y = self.target_transform(target).to(self.args.device)
+        #         y = self.target_transform(target).to(self.args.device)
         conv_loss_dict = {}
         x = sketch.to(self.device)
         y = target.to(self.device)
@@ -408,19 +408,24 @@ class CLIPConvLoss(torch.nn.Module):
 
         if self.clip_model_name.startswith("RN"):
             xs_fc_features, xs_conv_features = self.forward_inspection_clip_resnet(
-                xs.contiguous())
+                xs.contiguous()
+            )
             ys_fc_features, ys_conv_features = self.forward_inspection_clip_resnet(
-                ys.detach())
+                ys.detach()
+            )
 
         else:
             xs_fc_features, xs_conv_features = self.visual_encoder(xs)
             ys_fc_features, ys_conv_features = self.visual_encoder(ys)
 
         conv_loss = self.distance_metrics[self.clip_conv_loss_type](
-            xs_conv_features, ys_conv_features, self.clip_model_name)
+            xs_conv_features, ys_conv_features, self.clip_model_name
+        )
 
         for layer, w in enumerate(self.args.clip_conv_layer_weights):
             if w:
+                # layer_ = torch.tensor(layer, dtype=torch.long, device=self.device)
+                # print(layer_)
                 conv_loss_dict[f"clip_conv_loss_layer{layer}"] = conv_loss[layer] * w
 
         if self.clip_fc_loss_weight:
@@ -433,8 +438,8 @@ class CLIPConvLoss(torch.nn.Module):
 
     def forward_inspection_clip_resnet(self, x):
         def stem(m, x):
-            for conv, bn, relu in [(m.conv1, m.bn1, m.relu1), (m.conv2, m.bn2, m.relu2), (m.conv3, m.bn3, m.relu3)]:
-                x = relu(bn(conv(x)))
+            for conv, bn in [(m.conv1, m.bn1), (m.conv2, m.bn2), (m.conv3, m.bn3)]:
+                x = m.relu(bn(conv(x)))
             x = m.avgpool(x)
             return x
 

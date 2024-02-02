@@ -6,9 +6,15 @@
 
 from datetime import datetime
 import random
-from typing import Any, List
+import pathlib
+from typing import Any, List, Dict, Union
 
 import omegaconf
+
+"""Add Type"""
+AnyPath = Union[str, pathlib.Path, 'os.PathLike']
+AnyList = Union[omegaconf.ListConfig, List]
+AnyDict = Union[omegaconf.DictConfig, Dict]
 
 
 def render_batch_wrap(cfg: omegaconf.DictConfig,
@@ -25,7 +31,7 @@ def render_batch_wrap(cfg: omegaconf.DictConfig,
         pipe.painterly_rendering(**pipe_args)
 
 
-def get_seed_range(srange):
+def get_seed_range(srange: AnyList):
     # random sampling without specifying a range
     start_, end_ = 1, 1000000
     if srange is not None:  # specify range sequential sampling

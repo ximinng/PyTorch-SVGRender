@@ -46,11 +46,7 @@ def gradCAM(
         gradcam = torch.clamp(gradcam, min=0)
 
     # Resize gradcam to input resolution.
-    gradcam = F.interpolate(
-        gradcam,
-        input.shape[2:],
-        mode='bicubic',
-        align_corners=False)
+    gradcam = F.interpolate(gradcam, input.shape[2:], mode='bicubic', align_corners=False)
 
     # Restore gradient settings.
     for name, param in model.named_parameters():

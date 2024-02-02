@@ -52,7 +52,7 @@ class CLIPassoPipeline(ModelState):
                                        self.x_cfg.mask_object,
                                        self.x_cfg.fix_scale,
                                        self.device)
-        plot_img(inputs, self.result_path)
+        plot_img(inputs, self.result_path, fname="input")
 
         # init renderer
         renderer = self.load_renderer(inputs, mask)
@@ -61,7 +61,9 @@ class CLIPassoPipeline(ModelState):
         plot_img(img, self.result_path, fname="init_img")
 
         # init optimizer
-        optimizer = PainterOptimizer(renderer, self.x_cfg.num_iter, self.x_cfg.lr,
+        optimizer = PainterOptimizer(renderer,
+                                     self.x_cfg.num_iter,
+                                     self.x_cfg.lr,
                                      self.x_cfg.force_sparse, self.x_cfg.color_lr)
         optimizer.init_optimizers()
 
@@ -85,14 +87,14 @@ class CLIPassoPipeline(ModelState):
                                         optimizer)
                 loss = sum(list(losses_dict.values()))
 
-                pbar.set_description(f"L_train: {loss.item():.4f}")
-
                 optimizer.zero_grad_()
                 loss.backward()
                 optimizer.step_()
 
                 if self.x_cfg.lr_schedule:
                     optimizer.update_lr()
+
+                pbar.set_description(f"L_train: {loss.item():.5f}")
 
                 if self.step % self.args.save_step == 0 and self.accelerator.is_main_process:
                     plot_couple(inputs,
@@ -198,10 +200,12 @@ class CLIPassoPipeline(ModelState):
         transforms_ = []
         if target.size[0] != target.size[1]:
             transforms_.append(
-                transforms.Resize((image_size, image_size), interpolation=InterpolationMode.BICUBIC)
+                transforms.Resize((image_size, image_size),
+                                  interpolation=InterpolationMode.BICUBIC)
             )
         else:
-            transforms_.append(transforms.Resize(image_size, interpolation=InterpolationMode.BICUBIC))
+            transforms_.append(transforms.Resize(image_size,
+                                                 interpolation=InterpolationMode.BICUBIC))
             transforms_.append(transforms.CenterCrop(image_size))
 
         transforms_.append(transforms.ToTensor())
