@@ -64,6 +64,8 @@ class VectorizedParticleSDSPipeline(torch.nn.Module):
                 unet_ = self.unet
             else:
                 # create a new unet model
+                pipe_kwargs.pop('cpu_offload')
+                pipe_kwargs.pop('vae_slicing')
                 unet_ = init_diffusers_unet(args.x.model_id, **pipe_kwargs)
 
             # set correct LoRA layers
