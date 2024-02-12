@@ -63,7 +63,7 @@ def plt_triplet(
     plt.close()
 
 
-def plt_attn(attn: np.arry,
+def plt_attn(attn: np.array,
              threshold_map: np.array,
              inputs: torch.Tensor,
              inds: np.array,
