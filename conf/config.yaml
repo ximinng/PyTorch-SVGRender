@@ -16,7 +16,7 @@ state:
 
 # Diffusers config
 diffuser:
-  download: False
+  download: False # Set this variable to True the first time it runs
   force_download: False
   resume_download: False
 
