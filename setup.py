@@ -18,7 +18,7 @@ setup(
         'artificial intelligence',
         'AIGC',
         'generative models',
-        'SVG',
+        'SVG generation',
     ],
     install_requires=[
         'hydra-core==1.3.2',  # configuration processor

@@ -104,10 +104,20 @@ the [Install.md](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Install.
 
 ### 1. Basic Usage
 
-**LIVE** vectorizes raster images (the emojis in original PNG format):
+**DiffVG** vectorizes any raster images:
+
+```shell
+python svg_render.py x=diffvg target='./data/fallingwater.png'
+# change 'num_paths' and 'num_iter' for better results
+python svg_render.py x=diffvg target='./data/fallingwater.png' x.num_paths=512 x.num_iter=2000
+```
+
+**LIVE** vectorizes the raster emojis images (in original PNG format):
 
 ```shell
 python svg_render.py x=live target='./data/simile.png'
+# change 'num_paths' and 'schedule_each' for better results
+python svg_render.py x=live target='./data/simile.png' x.num_paths=5 x.schedule_each=1
 ```
 
 **CLIPasso** synthesizes vectorized sketches from images:

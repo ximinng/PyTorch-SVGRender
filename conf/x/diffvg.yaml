@@ -1,0 +1,18 @@
+method: 'diffvg'
+
+# train
+num_iter: 2000 # num_iter
+lr_base:
+  point: 1
+  color: 0.01
+  stroke_width: 0.1
+  stroke_color: 0.01
+lr_schedule: False # use lr_schedule
+
+# SVG path attr
+num_paths: 512 # number of paths
+max_width: 5.0 # maximum width
+path_type: 'unclosed' # or 'closed', using Closed curve or non-closed curve
+
+# loss
+loss_type: 'l2' # or 'l1', 'l2', 'lpips', 'l2+lpips', loss type

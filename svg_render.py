@@ -15,17 +15,20 @@ sys.path.append(os.path.split(os.path.abspath(os.path.dirname(__file__)))[0])
 
 from pytorch_svgrender.utils import render_batch_wrap, get_seed_range
 
-METHODS = ['live',
-           'vectorfusion',
-           'clipasso',
-           'clipascene',
-           'diffsketcher',
-           'stylediffsketcher',
-           'clipdraw',
-           'styleclipdraw',
-           'wordasimage',
-           'clipfont',
-           'svgdreamer']
+METHODS = [
+    'diffvg',
+    'live',
+    'vectorfusion',
+    'clipasso',
+    'clipascene',
+    'diffsketcher',
+    'stylediffsketcher',
+    'clipdraw',
+    'styleclipdraw',
+    'wordasimage',
+    'clipfont',
+    'svgdreamer'
+]
 
 
 @hydra.main(version_base=None, config_path="conf", config_name='config')
@@ -41,20 +44,11 @@ def main(cfg: omegaconf.DictConfig):
     # render function
     render_batch_fn = partial(render_batch_wrap, cfg=cfg, seed_range=seed_range)
 
-    if flag == "wordasimage":  # text2font
-        from pytorch_svgrender.pipelines.WordAsImage_pipeline import WordAsImagePipeline
+    if flag == "diffvg":  # img2svg
+        from pytorch_svgrender.pipelines.DiffVG_pipeline import DiffVGPipeline
 
-        pipe = WordAsImagePipeline(cfg)
-        pipe.painterly_rendering(cfg.x.word, cfg.prompt, cfg.x.optim_letter)
-
-    elif flag == "clipfont":  # text and font to font
-        from pytorch_svgrender.pipelines.CLIPFont_pipeline import CLIPFontPipeline
-
-        if not cfg.multirun:
-            pipe = CLIPFontPipeline(cfg)
-            pipe.painterly_rendering(svg_path=cfg.target, prompt=cfg.prompt)
-        else:  # generate many SVG at once
-            render_batch_fn(pipeline=CLIPFontPipeline, svg_path=cfg.target, prompt=cfg.prompt)
+        pipe = DiffVGPipeline(cfg)
+        pipe.painterly_rendering(cfg.target)
 
     elif flag == "live":  # img2svg
         from pytorch_svgrender.pipelines.LIVE_pipeline import LIVEPipeline
@@ -80,6 +74,12 @@ def main(cfg: omegaconf.DictConfig):
         else:  # generate many SVG at once
             render_batch_fn(pipeline=SVGDreamerPipeline, text_prompt=cfg.prompt, target_file=None)
 
+    elif flag == "wordasimage":  # text2font
+        from pytorch_svgrender.pipelines.WordAsImage_pipeline import WordAsImagePipeline
+
+        pipe = WordAsImagePipeline(cfg)
+        pipe.painterly_rendering(cfg.x.word, cfg.prompt, cfg.x.optim_letter)
+
     elif flag == "clipasso":  # img2sketch
         from pytorch_svgrender.pipelines.CLIPasso_pipeline import CLIPassoPipeline
 
@@ -97,6 +97,15 @@ def main(cfg: omegaconf.DictConfig):
 
         pipe = CLIPDrawPipeline(cfg)
         pipe.painterly_rendering(cfg.prompt)
+
+    elif flag == "clipfont":  # text and font to font
+        from pytorch_svgrender.pipelines.CLIPFont_pipeline import CLIPFontPipeline
+
+        if not cfg.multirun:
+            pipe = CLIPFontPipeline(cfg)
+            pipe.painterly_rendering(svg_path=cfg.target, prompt=cfg.prompt)
+        else:  # generate many SVG at once
+            render_batch_fn(pipeline=CLIPFontPipeline, svg_path=cfg.target, prompt=cfg.prompt)
 
     elif flag == "styleclipdraw":  # text to stylized svg
         from pytorch_svgrender.pipelines.StyleCLIPDraw_pipeline import StyleCLIPDrawPipeline
