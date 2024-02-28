@@ -10,7 +10,6 @@ from functools import partial
 from typing import AnyStr
 from PIL import Image
 
-import numpy as np
 from tqdm.auto import tqdm
 import torch
 from torchvision import transforms
@@ -47,15 +46,12 @@ class DiffVGPipeline(ModelState):
 
     def target_file_preprocess(self, tar_path):
         process_comp = transforms.Compose([
-            transforms.Lambda(lambda t: np.array(t)),
-            transforms.Lambda(lambda t: t / 255.),
             transforms.ToTensor(),
             transforms.Lambda(lambda t: t.unsqueeze(0)),
         ])
 
         tar_pil = Image.open(tar_path).convert("RGB")  # open file
         target_img = process_comp(tar_pil)  # preprocess
-        target_img = target_img.to(self.weight_dtype)
         target_img = target_img.to(self.device)
         return target_img
 
