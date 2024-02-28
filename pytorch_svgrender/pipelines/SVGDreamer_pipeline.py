@@ -199,7 +199,7 @@ class SVGDreamerPipeline(ModelState):
         L_reward = torch.tensor(0.)
 
         self.step = 0  # reset global step
-        self.print(f"\ntotal VSD optimization steps: {total_step}")
+        self.print(f"\ntotal VPSD optimization steps: {total_step}")
         with tqdm(initial=self.step, total=total_step, disable=not self.accelerator.is_main_process) as pbar:
             while self.step < total_step:
                 # set particles
