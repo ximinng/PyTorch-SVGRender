@@ -114,7 +114,7 @@ def main(cfg: omegaconf.DictConfig):
         pipe.painterly_rendering(cfg.prompt, style_fpath=cfg.target)
 
     elif flag == "diffsketcher":  # text2sketch
-        from pytorch_svgrender.pipelines.diffsketcher_pipeline import DiffSketcherPipeline
+        from pytorch_svgrender.pipelines.DiffSketcher_pipeline import DiffSketcherPipeline
 
         if not cfg.multirun:
             pipe = DiffSketcherPipeline(cfg)
@@ -123,7 +123,7 @@ def main(cfg: omegaconf.DictConfig):
             render_batch_fn(pipeline=DiffSketcherPipeline, prompt=cfg.prompt)
 
     elif flag == "stylediffsketcher":  # text2sketch + style transfer
-        from pytorch_svgrender.pipelines.diffsketcher_stylized_pipeline import StylizedDiffSketcherPipeline
+        from pytorch_svgrender.pipelines.DiffSketcher_stylized_pipeline import StylizedDiffSketcherPipeline
 
         if not cfg.multirun:
             pipe = StylizedDiffSketcherPipeline(cfg)
