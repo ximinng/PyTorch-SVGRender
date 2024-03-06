@@ -47,7 +47,7 @@ num_segments: 4
 segment_init: 'circle' # 'random'
 radius: 20
 coord_init: 'random' # 'random', 'naive', place the first control point
-grid: 30 # divide the canvas into n grids
+grid: 50 # divide the canvas into n grids
 path_reinit: # reinitializing paths
   use: True
   freq: 100 # every 50 iterations

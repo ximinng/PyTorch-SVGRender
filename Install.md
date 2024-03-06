@@ -29,7 +29,8 @@ pip install wldhx.yadisk-direct
 
 cd lama
 # download LaMa model weights
-curl -L $(yadisk-direct https://disk.yandex.ru/d/kHJkc7bs7mKIVA) -o big-lama.zip
+# raw link(deprecated): curl -L $(yadisk-direct https://disk.yandex.ru/d/kHJkc7bs7mKIVA) -o big-lama.zip
+curl -O -L https://huggingface.co/xingxm/PyTorch-SVGRender-models/resolve/main/big-lama.zip
 unzip big-lama.zip
 ```
 

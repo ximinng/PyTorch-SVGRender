@@ -76,7 +76,7 @@
 
   [[Project]](https://wordasimage.github.io/Word-As-Image-Page/) [[Paper]](https://arxiv.org/abs/2303.01818) [[Code]](https://github.com/Shiriluz/Word-As-Image)
 
-- SVGDreamer: Text Guided SVG Generation with Diffusion Model
+- SVGDreamer: Text Guided SVG Generation with Diffusion Model (`CVPR 2024`)
 
   [[Project]](https://ximinng.github.io/SVGDreamer-project/) [[Paper]](https://arxiv.org/abs/2312.16476) [[code]](https://github.com/ximinng/SVGDreamer)
 
@@ -172,7 +172,7 @@ python svg_render.py x=svgdreamer "prompt='Sydney opera house. oil painting. by 
 # primitive: low-ploy
 python svg_render.py x=svgdreamer "prompt='A picture of a bald eagle. low-ploy. polygon'" x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.num_iter=1000 result_path='./svgdreamer/eagle'
 # primitive: pixel-art
-python svg_render.py x=svgdreamer "prompt='Darth vader with lightsaber. ultrarealistic.'" x.style='pixelart' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.num_iter=1000 result_path='./svgdreamer/DarthVader'
+python svg_render.py x=svgdreamer "prompt='Darth vader with lightsaber. ultrarealistic. pixelart. trending on artstation.'" x.style='pixelart' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.num_iter=1000 result_path='./svgdreamer/DarthVader'
 # primitive: painting
 python svg_render.py x=svgdreamer "prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.'" x.style='painting' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait'
 # primitive: sketch
