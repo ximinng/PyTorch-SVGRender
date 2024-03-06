@@ -1,20 +1,21 @@
 import shutil
+from PIL import Image
 from pathlib import Path
 
+from tqdm.auto import tqdm
 import imageio
 import numpy as np
+from skimage.transform import resize
 import torch
-from PIL import Image
+from torchvision import transforms
+from torchvision.transforms import InterpolationMode
+
 from pytorch_svgrender.libs.engine import ModelState
 from pytorch_svgrender.painter.clipascene import Painter, PainterOptimizer, Loss
 from pytorch_svgrender.painter.clipascene.lama_utils import apply_inpaint
 from pytorch_svgrender.painter.clipascene.scripts_utils import read_svg
 from pytorch_svgrender.painter.clipascene.sketch_utils import plot_attn, get_mask_u2net, fix_image_scale
 from pytorch_svgrender.plt import plot_img, plot_couple
-from skimage.transform import resize
-from torchvision import transforms
-from torchvision.transforms import InterpolationMode
-from tqdm.auto import tqdm
 
 
 class CLIPascenePipeline(ModelState):
@@ -105,6 +106,7 @@ class CLIPascenePipeline(ModelState):
             self.frame_idx = 0
             self.frame_log_dir = output_dir / "frame_logs"
             self.frame_log_dir.mkdir(parents=True, exist_ok=True)
+
         # preprocess input image
         inputs, mask = self.get_target(target,
                                        self.args.x.image_size,
@@ -118,12 +120,10 @@ class CLIPascenePipeline(ModelState):
         loss_func = Loss(self.x_cfg, mask, self.device)
         # init renderer
         renderer = self.load_renderer(inputs, mask)
-
         # init optimizer
         optimizer = PainterOptimizer(self.x_cfg, renderer)
-        best_loss, best_fc_loss, best_num_strokes = 100, 100, self.args.x.num_paths
-        best_iter, best_iter_fc = 0, 0
-        min_delta = 1e-7
+
+        # set renderer and optimizer
         renderer.set_random_noise(0)
         renderer.init_image(stage=0)
         renderer.save_svg(svg_log_dir, "init_svg")
@@ -138,6 +138,8 @@ class CLIPascenePipeline(ModelState):
             renderer.get_image("init").to(self.device)
             renderer.save_svg(self.result_path, "init")
 
+        best_loss, best_fc_loss, best_num_strokes = 100, 100, self.args.x.num_paths
+        min_delta = 1e-7
         total_step = num_iter
         step = 0
         with tqdm(initial=step, total=total_step, disable=not self.accelerator.is_main_process) as pbar:
@@ -272,7 +274,8 @@ class CLIPascenePipeline(ModelState):
         if params_path.exists():
             params = np.load(params_path, allow_pickle=True)[()]
         mask_path = foreground_output_dir / "mask.png"
-        mask = imageio.imread(mask_path)
+        # mask = imageio.imread(mask_path)
+        mask = imageio.v2.imread(mask_path)
         mask = resize(mask, (output_size, output_size), anti_aliasing=False)
 
         object_svg_path = foreground_output_dir / "best_iter.svg"
