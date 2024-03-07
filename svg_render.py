@@ -33,6 +33,11 @@ METHODS = [
 
 @hydra.main(version_base=None, config_path="conf", config_name='config')
 def main(cfg: omegaconf.DictConfig):
+    """
+    The project configuration is stored in './conf/config.yaml’
+    And method configurations are stored in './conf/x/’
+    """
+
     # print(omegaconf.OmegaConf.to_yaml(cfg))
     flag = cfg.x.method
     assert flag in METHODS, f"{flag} is not currently supported!"
