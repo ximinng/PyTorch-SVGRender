@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Author: ximing
-# Description: LIVE pipeline
+# Description: DiffVG pipeline
 # Copyright (c) 2023, XiMing Xing.
 # License: MIT License
 
@@ -15,9 +15,9 @@ import torch
 from torchvision import transforms
 
 from pytorch_svgrender.libs.engine import ModelState
+from pytorch_svgrender.libs.metric.lpips_origin import LPIPS
 from pytorch_svgrender.painter.diffvg import Painter, PainterOptimizer
 from pytorch_svgrender.plt import plot_img, plot_couple
-from pytorch_svgrender.libs.metric.lpips_origin import LPIPS
 
 
 class DiffVGPipeline(ModelState):
