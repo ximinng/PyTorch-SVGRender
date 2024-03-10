@@ -239,10 +239,13 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 - Q: Where can I get more scripts and visualizations?
-- A: check the [pytorch-svgrender.readthedocs.io](https://pytorch-svgrender.readthedocs.io/en/latest/index.html).
+- A: Check the [pytorch-svgrender.readthedocs.io](https://pytorch-svgrender.readthedocs.io/en/latest/index.html).
 
 - Q: An error says HuggingFace cannot find the model in the disk cache.
 - A: Add *`diffuser.download=True`* to the command for downloading model checkpoints the **first time** you run the script.
+
+- Q: It says xFormers is not built with CUDA support or xFormers cannot load C++/CUDA extensions.
+- A: You need to install xFormers again using the command *`pip install --pre -U xformers`* instead of the conda one.
 
 <h2 align="center">TODO</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
