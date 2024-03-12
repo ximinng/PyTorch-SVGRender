@@ -40,7 +40,8 @@ echo "CLIP installation is complete."
 pip install diffusers==0.20.2
 
 echo "Diffusers installation is complete. version: 0.20.2"
-
+# if xformers doesnt install properly with conda try installing with pip using the code below
+# pip install --pre -U xformers
 conda install xformers -c xformers
 
 echo "xformers installation is complete."
