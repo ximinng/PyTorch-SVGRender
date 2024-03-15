@@ -4,7 +4,6 @@
 # Copyright (c) 2023, XiMing Xing.
 # License: MPL-2.0 License
 
-import copy
 import random
 from typing import List
 

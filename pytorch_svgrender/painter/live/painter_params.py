@@ -8,8 +8,6 @@ import copy
 import random
 
 import omegaconf
-from omegaconf import DictConfig
-
 import cv2
 import numpy as np
 import pydiffvg
@@ -382,7 +380,7 @@ class PainterOptimizer:
     def __init__(self,
                  renderer: Painter,
                  num_iter: int,
-                 lr_config: DictConfig,
+                 lr_config: omegaconf.DictConfig,
                  trainable_stroke: bool = False,
                  trainable_bg: bool = False):
         self.renderer = renderer
