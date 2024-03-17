@@ -8,7 +8,7 @@
 </p>
 
 <div align="center">
-<img src="./assets/logo.png" style="width: 350px; height: 300px;" alt="Pytorch-SVGRender">
+<img src="./assets/cover1.png" height="70%" width="auto" alt="Pytorch-SVGRender">
 <p><strong>Pytorch-SVGRender: </strong>The go-to library for differentiable rendering methods for SVG generation.</p>
 </div>
 <p align="center">
@@ -157,8 +157,9 @@ python svg_render.py x=clipfont "prompt='Starry Night by Vincent van gogh'" targ
 
 ---
 
-> Because the following methods rely on stable diffusion, add `diffuser.download=True` to the command the **first time** you
-run the script.
+> Because the following methods rely on stable diffusion, add `diffuser.download=True` to the command the **first time**
+> you
+> run the script.
 
 **SVGDreamer** generates various styles of SVG based on text prompts. It supports the use of six vector primitives,
 including Iconography, Sketch, Pixel Art, Low-Poly, Painting, and Ink and Wash.
@@ -242,7 +243,8 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 - A: Check the [pytorch-svgrender.readthedocs.io](https://pytorch-svgrender.readthedocs.io/en/latest/index.html).
 
 - Q: An error says HuggingFace cannot find the model in the disk cache.
-- A: Add *`diffuser.download=True`* to the command for downloading model checkpoints the **first time** you run the script.
+- A: Add *`diffuser.download=True`* to the command for downloading model checkpoints the **first time** you run the
+  script.
 
 - Q: It says xFormers is not built with CUDA support or xFormers cannot load C++/CUDA extensions.
 - A: You need to install xFormers again using the command *`pip install --pre -U xformers`* instead of the conda one.
