@@ -22,7 +22,7 @@ pip install accelerate transformers safetensors datasets
 Install LaMa:
 
 ```shell
-pip install easydict scikit-learn pytorch_lightning webdataset 
+pip install easydict scikit-learn pytorch_lightning==2.1.0 webdataset
 pip install albumentations==0.5.2
 pip install kornia==0.5.0
 pip install wldhx.yadisk-direct

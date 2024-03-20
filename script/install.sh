@@ -19,14 +19,13 @@ pip install accelerate transformers safetensors datasets
 
 echo "The basic dependency library is installed."
 
-pip install easydict scikit-learn pytorch_lightning webdataset
+pip install easydict scikit-learn pytorch_lightning==2.1.0 webdataset
 pip install albumentations==0.5.2
 pip install kornia==0.5.0
 
+cd lama
 # Noting: you can download the lama model when you need it,
 # download LaMa model weights:
-
-cd lama
 curl -O -L https://huggingface.co/xingxm/PyTorch-SVGRender-models/resolve/main/big-lama.zip
 unzip big-lama.zip
 

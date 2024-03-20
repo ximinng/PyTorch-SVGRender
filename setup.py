@@ -10,7 +10,7 @@ setup(
     version='1.0.0',
     license='Mozilla Public License Version 2.0',
     description='SVG Differentiable Rendering: Generating vector graphics using neural networks.',
-    author='XiMing Xing, Juncheng Hu et al.',
+    author='Ximing Xing, Juncheng Hu et al.',
     author_email='ximingxing@gmail.com',
     url='https://github.com/ximinng/PyTorch-SVGRender',
     long_description_content_type='text/markdown',
@@ -23,14 +23,14 @@ setup(
     install_requires=[
         'hydra-core==1.3.2',  # configuration processor
         'omegaconf==2.3.0',  # YAML processor
-        'accelerate==0.20.3',  # Hugging Face - pytorch distributed configuration
-        'diffusers==0.20.2',  # Hugging Face - diffusion models
-        'transformers==4.30.2',  # Hugging Face - transformers
-        'datasets==2.13.1',
+        'accelerate==0.20.3',  # HuggingFace - pytorch distributed configuration
+        'diffusers==0.20.2',  # HuggingFace - diffusion models
+        'transformers==4.30.2',  # HuggingFace - transformers
+        'datasets==2.13.1',  # #HuggingFace - datasets
         'safetensors==0.3.1',
-        'xformers',
+        'xformers',  # speed up attn compute
         'einops==0.6.1',
-        'pillow',
+        'pillow',  # keep the PIL.Image.Resampling deprecation away,
         'imageio-ffmpeg==0.4.8'
         'torch>=1.13.1',
         'torchvision>=0.14.1',
@@ -46,7 +46,6 @@ setup(
         'scikit-fmm==2023.4.2',
         'scipy==1.10.1',
         'scikit-image==0.20.0',
-        'Pillow',  # keep the PIL.Image.Resampling deprecation away,
         'pytorch-lightning==2.1.0',
         'matplotlib==3.7.1',
         'visdom=0.2.4',
