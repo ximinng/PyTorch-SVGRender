@@ -95,6 +95,12 @@ sh script/install.sh
 Note: Make sure that the script file has execution **permissions** (you can give them using `chmod +x script.sh`), and
 then run the script.
 
+or using docker,
+
+```shell
+docker run --name svgdreamer --gpus all -it --ipc=host ximingxing/svgrender:v1 /bin/bash
+```
+
 For more information, please refer to
 the [Install.md](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Install.md).
 
