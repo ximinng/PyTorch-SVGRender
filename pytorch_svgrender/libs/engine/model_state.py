@@ -6,7 +6,6 @@
 from typing import Union, List
 from pathlib import Path
 from datetime import datetime
-import logging
 
 from omegaconf import OmegaConf, DictConfig
 from pprint import pprint
@@ -82,9 +81,6 @@ class ModelState:
 
         """logs"""
         if self.accelerator.is_local_main_process:
-            # logging
-            self.log = logging.getLogger(__name__)
-
             # log results in a folder periodically
             self.result_path.mkdir(parents=True, exist_ok=True)
             if not ignore_log:
