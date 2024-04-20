@@ -368,10 +368,13 @@ class VectorFusionPipeline(ModelState):
 
                 # re-init paths
                 if self.step % path_reinit.freq == 0 and self.step < path_reinit.stop_step and self.step != 0:
-                    renderer.reinitialize_paths(path_reinit.use,  # on-off
-                                                path_reinit.opacity_threshold,
-                                                path_reinit.area_threshold,
-                                                fpath=self.reinit_dir / f"reinit-{self.step}.svg")
+                    new_point_params, new_color_params = \
+                        renderer.reinitialize_paths(path_reinit.use,  # on-off
+                                                    f"Step {self.step}",
+                                                    path_reinit.opacity_threshold,
+                                                    path_reinit.area_threshold,
+                                                    fpath=self.reinit_dir / f"reinit-{self.step}.svg")
+                    optimizer.add_params(new_point_params, new_color_params)
 
                 # update lr
                 if self.x_cfg.lr_stage_two.lr_schedule:

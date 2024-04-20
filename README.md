@@ -24,11 +24,11 @@
     <a href="#licence">Licence</a>
 </p>
 
-<h2 align="center">Recent Updates</h2>
+<h2 align="center">🔥 Recent Updates</h2>
 
 - [12/2023] 🔥 We open-sourced Pytorch-SVGRender V1.0.
 
-<h2 align="center">Table of Contents</h2>
+<h2 align="center">📝 Table of Contents</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 ### 1. Image Vectorization
@@ -79,9 +79,9 @@
 
 - SVGDreamer: Text Guided SVG Generation with Diffusion Model (`CVPR 2024`)
 
-  [[Project]](https://ximinng.github.io/SVGDreamer-project/) [[Paper]](https://arxiv.org/abs/2312.16476) [[code]](https://github.com/ximinng/SVGDreamer)
+  [[Project]](https://ximinng.github.io/SVGDreamer-project/) [[Paper]](https://arxiv.org/abs/2312.16476) [[Code]](https://github.com/ximinng/SVGDreamer) [[Blog]](https://huggingface.co/blog/xingxm/svgdreamer/)
 
-<h2 align="center">Installation</h2>
+<h2 align="center">⚙️ Installation</h2>
 
 You can follow the steps below to quickly get up and running with PyTorch-SVGRender.
 These steps will let you run quick inference locally.
@@ -104,7 +104,7 @@ docker run --name svgdreamer --gpus all -it --ipc=host ximingxing/svgrender:v1 /
 For more information, please refer to
 the [Install.md](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Install.md).
 
-<h2 align="center">Quickstart</h2>
+<h2 align="center">👩‍🎨🎨 Quickstart</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 **For more information, [read the docs](https://pytorch-svgrender.readthedocs.io/en/latest/index.html).**
@@ -243,7 +243,7 @@ python svg_render.py x=diffsketcher "prompt='an elephant. minimal 2d line drawin
 python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'" save_step=60 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 
 ```
 
-<h2 align="center">FAQ</h2>
+<h2 align="center">❓ FAQ</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 - Q: Where can I get more scripts and visualizations?
@@ -261,7 +261,7 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 
 - [x] integrated SVGDreamer.
 
-<h2 align="center">Acknowledgement</h2>
+<h2 align="center">💘 Acknowledgement</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 The project is built based on the following repository:
@@ -276,7 +276,7 @@ The project is built based on the following repository:
 
 We gratefully thank the authors for their wonderful works.
 
-<h2 align="center">Citation</h2>
+<h2 align="center">📚 Citation</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 If you use this code for your research, please cite the following work:
