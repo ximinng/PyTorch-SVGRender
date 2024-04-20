@@ -283,12 +283,14 @@ class SVGDreamerPipeline(ModelState):
                     r.clip_curve_shape()
 
                 # re-init paths
-                if self.step % path_reinit.freq == 0 and self.step < path_reinit.stop_step and self.step != 0:
+                if path_reinit.use and self.step % path_reinit.freq == 0 and self.step < path_reinit.stop_step and self.step != 0:
                     for i, r in enumerate(renderers):
-                        r.reinitialize_paths(path_reinit.use,  # on-off
-                                             path_reinit.opacity_threshold,
-                                             path_reinit.area_threshold,
-                                             fpath=self.reinit_dir / f"reinit-{self.step}_p{i}.svg")
+                        extra_point_params, extra_color_params, extra_width_params = \
+                            r.reinitialize_paths(f"P{i} - Step {self.step}",
+                                                 self.reinit_dir / f"reinit-{self.step}_p{i}.svg",
+                                                 path_reinit.opacity_threshold,
+                                                 path_reinit.area_threshold)
+                        optimizers[i].add_params(extra_point_params, extra_color_params, extra_width_params)
 
                 # update lr
                 if self.x_cfg.lr_stage_two.lr_schedule:

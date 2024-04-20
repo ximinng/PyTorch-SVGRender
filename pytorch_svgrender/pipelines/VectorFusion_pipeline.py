@@ -367,14 +367,13 @@ class VectorFusionPipeline(ModelState):
                 renderer.clip_curve_shape()
 
                 # re-init paths
-                if self.step % path_reinit.freq == 0 and self.step < path_reinit.stop_step and self.step != 0:
-                    new_point_params, new_color_params = \
-                        renderer.reinitialize_paths(path_reinit.use,  # on-off
-                                                    f"Step {self.step}",
+                if path_reinit.use and self.step % path_reinit.freq == 0 and self.step < path_reinit.stop_step and self.step != 0:
+                    extra_point_params, extra_color_params, extra_width_params = \
+                        renderer.reinitialize_paths(f"Step {self.step}",
+                                                    self.reinit_dir / f"reinit-{self.step}.svg",
                                                     path_reinit.opacity_threshold,
-                                                    path_reinit.area_threshold,
-                                                    fpath=self.reinit_dir / f"reinit-{self.step}.svg")
-                    optimizer.add_params(new_point_params, new_color_params)
+                                                    path_reinit.area_threshold)
+                    optimizer.add_params(extra_point_params, extra_color_params, extra_width_params)
 
                 # update lr
                 if self.x_cfg.lr_stage_two.lr_schedule:
