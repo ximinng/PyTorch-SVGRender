@@ -10,7 +10,7 @@ neg_prompt: ~ # negative prompt
 # Accelerate config
 state:
   cpu: False # use cpu
-  mprec: no # mixed precision, choices: 'no', 'fp16', 'bf16'
+  mprec: 'no' # mixed precision, choices: 'no', 'fp16', 'bf16'
 #  wandb: False
 #  tensorboard: False
 
@@ -54,3 +54,4 @@ hydra:
 defaults:
   - _self_
   - x: ~
+  - override hydra/job_logging: disabled # Outputs only to stdout (no log file)

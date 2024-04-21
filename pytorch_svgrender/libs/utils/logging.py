@@ -8,7 +8,7 @@ import sys
 import errno
 
 
-def get_logger(logs_dir: str, file_name: str = "log.txt"):
+def build_sysout_print_logger(logs_dir: str, file_name: str = "log.txt"):
     logger = PrintLogger(os.path.join(logs_dir, file_name))
     sys.stdout = logger  # record all python print
     return logger

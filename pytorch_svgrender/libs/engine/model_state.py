@@ -5,15 +5,15 @@
 
 from typing import Union, List
 from pathlib import Path
-from datetime import datetime
 
-from omegaconf import OmegaConf, DictConfig
+import hydra
+from omegaconf import OmegaConf, DictConfig, open_dict
 from pprint import pprint
 import torch
 from accelerate.utils import LoggerType
 from accelerate import Accelerator
 
-from ..utils.logging import get_logger
+from ..utils.logging import build_sysout_print_logger
 
 
 class ModelState:
@@ -32,35 +32,21 @@ class ModelState:
             self,
             args: DictConfig,
             log_path_suffix: str = None,
-            ignore_log=False,  # whether to create log file or not
     ) -> None:
         self.args: DictConfig = args
+
+        # runtime output directory
+        with open_dict(args):
+            args.output_dir = hydra.core.hydra_config.HydraConfig.get().runtime.output_dir
+
         # set cfg
         self.state_cfg = args.state
         self.x_cfg = args.x
 
-        """check valid"""
-        mixed_precision = self.state_cfg.get("mprec")
-        # Bug: omegaconf convert 'no' to false
-        mixed_precision = "no" if type(mixed_precision) == bool else mixed_precision
-
         """create working space"""
-        # rule: ['./config'. 'method_name', 'exp_name.yaml']
-        # -> result_path: ./runs/{method_name}-{exp_name}, as a base folder
-        now_time = datetime.now().strftime('%Y-%m-%d-%H-%M')
-        results_folder = self.args.get("result_path", None)
-        if results_folder is None:
-            self.result_path = Path("./workdir") / f"{self.x_cfg.method}-{now_time}"
-        else:
-            self.result_path = Path(results_folder) / f"{self.x_cfg.method}-{now_time}"
-
-        # update result_path: ./runs/{method_name}-{exp_name}/{log_path_suffix}
-        # noting: can be understood as "results dir / methods / ablation study / your result"
-        config_name_only = str(self.x_cfg.method).split(".")[0]
-        if log_path_suffix is not None:
-            self.result_path = self.result_path / f"{config_name_only}-{log_path_suffix}"
-        else:
-            self.result_path = self.result_path / f"{config_name_only}"
+        self.result_path = Path(args.output_dir)  # saving path
+        self.monitor_dir = self.result_path / 'runs'  # monitor path
+        self.result_path = self.result_path / f"{log_path_suffix}"  # method results path
 
         """init visualized tracker"""
         # TODO: monitor with WANDB or TENSORBOARD
@@ -73,30 +59,28 @@ class ModelState:
         """HuggingFace Accelerator"""
         self.accelerator = Accelerator(
             device_placement=True,
-            mixed_precision=mixed_precision,
+            mixed_precision=args.state.get("mprec"),
             cpu=True if self.state_cfg.cpu else False,
             log_with=None if len(self.log_with) == 0 else self.log_with,
-            project_dir=self.result_path / "vis",
+            project_dir=self.monitor_dir,
         )
 
         """logs"""
         if self.accelerator.is_local_main_process:
             # log results in a folder periodically
             self.result_path.mkdir(parents=True, exist_ok=True)
-            if not ignore_log:
-                self.logger = get_logger(
-                    logs_dir=self.result_path.as_posix(),
-                    file_name=f"{now_time}-{args.seed}-log.txt"
-                )
+            self.logger = build_sysout_print_logger(logs_dir=self.result_path.as_posix(),
+                                                    file_name=f"stdout-print-log.txt")
 
             print("==> system args: ")
-            sys_cfg = OmegaConf.masked_copy(args, ["x"])
+            custom_cfg = OmegaConf.masked_copy(args, ["x"])
+            sys_cfg = dictconfig_diff(args, custom_cfg)
             print(sys_cfg)
             print("==> yaml config args: ")
             print(self.x_cfg)
 
             print("\n***** Model State *****")
-            print(f"-> Mixed Precision: {mixed_precision}, AMP: {self.accelerator.native_amp}")
+            print(f"-> Mixed Precision: {self.accelerator.state.mixed_precision}, AMP: {self.accelerator.native_amp}")
             print(f"-> Weight dtype:  {self.weight_dtype}")
 
             if self.accelerator.scaler_handler is not None and self.accelerator.scaler_handler.enabled:
@@ -123,11 +107,12 @@ class ModelState:
 
     @property
     def weight_dtype(self):
-        weight_dtype = torch.float32
         if self.accelerator.mixed_precision == "fp16":
             weight_dtype = torch.float16
         elif self.accelerator.mixed_precision == "bf16":
             weight_dtype = torch.bfloat16
+        else:
+            weight_dtype = torch.float32
         return weight_dtype
 
     @property
@@ -249,3 +234,27 @@ class ModelState:
         if len(self.log_with) > 0:
             self.close_tracker()
         self.print(msg)
+
+
+def dictconfig_diff(dict1, dict2):
+    """
+    Find the difference between two OmegaConf.DictConfig objects
+    """
+    # Convert OmegaConf.DictConfig to regular dictionaries
+    dict1 = OmegaConf.to_container(dict1, resolve=True)
+    dict2 = OmegaConf.to_container(dict2, resolve=True)
+
+    # Find the keys that are in dict1 but not in dict2
+    diff = {}
+    for key in dict1:
+        if key not in dict2:
+            diff[key] = dict1[key]
+        elif dict1[key] != dict2[key]:
+            if isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+                nested_diff = dictconfig_diff(dict1[key], dict2[key])
+                if nested_diff:
+                    diff[key] = nested_diff
+            else:
+                diff[key] = dict1[key]
+
+    return diff

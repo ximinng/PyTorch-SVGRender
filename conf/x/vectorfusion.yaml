@@ -54,7 +54,7 @@ coord_init: 'sparse' # 'random', 'naive', place the first control point
 grid: 32 # divide the canvas into n grids
 path_reinit: # reinitializing paths
   use: True
-  freq: 50 # every 50 iterations
+  freq: 10 # every 50 iterations
   stop_step: 800 # for SDS fine-tuning
   opacity_threshold: 0.05
   area_threshold: 64
