@@ -3,6 +3,18 @@ Installation
 
 .. _install:
 
+You can follow the steps below to quickly get up and running with PyTorch-SVGRender.
+These steps will let you run quick inference locally.
+
+In the top level directory run,
+
+.. code-block:: console
+
+   $ sh script/install.sh
+
+Note: Make sure that the script file has execution **permissions** (you can give them using ``chmod +x script.sh``), and
+then run the script.
+
 **If you want to install it yourself step by step, you can refer to the following content,**
 
 Create a new conda environment:

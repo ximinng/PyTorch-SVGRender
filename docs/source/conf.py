@@ -2,11 +2,11 @@
 
 # -- Project information
 project = 'PyTorch-SVGRender'
-copyright = '2023, Ximing Xing'
+copyright = '2024, Ximing Xing'
 author = 'XiMing Xing, Juncheng Hu et al.'
 
-release = '0.1'
-version = '0.1.0'
+release = '1.0'
+version = '0.2.0'
 
 # -- General configuration
 extensions = [

@@ -13,36 +13,72 @@ Welcome to PyTorch-SVGRender documentation!
 
    This project is under active development.
 
+Installation
+-----------
+
+:doc:`Installation <install>`
+    How to install the PyTorch-SVGRender.
+
 Table of Contents
-----------
+-----------
+
+:doc:`DiffVG <diffvg>`
+    Differentiable Vector Graphics Rasterization.
+
+:doc:`LIVE <live>`
+
+:doc:`CLIPDraw <clipdraw>`
+
+:doc:`StyleCLIPDraw <styleclipdraw>`
+
+:doc:`CLIPFont <clipfont>`
+
+:doc:`CLIPasso <clipasso>`
+
+:doc:`CLIPascene <clipascene>`
+
+:doc:`VectorFusion <vectorfusion>`
+
+:doc:`DiffSketcher <diffsketcher>`
+
+:doc:`Word-As-Image <wordasimage>`
+
+:doc:`SVGDreamer <svgdreamer>`
+
+API Documentation
+-----------
+
+:doc:`API <api>`
+
+.. Hidden TOCs
 
 .. toctree::
+   :caption: How to install
    :maxdepth: 1
+   :hidden:
 
    install
+
+.. toctree::
+   :caption: Methods
+   :maxdepth: 1
+   :hidden:
+
    diffvg
-   live
-   clipasso
    clipdraw
    styleclipdraw
+   live
    clipfont
+   clipasso
+   clipascene
    vectorfusion
    diffsketcher
    wordasimage
    svgdreamer
+
+.. toctree::
+   :caption: API Documentation
+   :maxdepth: 1
+   :hidden:
+
    api
-
-Installation
-----------
-
-You can follow the steps below to quickly get up and running with PyTorch-SVGRender.
-These steps will let you run quick inference locally.
-
-In the top level directory run,
-
-.. code-block:: console
-
-   $ sh script/install.sh
-
-Note: Make sure that the script file has execution **permissions** (you can give them using ``chmod +x script.sh``), and
-then run the script.
