@@ -3,7 +3,7 @@
 # -- Project information
 project = 'PyTorch-SVGRender'
 copyright = '2024, Ximing Xing'
-author = 'XiMing Xing, Juncheng Hu et al.'
+author = 'Ximing Xing, Juncheng Hu et al.'
 
 release = '1.0'
 version = '0.2.0'

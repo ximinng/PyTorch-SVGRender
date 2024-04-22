@@ -15,13 +15,22 @@ The abstract from the paper is:
 
 CLIPasso converts an image of an object to a sketch, allowing for varying levels of abstraction, while preserving its key visual features.
 
-note: first download the `U2Net <https://huggingface.co/akhaliq/CLIPasso/blob/main/u2net.pth>`_ model, and put the model in :file:`./checkpoint/u2net/u2net.pth`.
+.. note::
+
+   first download the `U2Net <https://huggingface.co/akhaliq/CLIPasso/blob/main/u2net.pth>`_ model, and put the model in :file:`./checkpoint/u2net/u2net.pth`.
 
 Convert an image of *a horse* from the original PNG format to an abstract sketch:
 
 .. code-block:: console
 
    $ python svg_render.py x=clipasso target='./data/horse.png'
+
+sketch format:
+
+- Rendering size: 224x224
+- Number of strokes: 16
+- Strokes type: cubic Bezier curves
+- Stroke width: 1.5
 
 **Strokes Initialization**:
 

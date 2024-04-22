@@ -82,3 +82,17 @@ API Documentation
    :hidden:
 
    api
+
+
+Infos
+----------
+
+.. bibliographic fields (which also require a transform):
+
+:Authors: Ximing Xing; Juncheng Hu
+:Contact: ximingxing@gmail.com
+:organization: BUAA
+:status: This is a "work in progress"
+:version: 1.0
+:copyright: 2024, Ximing Xing
+:licence: This work is licensed under a **Mozilla Public License Version 2.0**
