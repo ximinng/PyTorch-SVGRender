@@ -35,10 +35,14 @@ def test_PyTorchSVGRender(args):
         "python svg_render.py x=clipdraw " + "prompt='Self'",
     ]
     run_style_clipdraw = [
-        "python svg_render.py x=styleclipdraw " + "prompt='a photo of a cat'" + "target='./data/starry.png'"
+        "python svg_render.py x=styleclipdraw " + "prompt='A 3D rendering of a temple'" + " target='./data/starry.png'",
+        "python svg_render.py x=styleclipdraw " + "prompt='Family vacation to Walt Disney World'" + " target='./data/starry.png'",
+        "python svg_render.py x=styleclipdraw " + "prompt='Self'" + " target='./data/starry.png'"
     ]
     run_clipfont = [
-        "python svg_render.py x=clipfont " + "prompt='Starry Night by Vincent van gogh'" + " target='./data/alphabet1.svg'"
+        "python svg_render.py x=clipfont " + "prompt='Starry Night by Vincent van gogh'" + " target='./data/alphabet1.svg'",
+        "python svg_render.py x=clipfont " + "prompt='English alphabet, cyberpunk'" + " target='./data/alphabet1.svg'",
+        "python svg_render.py x=clipfont " + "prompt='Starry Night by Vincent van gogh'" + " target='./data/ch1.svg'",
     ]
     run_svgdreamer = [
         "python svg_render.py x=svgdreamer " + "prompt='A colorful German shepherd in vector art. tending on artstation.'" + " save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2"
@@ -61,7 +65,7 @@ def test_PyTorchSVGRender(args):
     test_dict = {
         'diffvg': run_diffvg,
         'clipdraw': run_clipdraw,
-        'style_clipdraw': run_style_clipdraw,
+        'styleclipdraw': run_style_clipdraw,
         'live': run_live,
         'clipasso': run_clipasso,
         'clipasene': run_clipascene,
@@ -98,9 +102,13 @@ if __name__ == '__main__':
 
     """
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py
+    
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'quick' --result "./quick_test_PyTorchSVGRender/" 
+    
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipdraw' --result "./test_clipdraw"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'styleclipdraw' --result "./test_styleclipdraw"
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipasso' --result "./test_clipasso"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipfont' --result "./test_clipfont"
     """
 
     test_PyTorchSVGRender(args)
