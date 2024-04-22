@@ -75,7 +75,7 @@ def plot_attn_clip(attn, threshold_map, inputs, inds, output_path):
     plt.axis("off")
 
     plt.tight_layout()
-    plt.savefig(output_path)
+    plt.savefig(output_path, bbox_inches='tight', pad_inches=0.1)
     plt.close()
 
 

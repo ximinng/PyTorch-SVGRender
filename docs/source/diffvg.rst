@@ -23,14 +23,14 @@ Convert a raster image from the original PNG format to vector format:
 
    $ python svg_render.py x=diffvg target='./data/fallingwater.png'
 
-Result:
+**Result**:
 
-.. container:: image-row
+.. list-table:: Rendering Result
 
-   .. figure:: ../../data/fallingwater.png
-      :width: 300px
-      :caption: input raster image
+    * - .. figure:: ../../data/fallingwater.png
 
-   .. figure:: ../../examples/diffvg/fallingwater.svg
-      :width: 300px
-      :caption: vectorization result
+           input raster image
+
+      - .. figure:: ../../examples/diffvg/fallingwater.svg
+
+           vectorization result

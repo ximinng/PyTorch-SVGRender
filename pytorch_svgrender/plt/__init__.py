@@ -19,7 +19,7 @@ def plot_couple(input_1: torch.Tensor,
                 fname: Union[str, pathlib.Path, BinaryIO],  # file name
                 prompt: str = '',  # text prompt as image tile
                 pad_value: float = 0,
-                dpi: int = 300):
+                dpi: int = 200):
     if input_1.shape != input_2.shape:
         raise ValueError("inputs and outputs must have the same dimensions")
 
@@ -51,7 +51,7 @@ def plot_couple(input_1: torch.Tensor,
     plt.suptitle(insert_newline(prompt), fontsize=10)
 
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/{fname}.png", dpi=dpi)
+    plt.savefig(f"{output_dir}/{fname}.png", bbox_inches='tight', pad_inches=0.1, dpi=dpi)
     plt.close()
 
 
@@ -86,5 +86,5 @@ def plot_img_title(inputs: torch.Tensor,
     plt.imshow(ndarr)
     plt.axis("off")
     plt.title(f"{title}")
-    plt.savefig(f"{output_dir}/{fname}.png", dpi=dpi)
+    plt.savefig(f"{output_dir}/{fname}.png", bbox_inches='tight', pad_inches=0.1, dpi=dpi)
     plt.close()

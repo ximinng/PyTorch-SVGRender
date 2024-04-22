@@ -23,6 +23,21 @@ Convert an image of *a horse* from the original PNG format to an abstract sketch
 
    $ python svg_render.py x=clipasso target='./data/horse.png'
 
-You will get the following result:
+**Strokes Initialization**:
 
-.. image:: ../../examples/clipasso/clipasso_horse.svg
+.. figure:: ../../examples/clipasso/attention_map.png
+   :align: center
+
+   A saliency map is used as the distribution to sample the initial strokes locations.
+
+**Result**:
+
+.. list-table:: Rendering Result
+
+    * - .. figure:: ../../data/horse.png
+
+           Input
+
+      - .. figure:: ../../examples/clipasso/horse.svg
+
+           Rendering Results
