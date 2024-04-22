@@ -23,7 +23,7 @@ Synthesize *a cat*:
 
 **Result**:
 
-.. figure:: ../../examples/clipdraw/clipdraw_cat.svg
+.. figure:: ../../examples/clipdraw/cat.svg
    :align: center
 
    Fig 1. textual prompt: "a photo of a cat"
