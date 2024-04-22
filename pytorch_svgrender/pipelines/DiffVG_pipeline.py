@@ -137,7 +137,7 @@ class DiffVGPipeline(ModelState):
                 pbar.update(1)
 
         # end rendering
-        renderer.save_svg(self.result_path / "final_svg.svg")
+        renderer.save_svg(self.result_path / "final_result.svg")
 
         if self.make_video:
             from subprocess import call

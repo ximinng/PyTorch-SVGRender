@@ -20,6 +20,7 @@ Table of Contents
    :maxdepth: 1
 
    install
+   diffvg
    live
    clipasso
    clipdraw

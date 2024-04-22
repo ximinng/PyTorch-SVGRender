@@ -47,7 +47,7 @@ def test_PyTorchSVGRender():
     ]
 
     test_sequence = [
-        run_diffvg, run_live, run_clipasso, run_clipascene, run_clipdraw, run_style_clipdraw, run_style_clipdraw,
+        run_diffvg, run_live, run_clipasso, run_clipascene, run_clipdraw, run_style_clipdraw,
         run_clipfont, run_vectorfusion, run_diffsketcher, run_wordasimg, run_svgdreamer
     ]
 
