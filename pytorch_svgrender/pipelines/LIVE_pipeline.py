@@ -174,7 +174,7 @@ class LIVEPipeline(ModelState):
                 # recalculate the coordinates for the new join path
                 renderer.component_wise_path_init(pred=raster_img, init_type=self.x_cfg.coord_init)
 
-        renderer.save_svg(self.result_path / "final_svg.svg")
+        renderer.save_svg(self.result_path / "final_render.svg")
 
         if self.make_video:
             from subprocess import call

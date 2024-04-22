@@ -137,7 +137,7 @@ class DiffVGPipeline(ModelState):
                 pbar.update(1)
 
         # end rendering
-        renderer.save_svg(self.result_path / "final_result.svg")
+        renderer.save_svg(self.result_path / "final_render.svg")
 
         if self.make_video:
             from subprocess import call
@@ -146,7 +146,7 @@ class DiffVGPipeline(ModelState):
                 "-framerate", f"{self.args.framerate}",
                 "-i", (self.frame_log_dir / "iter%d.png").as_posix(),
                 "-vb", "20M",
-                (self.result_path / "live_rendering.mp4").as_posix()
+                (self.result_path / "diffvg_rendering.mp4").as_posix()
             ])
 
         self.close(msg="painterly rendering complete.")

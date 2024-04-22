@@ -196,7 +196,7 @@ class CLIPFontPipeline(ModelState):
                 pbar.update(1)
 
         # log final results
-        renderer.pretty_save_svg(self.result_path / "final_svg.svg")
+        renderer.pretty_save_svg(self.result_path / "final_render.svg")
         final_raster_sketch = renderer.get_image().to(self.device)
         plot_img_title(final_raster_sketch,
                        title=f'final result - {self.step} step',

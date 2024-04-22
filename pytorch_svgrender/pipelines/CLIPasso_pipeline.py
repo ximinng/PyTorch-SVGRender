@@ -140,7 +140,7 @@ class CLIPassoPipeline(ModelState):
                 pbar.update(1)
 
         # log final results
-        renderer.save_svg(self.result_path.as_posix(), "final_svg")
+        renderer.save_svg(self.result_path.as_posix(), "final_render")
         final_raster_sketch = renderer.get_image().to(self.device)
         plot_img_title(final_raster_sketch,
                        title=f'final result - {self.step} step',

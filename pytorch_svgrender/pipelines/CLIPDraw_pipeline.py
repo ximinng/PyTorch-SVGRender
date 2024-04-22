@@ -122,7 +122,7 @@ class CLIPDrawPipeline(ModelState):
                 self.step += 1
                 pbar.update(1)
 
-        renderer.save_svg(self.result_path.as_posix(), "final_svg")
+        renderer.save_svg(self.result_path.as_posix(), "final_render")
 
         if self.make_video:
             from subprocess import call

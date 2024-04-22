@@ -182,7 +182,7 @@ class StyleCLIPDrawPipeline(ModelState):
                     prompt=prompt,
                     output_dir=self.result_path.as_posix(),
                     fname=f"final_iter")
-        renderer.save_svg(self.result_path.as_posix(), "final_svg")
+        renderer.save_svg(self.result_path.as_posix(), "final_render")
 
         if self.make_video:
             from subprocess import call

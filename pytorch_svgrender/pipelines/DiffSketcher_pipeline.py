@@ -429,10 +429,10 @@ class DiffSketcherPipeline(ModelState):
                 pbar.update(1)
 
         # saving final result
-        renderer.save_svg(self.svg_logs_dir.as_posix(), "final_svg_tmp")
+        renderer.save_svg(self.svg_logs_dir.as_posix(), "final_render_tmp")
         # stroke pruning
         if self.args.opacity_delta != 0:
-            paths_pruning(self.svg_logs_dir / "final_svg_tmp.svg", self.result_path / "final_result.svg",
+            paths_pruning(self.svg_logs_dir / "final_render_tmp.svg", self.result_path / "final_render.svg",
                           self.x_cfg.opacity_delta)
 
         final_raster_sketch = renderer.get_image().to(self.device)
