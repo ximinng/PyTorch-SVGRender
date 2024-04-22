@@ -50,7 +50,7 @@ Convert the *emoji* from the original PNG format to vector format:
 
            2000 iter, add 1 path, total path: 5
 
-      - .. figure:: ../../examples/live/svg_iter2500.svg
+      - .. figure:: ../../examples/live/live_smile.svg
            :width: 150
 
            2500 iter, add 1 path, total path: 5
