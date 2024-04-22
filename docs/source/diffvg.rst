@@ -27,10 +27,10 @@ Result:
 
 .. container:: image-row
 
-   .. figure:: ../../examples/data/fallingwater.png
+   .. figure:: ../../data/fallingwater.png
       :width: 300px
       :caption: input raster image
 
-   .. figure:: ../../examples/examples/diffvg/fallingwater2.svg
+   .. figure:: ../../examples/diffvg/fallingwater.svg
       :width: 300px
       :caption: vectorization result
