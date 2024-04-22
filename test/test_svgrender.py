@@ -3,28 +3,36 @@
 # Description: test_svgrender
 # Copyright (c) 2024, XiMing Xing.
 # License: MIT License
+import argparse
 import subprocess
 
 
-def test_PyTorchSVGRender():
+def test_PyTorchSVGRender(args):
     # save
-    result_path = " result_path='./test_PyTorchSVGRender/'"
+    result_path = f" result_path={args.result}"
 
     # cmd list
     run_diffvg = [
-        "python svg_render.py x=diffvg target='./data/fallingwater.png' x.num_paths=512 x.num_iter=2000"
+        "python svg_render.py x=diffvg target='./data/fallingwater.png' x.num_paths=512 x.num_iter=2000",
+        "python svg_render.py x=diffvg target='./data/fallingwater.png' x.num_paths=1024 x.num_iter=2000"
     ]
     run_live = [
         "python svg_render.py x=live target='./data/simile.png' x.num_paths=5 x.schedule_each=1"
     ]
     run_clipasso = [
-        "python svg_render.py x=clipasso target='./data/horse.png'"
+        "python svg_render.py x=clipasso target='./data/horse.png'" + " x.num_paths=8",
+        "python svg_render.py x=clipasso target='./data/horse.png'" + " x.num_paths=16",
+        "python svg_render.py x=clipasso target='./data/horse.png'" + " x.num_paths=24"
     ]
     run_clipascene = [
         "python svg_render.py x=clipascene target='ballerina.png'"
     ]
     run_clipdraw = [
-        "python svg_render.py x=clipdraw " + "prompt='a photo of a cat'"
+        "python svg_render.py x=clipdraw " + "prompt='a photo of a cat'" + " seed=42",
+        "python svg_render.py x=clipdraw " + "prompt='Horse eating a cupcake'",
+        "python svg_render.py x=clipdraw " + "prompt='A 3D rendering of a temple'",
+        "python svg_render.py x=clipdraw " + "prompt='Family vacation to Walt Disney World'",
+        "python svg_render.py x=clipdraw " + "prompt='Self'",
     ]
     run_style_clipdraw = [
         "python svg_render.py x=styleclipdraw " + "prompt='a photo of a cat'" + "target='./data/starry.png'"
@@ -46,18 +54,53 @@ def test_PyTorchSVGRender():
         "python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'"
     ]
 
-    test_sequence = [
-        run_diffvg, run_live, run_clipasso, run_clipascene, run_clipdraw, run_style_clipdraw,
-        run_clipfont, run_vectorfusion, run_diffsketcher, run_wordasimg, run_svgdreamer
-    ]
+    # test_sequence = [
+    #     run_diffvg, run_live, run_clipasso, run_clipascene, run_clipdraw, run_style_clipdraw,
+    #     run_clipfont, run_vectorfusion, run_diffsketcher, run_wordasimg, run_svgdreamer
+    # ]
+    test_dict = {
+        'diffvg': run_diffvg,
+        'clipdraw': run_clipdraw,
+        'style_clipdraw': run_style_clipdraw,
+        'live': run_live,
+        'clipasso': run_clipasso,
+        'clipasene': run_clipascene,
+        'clipfont': run_clipfont,
+        'vectorfusion': run_vectorfusion,
+        'diffsketcher': run_diffsketcher,
+        'wordasimg': run_wordasimg,
+        'svgdreamer': run_svgdreamer
+    }
 
     # test
-    for test_list in test_sequence:
-        for test_cmd in test_list:
+    if args.which == 'all':  # test all scripts
+        print(f"=> Testing All...")
+        for test_list in test_dict.values():
+            for test_cmd in test_list:
+                subprocess.call(['bash', '-c', test_cmd + result_path])
+    elif args.which == 'quick':  # quick testing: test only one script per method
+        print(f"=> Quick Testing...")
+        for test_list in test_dict.values():
+            subprocess.call(['bash', '-c', test_list[0] + result_path])
+    else:  # test all scripts for a method
+        print(f"=> Testing: {args.which}... \n")
+        for test_cmd in test_dict[f"{args.which}"]:
             subprocess.call(['bash', '-c', test_cmd + result_path])
 
     print("all tests passed")
 
 
 if __name__ == '__main__':
-    test_PyTorchSVGRender()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--which", type=str, default='all', help='test method')
+    parser.add_argument("--result", type=str, default='', help='./test_PyTorchSVGRender/')
+    args = parser.parse_args()
+
+    """
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'quick' --result "./quick_test_PyTorchSVGRender/" 
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipdraw' --result "./test_clipdraw"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipasso' --result "./test_clipasso"
+    """
+
+    test_PyTorchSVGRender(args)

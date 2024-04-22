@@ -269,6 +269,8 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
   helping us make it even better than it is now! For more details, please refer to
   the [Contribution Guidelines](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Contribution.md).
 
+  **Remember** to use `test/test_svgrender.py` to test your code before committing it.
+
 <h2 align="center">💘 Acknowledgement</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 

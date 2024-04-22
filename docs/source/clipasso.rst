@@ -28,11 +28,11 @@ Convert an image of *a horse* from the original PNG format to an abstract sketch
 .. figure:: ../../examples/clipasso/attention_map.png
    :align: center
 
-   A saliency map is used as the distribution to sample the initial strokes locations.
+   Fig 1. A saliency map is used as the distribution to sample the initial strokes locations.
 
 **Result**:
 
-.. list-table:: Fig 1. Rendering Result
+.. list-table:: Fig 2. Rendering Result
 
     * - .. figure:: ../../data/horse.png
            :width: 224
@@ -42,4 +42,4 @@ Convert an image of *a horse* from the original PNG format to an abstract sketch
       - .. figure:: ../../examples/clipasso/horse.svg
            :width: 224
 
-           Rendering Results
+           Vector Sketch
