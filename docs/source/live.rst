@@ -55,10 +55,10 @@ Convert the *emoji* from the original PNG format to vector format:
 
            2500 iter, add 1 path, total path: 5
 
-**Result**:
+**Final Result**:
 
-.. image:: ../../examples/live/live_smile.svg
-   :width: 224
+.. figure:: ../../examples/live/live_smile.svg
+   :align: center
 
    Fig 2. image vectorization.
 
