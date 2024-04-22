@@ -19,6 +19,7 @@
     <a href="#quickstart">Quickstart</a> •
     <a href="#faq">FAQ</a> •
     <a href="#todo">TODO</a> •
+    <a href="#contribution">Contribution</a> •
     <a href="#acknowledgement">Acknowledgment</a> •
     <a href="#citation">Citation</a> •
     <a href="#licence">Licence</a>
@@ -260,6 +261,13 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 - [x] integrated SVGDreamer.
+
+<h2 align="center">🤝 Contribution</h2>
+
+- How to Contribute to the PyTorch-SVGRender Community?
+- We greatly appreciate your contributions to the [PyTorch-SVGRender community](https://huggingface.co/SVGRender) and
+  helping us make it even better than it is now! For more details, please refer to
+  the [Contribution Guidelines](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Contribution.md).
 
 <h2 align="center">💘 Acknowledgement</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>

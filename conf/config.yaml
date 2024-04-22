@@ -3,9 +3,9 @@
 #-----------------#
 
 # optional args
-target: ~
-prompt: ~
-neg_prompt: ~ # negative prompt
+target: ~ # target file
+prompt: ~ # textual prompt
+neg_prompt: "nsfw, lowres, (bad), text, error, fewer, extra, missing, worst quality, jpeg artifacts, low quality, watermark, unfinished, displeasing, oldest, early, chromatic aberration, signature, extra digits, artistic error, username, scan" # negative prompt
 
 # Accelerate config
 state:
