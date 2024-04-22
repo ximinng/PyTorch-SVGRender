@@ -28,7 +28,7 @@
 
 - [12/2023] 🔥 We open-sourced Pytorch-SVGRender V1.0.
 
-<h2 align="center">📝 Table of Contents</h2>
+<h2 align="center">💡 Table of Contents</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 ### 1. Image Vectorization
@@ -256,7 +256,7 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 - Q: It says xFormers is not built with CUDA support or xFormers cannot load C++/CUDA extensions.
 - A: You need to install xFormers again using the command *`pip install --pre -U xformers`* instead of the conda one.
 
-<h2 align="center">TODO</h2>
+<h2 align="center">🗒 TODO</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 - [x] integrated SVGDreamer.

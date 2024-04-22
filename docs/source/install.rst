@@ -21,7 +21,7 @@ Install pytorch and the following libraries:
    (svgrender) $ pip install freetype-py shapely svgutils
    (svgrender) $ pip install opencv-python scikit-image matplotlib visdom wandb BeautifulSoup4
    (svgrender) $ pip install triton numba
-   (svgrender) $ pip install numpy scipy scikit-fmm einops timm fairscale=0.4.13
+   (svgrender) $ pip install numpy scipy scikit-fmm einops timm fairscale==0.4.13
    (svgrender) $ pip install accelerate transformers safetensors datasets
 
 Install LaMa:
