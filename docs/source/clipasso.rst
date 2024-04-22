@@ -32,12 +32,14 @@ Convert an image of *a horse* from the original PNG format to an abstract sketch
 
 **Result**:
 
-.. list-table:: Rendering Result
+.. list-table:: Fig 1. Rendering Result
 
     * - .. figure:: ../../data/horse.png
+           :width: 224
 
            Input
 
       - .. figure:: ../../examples/clipasso/horse.svg
+           :width: 224
 
            Rendering Results

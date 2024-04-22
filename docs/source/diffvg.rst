@@ -25,7 +25,7 @@ Convert a raster image from the original PNG format to vector format:
 
 **Result**:
 
-.. list-table:: Rendering Result
+.. list-table:: Fig 1. Rendering Result
 
     * - .. figure:: ../../data/fallingwater.png
 
