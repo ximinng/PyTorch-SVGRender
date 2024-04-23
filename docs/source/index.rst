@@ -26,29 +26,40 @@ Table of Contents
     Differentiable Vector Graphics Rasterization.
 
 :doc:`LIVE <live>`
+    Type: **Img-to-SVG**
 
 :doc:`CLIPDraw <clipdraw>`
+    Type: **Text-to-SVG**
 
 :doc:`StyleCLIPDraw <styleclipdraw>`
+    Type: **Text-and-Ref-to-SVG**
 
 :doc:`CLIPFont <clipfont>`
+    Type: **Text-and-SVG-to-Glyph**
 
 :doc:`CLIPasso <clipasso>`
+    Type: **Img-to-Sketch**
 
 :doc:`CLIPascene <clipascene>`
+    Type: **Img-to-Sketch**
 
 :doc:`VectorFusion <vectorfusion>`
+    Type: **Text-to-SVG**
 
 :doc:`DiffSketcher <diffsketcher>`
+    Type: **Text-to-Sketch**
 
 :doc:`Word-As-Image <wordasimage>`
+    Type: **Text-and-SVG-to-SVG**
 
 :doc:`SVGDreamer <svgdreamer>`
+    Type: **Text-to-SVG**
 
 API Documentation
 -----------
 
 :doc:`API <api>`
+    TODO
 
 .. Hidden TOCs
 
@@ -84,15 +95,15 @@ API Documentation
    api
 
 
-Infos
+About Us
 ----------
 
 .. bibliographic fields (which also require a transform):
 
 :Authors: Ximing Xing; Juncheng Hu
 :Contact: ximingxing@gmail.com
-:organization: BUAA
-:status: This is a "work in progress"
-:version: 1.0
-:copyright: 2024, Ximing Xing
-:licence: This work is licensed under a **Mozilla Public License Version 2.0**
+:Organization: https://huggingface.co/SVGRender @BUAA
+:Status: This is a "work in progress"
+:Version: 1.0
+:Copyright: 2024, Ximing Xing
+:Licence: This work is licensed under a **Mozilla Public License Version 2.0**
