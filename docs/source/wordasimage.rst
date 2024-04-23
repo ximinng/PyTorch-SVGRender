@@ -21,7 +21,16 @@ Inject the meaning of the word *bunny* into the 'Y' in the word 'BUNNY':
     
    $ python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'
 
-You will get the following result:
+**Result**:
 
-.. image:: ../../examples/wordasimage/wordasimage_BUNNY_Y.svg
-   :width: 224
+.. list-table:: Fig 1. Infuses the semantics of "BUNNY" into letter Y
+
+    * - .. figure:: ../../examples/wordasimage/KaushanScript-Regular_BUNNY_scaled.svg
+           :width: 250
+
+           Word: BUNNY, Font: KaushanScript-Regular.tff
+
+      - .. figure:: ../../examples/wordasimage/wordasimage_BUNNY_Y.svg
+           :width: 250
+
+           Final Vector Glyph
