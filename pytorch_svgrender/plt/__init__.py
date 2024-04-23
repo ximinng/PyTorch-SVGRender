@@ -19,7 +19,7 @@ def plot_couple(input_1: torch.Tensor,
                 fname: Union[str, pathlib.Path, BinaryIO],  # file name
                 prompt: str = '',  # text prompt as image tile
                 pad_value: float = 0,
-                dpi: int = 200):
+                dpi: int = 100):
     if input_1.shape != input_2.shape:
         raise ValueError("inputs and outputs must have the same dimensions")
 

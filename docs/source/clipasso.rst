@@ -28,7 +28,6 @@ Convert an image of *a horse* from the original PNG format to an abstract sketch
 sketch format:
 
 - Rendering size: 224x224
-- Number of strokes: 16
 - Strokes type: cubic Bezier curves
 - Stroke width: 1.5
 
@@ -46,9 +45,19 @@ sketch format:
     * - .. figure:: ../../data/horse.png
            :width: 224
 
-           Input
+           Input image
 
-      - .. figure:: ../../examples/clipasso/horse.svg
+     - .. figure:: ../../examples/clipasso/horse-8paths.svg
            :width: 224
 
-           Vector Sketch
+           Vector Sketch, Number of strokes: 8
+
+     - .. figure:: ../../examples/clipasso/horse-16paths.svg
+           :width: 224
+
+           Vector Sketch, Number of strokes: 16
+
+      - .. figure:: ../../examples/clipasso/horse-24paths.svg
+           :width: 224
+
+           Vector Sketch, Number of strokes: 24

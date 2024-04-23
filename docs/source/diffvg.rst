@@ -15,7 +15,7 @@ The abstract from the paper is:
 
 Additional Key Words and Phrases: **vector graphics, differentiable rendering, image vectorization.**
 
-**Examples:**
+**Example:**
 
 Convert a raster image from the original PNG format to vector format:
 
@@ -31,6 +31,10 @@ Convert a raster image from the original PNG format to vector format:
 
            input raster image
 
-      - .. figure:: ../../examples/diffvg/fallingwater.svg
+      - .. figure:: ../../examples/diffvg/fallingwater_512paths.svg
 
-           vectorization result
+           vectorization result, 512 paths
+
+      - .. figure:: ../../examples/diffvg/fallingwater_1024paths.svg
+
+           vectorization result, 1024 paths

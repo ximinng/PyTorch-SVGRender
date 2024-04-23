@@ -18,7 +18,7 @@ to keep the category of each character unchanged. The gradients computed on the 
 renderer. Experimental results and Turing tests demonstrate our method’s state-of-the-art
 performance. Project page: https://github.com/songyiren98/CLIPFont`
 
-**Examples:**
+**Example 1: alphabet**
 
 StyleCLIPDraw styles vector fonts according to text prompts.
 
@@ -28,6 +28,36 @@ Style the *alphabet* in the style of *Starry Night by Vincent van Gogh*:
 
    $ python svg_render.py x=clipfont prompt='Starry Night by Vincent van gogh' target='./data/alphabet1.svg'
 
-You will get the following result:
+**Result**:
 
-.. image:: ../../examples/clipfont/clipfont_alphabet.svg
+.. list-table:: Fig 1. text prompt: "Starry Night by Vincent van gogh"
+
+    * - .. figure:: ../../data/alphabet1.svg
+           :width: 250
+
+           Input Vector Glyph
+
+     - .. figure:: ../../examples/clipfont/alphabet1_VanGogh.svg
+           :width: 250
+
+           Final Vector Glyph
+
+**Example 2: Chinese**
+
+.. code-block:: console
+
+   $ python svg_render.py x=clipfont prompt='Starry Night by Vincent van gogh' target='./data/ch1.svg'
+
+**Result**:
+
+.. list-table:: Fig 2. text prompt: "Starry Night by Vincent van gogh"
+
+    * - .. figure:: ../../data/ch1.svg
+           :width: 250
+
+           Input Vector Glyph
+
+     - .. figure:: ../../examples/clipfont/target='./data/ch1.svg
+           :width: 250
+
+           Final Vector Glyph

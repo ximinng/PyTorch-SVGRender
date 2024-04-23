@@ -105,10 +105,10 @@ if __name__ == '__main__':
     
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'quick' --result "./quick_test_PyTorchSVGRender/" 
     
-    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipdraw' --result "./test_clipdraw"
-    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'styleclipdraw' --result "./test_styleclipdraw"
-    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipasso' --result "./test_clipasso"
-    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipfont' --result "./test_clipfont"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipdraw' --result "./test_PyTorchSVGRender/test_clipdraw"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'styleclipdraw' --result "./test_PyTorchSVGRender/test_styleclipdraw"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipasso' --result "./test_PyTorchSVGRender/test_clipasso"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipfont' --result "./test_PyTorchSVGRender/test_clipfont"
     """
 
     test_PyTorchSVGRender(args)
