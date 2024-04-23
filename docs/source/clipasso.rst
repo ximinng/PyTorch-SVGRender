@@ -57,7 +57,7 @@ sketch format:
 
            Vector Sketch, Number of strokes: 16
 
-       - .. figure:: ../../examples/clipasso/horse-24paths.svg
-            :width: 224
+      - .. figure:: ../../examples/clipasso/horse-24paths.svg
+           :width: 224
 
            Vector Sketch, Number of strokes: 24
