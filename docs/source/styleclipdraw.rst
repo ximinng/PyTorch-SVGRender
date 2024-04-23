@@ -23,7 +23,7 @@ Synthesize *A 3D rendering of a temple* in the style of *Starry Night by Vincent
 
 **Result**:
 
-.. list-table:: Fig 1. text prompt: "A 3D rendering of a temple"
+.. list-table:: Fig 1. text prompt:"A 3D rendering of a temple"
 
     * - .. figure:: ../../data/starry.png
            :width: 224
@@ -35,6 +35,7 @@ Synthesize *A 3D rendering of a temple* in the style of *Starry Night by Vincent
 
            SVG, Number of strokes: 512, style_weight: 2.0
 
+
 **Example 2: Self, Starry style**
 
 .. code-block:: console
@@ -43,7 +44,7 @@ Synthesize *A 3D rendering of a temple* in the style of *Starry Night by Vincent
 
 **Result**:
 
-.. list-table:: Fig 2. text prompt: "self"
+.. list-table:: Fig 2. text prompt:"self"
 
     * - .. figure:: ../../data/starry.png
            :width: 224
