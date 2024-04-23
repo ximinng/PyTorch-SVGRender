@@ -28,13 +28,16 @@ Convert a raster image from the original PNG format to vector format:
 .. list-table:: Fig 1. Rendering Result
 
     * - .. figure:: ../../data/fallingwater.png
+           :width: 300
 
            input raster image
 
       - .. figure:: ../../examples/diffvg/fallingwater_512paths.svg
+           :width: 300
 
            vectorization result, 512 paths
 
       - .. figure:: ../../examples/diffvg/fallingwater_1024paths.svg
+           :width: 300
 
            vectorization result, 1024 paths
