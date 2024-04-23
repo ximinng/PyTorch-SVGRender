@@ -20,7 +20,7 @@ performance. Project page: https://github.com/songyiren98/CLIPFont`
 
 **Example 1: alphabet**
 
-StyleCLIPDraw styles vector fonts according to text prompts.
+CLIPFont styles vector fonts according to text prompts.
 
 Style the *alphabet* in the style of *Starry Night by Vincent van Gogh*:
 
@@ -37,10 +37,11 @@ Style the *alphabet* in the style of *Starry Night by Vincent van Gogh*:
 
            Input Vector Glyph
 
-     - .. figure:: ../../examples/clipfont/alphabet1_VanGogh.svg
+      - .. figure:: ../../examples/clipfont/alphabet1_VanGogh.svg
            :width: 250
 
            Final Vector Glyph
+
 
 **Example 2: Chinese**
 
@@ -57,7 +58,7 @@ Style the *alphabet* in the style of *Starry Night by Vincent van Gogh*:
 
            Input Vector Glyph
 
-     - .. figure:: ../../examples/clipfont/target='./data/ch1.svg
+      - .. figure:: ../../examples/clipfont/target='./data/ch1.svg
            :width: 250
 
            Final Vector Glyph
