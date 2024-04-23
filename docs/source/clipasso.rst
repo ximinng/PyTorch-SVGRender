@@ -47,17 +47,17 @@ sketch format:
 
            Input image
 
-     - .. figure:: ../../examples/clipasso/horse-8paths.svg
+      - .. figure:: ../../examples/clipasso/horse-8paths.svg
            :width: 224
 
            Vector Sketch, Number of strokes: 8
 
-     - .. figure:: ../../examples/clipasso/horse-16paths.svg
+      - .. figure:: ../../examples/clipasso/horse-16paths.svg
            :width: 224
 
            Vector Sketch, Number of strokes: 16
 
-      - .. figure:: ../../examples/clipasso/horse-24paths.svg
-           :width: 224
+       - .. figure:: ../../examples/clipasso/horse-24paths.svg
+            :width: 224
 
            Vector Sketch, Number of strokes: 24

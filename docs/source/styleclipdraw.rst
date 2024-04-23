@@ -30,8 +30,8 @@ Synthesize *A 3D rendering of a temple* in the style of *Starry Night by Vincent
 
            Style image
 
-     - .. figure:: ../../examples/styleclipdraw/3D_temple_starry.svg
-          :width: 224
+      - .. figure:: ../../examples/styleclipdraw/3D_temple_starry.svg
+           :width: 224
 
            SVG, Number of strokes: 512, style_weight: 2.0
 
@@ -51,7 +51,7 @@ Synthesize *A 3D rendering of a temple* in the style of *Starry Night by Vincent
 
            Style image
 
-     - .. figure:: ../../examples/styleclipdraw/self_starry.svg
-          :width: 224
+      - .. figure:: ../../examples/styleclipdraw/self_starry.svg
+           :width: 224
 
            SVG, Number of strokes: 512, style_weight: 2.0
