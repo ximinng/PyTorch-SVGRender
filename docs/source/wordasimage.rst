@@ -28,9 +28,9 @@ Inject the meaning of the word *bunny* into the 'Y' in the word 'BUNNY':
     * - .. figure:: ../../examples/wordasimage/KaushanScript-Regular_BUNNY_scaled.svg
            :width: 250
 
-           Word: BUNNY, Font: KaushanScript-Regular.tff
+           **Word:** BUNNY, **Font:** KaushanScript-Regular.tff
 
-      - .. figure:: ../../examples/wordasimage/wordasimage_BUNNY_Y.svg
+      - .. figure:: ../../examples/wordasimage/BUNNY_Y.svg
            :width: 250
 
            Final Vector Glyph

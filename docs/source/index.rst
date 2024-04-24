@@ -35,7 +35,7 @@ Table of Contents
     Type: **Text-and-Ref-to-SVG**
 
 :doc:`CLIPFont <clipfont>`
-    Type: **Text-and-SVG-to-Glyph**
+    Type: **Text-and-Glyph-to-Glyph**
 
 :doc:`CLIPasso <clipasso>`
     Type: **Img-to-Sketch**
@@ -50,7 +50,7 @@ Table of Contents
     Type: **Text-to-Sketch**
 
 :doc:`Word-As-Image <wordasimage>`
-    Type: **Text-and-SVG-to-SVG**
+    Type: **Text-and-Glyph-to-Glyph**
 
 :doc:`SVGDreamer <svgdreamer>`
     Type: **Text-to-SVG**

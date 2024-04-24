@@ -45,7 +45,16 @@ def test_PyTorchSVGRender(args):
         "python svg_render.py x=clipfont " + "prompt='Starry Night by Vincent van gogh'" + " target='./data/ch1.svg'",
     ]
     run_svgdreamer = [
-        "python svg_render.py x=svgdreamer " + "prompt='A colorful German shepherd in vector art. tending on artstation.'" + " save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2"
+        "python svg_render.py x=svgdreamer " + "prompt='A colorful German shepherd in vector art. tending on artstation.'" + " x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 save_step=50",
+        "python svg_render.py x=svgdreamer " + "prompt='Sydney Opera House. oil painting. by Van Gogh.'" + " x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 save_step=50",
+        "python svg_render.py x=svgdreamer " + "prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg.'" + " x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 save_step=50",
+        "python svg_render.py x=svgdreamer " + "prompt='Darth vader with lightsaber. ultrarealistic.'" + " x.style='pixelart' x.grid=30 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 save_step=50",
+        "python svg_render.py x=svgdreamer " + "prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.'" + " x.style = 'sketch' x.num_paths=128 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 save_step=50",
+        "python svg_render.py x=svgdreamer " + "prompt='A picture of a bald eagle. low-ploy. polygon'" + " x.style='low-poly' x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 save_step=50",
+        "python svg_render.py x=svgdreamer " + "prompt='A picture of a scarlet macaw. low-ploy. polygon'" + " x.style='low-poly' x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 save_step=50",
+        "python svg_render.py x=svgdreamer " + "prompt='a phoenix coming out of the fire drawing. lineal color. trending on artstation.'" + " x.style='painting' x.num_paths=384 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 save_step=50",
+        "python svg_render.py x=svgdreamer " + "prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.'" + " x.style='painting x.num_paths=1500 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 save_step=50",
+        "python svg_render.py x=svgdreamer " + "prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.'" + " x.style='ink' x.num_paths=128 x.width=6 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 x.guidance.t_schedule='max_0.5_2000' save_step=50"
     ]
     run_vectorfusion = [
         "python svg_render.py x=vectorfusion x.style='iconography' " + "prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'"
@@ -77,27 +86,29 @@ def test_PyTorchSVGRender(args):
     }
 
     # test
+    seed_str = "" if args.seed is None else f"{args.seed}"
     if args.which == 'all':  # test all scripts
         print(f"=> Testing All...")
         for test_list in test_dict.values():
             for test_cmd in test_list:
-                subprocess.call(['bash', '-c', test_cmd + result_path])
+                subprocess.call(['bash', '-c', test_cmd + result_path + seed_str])
     elif args.which == 'quick':  # quick testing: test only one script per method
         print(f"=> Quick Testing...")
         for test_list in test_dict.values():
-            subprocess.call(['bash', '-c', test_list[0] + result_path])
+            subprocess.call(['bash', '-c', test_list[0] + result_path + seed_str])
     else:  # test all scripts for a method
         print(f"=> Testing: {args.which}... \n")
         for test_cmd in test_dict[f"{args.which}"]:
-            subprocess.call(['bash', '-c', test_cmd + result_path])
+            subprocess.call(['bash', '-c', test_cmd + result_path + seed_str])
 
     print("all tests passed")
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--which", type=str, default='all', help='test method')
-    parser.add_argument("--result", type=str, default='', help='./test_PyTorchSVGRender/')
+    parser.add_argument("--which", type=str, default='all', help='test method.')
+    parser.add_argument("--result", type=str, default='./test_PyTorchSVGRender/', help='saving path.')
+    parser.add_argument("--seed", type=int, default=None, help='random seed')
     args = parser.parse_args()
 
     """
@@ -109,6 +120,7 @@ if __name__ == '__main__':
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'styleclipdraw' --result "./test_PyTorchSVGRender/test_styleclipdraw"
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipasso' --result "./test_PyTorchSVGRender/test_clipasso"
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipfont' --result "./test_PyTorchSVGRender/test_clipfont"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'svgdreamer' --result "./test_PyTorchSVGRender/test_svgdreamer/"
     """
 
     test_PyTorchSVGRender(args)

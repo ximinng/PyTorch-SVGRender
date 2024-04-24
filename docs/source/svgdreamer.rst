@@ -14,7 +14,7 @@ The abstract from the paper is:
 Examples of VPSD
 ^^^^^^^^^^^
 
-SVGDreamer generates various styles of SVG based on text prompts. It supports the use of six vector primitives, including Iconography, Sketch, Pixel Art, Low-Poly, Painting, and Ink and Wash.
+SVGDreamer generates various styles of SVG based on text prompts. It supports the use of six vector primitives, including **Iconography, Sketch, Pixel Art, Low-Poly, Painting, and Ink and Wash**.
 
 **Note: The examples provided here are based on VPSD only.**
 
@@ -25,15 +25,31 @@ Synthesize the SVGs of the Sydney Opera House in the style of Van Gogh's oil pai
 
 .. code-block:: console
 
-   $ python svg_render.py x=svgdreamer prompt='Sydney Opera House. oil painting. by Van Gogh' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/SydneyOperaHouse'
+   $ python svg_render.py x=svgdreamer prompt='Sydney Opera House. oil painting. by Van Gogh' save_step=50 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/SydneyOperaHouse'
 
-You will get the following result:
+**Result**:
 
-.. image:: ../../examples/svgdreamer/icon_sydney_opera_house_1.png
-.. image:: ../../examples/svgdreamer/icon_sydney_opera_house_2.png
-.. raw:: html
+.. list-table:: Fig 1. The oil paintings of Sydney Opera House by Van Gogh's. iconography. Number of vector particles: 4
 
-    <p style="text-align: center;"><strong>Fig. </strong>The oil paintings of Sydney Opera House by Van Gogh's. iconography. Number of vector particles: 6</p>
+    * - .. figure:: ../../examples/svgdreamer/Iconography-SydneyOperaHouse/p_0.svg
+           :width: 150
+
+           particle 1
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-SydneyOperaHouse/p_1.svg
+           :width: 150
+
+           particle 2
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-SydneyOperaHouse/p_2.svg
+           :width: 150
+
+           particle 3
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-SydneyOperaHouse/p_3.svg
+           :width: 150
+
+           particle 4
 
 ------------
 
@@ -41,30 +57,31 @@ Synthesize a German shepherd in vector art,
 
 .. code-block:: console
 
-   $ python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd'
+   $ python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=50 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd'
 
-You will get the following result:
+**Result**:
 
-.. image:: ../../examples/svgdreamer/icon_GermanShepherd_1.png
-.. raw:: html
+.. list-table:: Fig 2. German shepherd in vector art. iconography. Number of vector particles: 4
 
-    <p style="text-align: center;"><strong>Fig. </strong>German shepherd in vector art. iconography. Number of vector particles: 6</p>
+    * - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_0.svg
+           :width: 150
 
-------------
+           particle 1
 
-Synthesize a ship on the high sea,
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_1.svg
+           :width: 150
 
-.. code-block:: console
+           particle 2
 
-   $ python svg_render.py x=svgdreamer prompt='Seascape. Ship on the high seas. Storm. High waves. Colored ink by Mikhail Garmash. Louis Jover. Victor Cheleg' save_step=60 x.guidance.n_particle=4 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=4 x.num_paths=512 result_path='./svgdreamer/ship'
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_2.svg
+           :width: 150
 
-You will get the following result:
+           particle 3
 
-.. image:: ../../examples/svgdreamer/icon_ship_1.png
-.. image:: ../../examples/svgdreamer/icon_ship_randT_1.png
-.. raw:: html
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_3.svg
+           :width: 150
 
-    <p style="text-align: center;"><strong>Fig. </strong>A ship on the high sea. iconography. Number of vector particles: 4</p>
+           particle 4
 
 Sketch
 """"""""""""
@@ -89,7 +106,7 @@ Synthesize the free-hand sketches of elephants,
 
 .. code-block:: console
 
-   $ python svg_render.py x=svgdreamer prompt='a freehand drawing of an elephant. white background. minimal 2d line drawing. trending on artstation.' x.style='sketch' save_step=60 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=256 x.guidance.t_schedule='randint' result_path='./svgdreamer/sketch_elephant' multirun=True
+   $ python svg_render.py x=svgdreamer prompt='a freehand drawing of an elephant. white background. minimal 2d line drawing. trending on artstation.' x.style='sketch' save_step=60 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=256 x.guidance.t_schedule='randint' result_path='./svgdreamer/sketch_elephant'
 
 You will get the following result:
 
@@ -105,7 +122,7 @@ Synthesize German shepherds in vector art,
 
 .. code-block:: console
 
-   $ python svg_render.py x=svgdreamer prompt='Darth vader with lightsaber. ultrarealistic.' x.style='pixelart' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/DarthVader'
+   $ python svg_render.py x=svgdreamer prompt='Darth vader with lightsaber. ultrarealistic.' x.style='pixelart' x.grid=30 save_step=50 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 x.guidance.num_iter=1000 result_path='./svgdreamer/DarthVader'
 
 You will get the following result:
 
