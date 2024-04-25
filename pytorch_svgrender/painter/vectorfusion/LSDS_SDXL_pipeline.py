@@ -320,17 +320,17 @@ class LSDSSDXLPipeline(StableDiffusionXLPipeline):
                                     negative_prompt: Union[List, str] = None,
                                     negative_prompt_2: Optional[Union[List, str]] = None,
                                     guidance_scale: float = 100,
+                                    input_augment: bool = True,
                                     as_latent: bool = False,
                                     grad_scale: float = 1,
                                     t_range: Union[List[float], Tuple[float]] = (0.05, 0.95),
                                     original_size: Optional[Tuple[int, int]] = None,
-                                    crops_coords_top_left: Tuple[int, int] = (0, 0),
-                                    target_size: Optional[Tuple[int, int]] = None):
+                                    crops_coords_top_left: Tuple[int, int] = (0, 0)):
         height = height or self.unet.config.sample_size * self.vae_scale_factor
         width = width or self.unet.config.sample_size * self.vae_scale_factor
 
         original_size = original_size or (height, width)
-        target_size = target_size or (height, width)
+        target_size = (im_size, im_size)
 
         batch_size = 1 if isinstance(prompt, str) else len(prompt)
 
@@ -340,7 +340,7 @@ class LSDSSDXLPipeline(StableDiffusionXLPipeline):
         alphas = self.scheduler.alphas_cumprod.to(self.device)  # for convenience
 
         # input augmentation
-        pred_rgb_a = self.x_augment(pred_rgb, im_size)
+        pred_rgb_a = self.x_augment(pred_rgb, im_size) if input_augment else pred_rgb
 
         # interp to im_size x im_size to be fed into vae.
         if as_latent:

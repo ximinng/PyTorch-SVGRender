@@ -149,7 +149,7 @@ class VectorFusionPipeline(ModelState):
         for i in range(self.x_cfg.K):
             height = width = model2res(self.x_cfg.model_id)
             outputs = self.diffusion(prompt=[text_prompt],
-                                     negative_prompt=self.args.neg_prompt,
+                                     negative_prompt=[self.args.neg_prompt],
                                      height=height,
                                      width=width,
                                      num_images_per_prompt=1,
@@ -344,11 +344,13 @@ class VectorFusionPipeline(ModelState):
                     raster_img,
                     im_size=self.x_cfg.sds.im_size,
                     prompt=[text_prompt],
-                    negative_prompt=self.args.neg_prompt,
+                    negative_prompt=[self.args.neg_prompt],
                     guidance_scale=self.x_cfg.sds.guidance_scale,
+                    input_augment=self.x_cfg.sds.x_aug,
                     grad_scale=self.x_cfg.sds.grad_scale,
                     t_range=list(self.x_cfg.sds.t_range),
                 )
+
                 # Xing Loss for Self-Interaction Problem
                 L_add = torch.tensor(0.)
                 if self.style == "iconography":

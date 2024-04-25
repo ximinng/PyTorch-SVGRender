@@ -227,6 +227,7 @@ class LSDSPipeline(StableDiffusionPipeline):
                                     prompt: Union[List, str],
                                     negative_prompt: Union[List, str] = None,
                                     guidance_scale: float = 100,
+                                    input_augment: bool = True,
                                     as_latent: bool = False,
                                     grad_scale: float = 1,
                                     t_range: Union[List[float], Tuple[float]] = (0.05, 0.95)):
@@ -236,7 +237,7 @@ class LSDSPipeline(StableDiffusionPipeline):
         alphas = self.scheduler.alphas_cumprod.to(self.device)  # for convenience
 
         # input augmentation
-        pred_rgb_a = self.x_augment(pred_rgb, im_size)
+        pred_rgb_a = self.x_augment(pred_rgb, im_size) if input_augment else pred_rgb
 
         # the input is intercepted to im_size x im_size and then fed to the vae
         if as_latent:
