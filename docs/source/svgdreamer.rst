@@ -51,7 +51,7 @@ Synthesize a German shepherd in vector art,
 
            particle 4
 
-To save GPU VRAM, fp16 optimization is supported,
+To save GPU VRAM, fp16 optimization is supported via `state.mprec='fp16'`,
 
 .. code-block:: console
 
@@ -59,37 +59,39 @@ To save GPU VRAM, fp16 optimization is supported,
 
 **Result**:
 
-.. list-table:: Fig 2. German shepherd in vector art. iconography. Number of vector particles: 4
+.. list-table:: Fig 2. FP16 optimization. iconography. Number of vector particles: 6
 
     * - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_0.svg
-           :width: 150
+           :width: 200
 
            particle 1
 
       - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_1.svg
-           :width: 150
+           :width: 200
 
            particle 2
 
       - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_2.svg
-           :width: 150
+           :width: 200
 
            particle 3
 
       - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_3.svg
-           :width: 150
+           :width: 200
 
            particle 4
 
       - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_4.svg
-           :width: 150
+           :width: 200
 
            particle 5
 
       - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_5.svg
-           :width: 150
+           :width: 200
 
            particle 6
+
+------------
 
 Synthesize the SVGs of the Sydney Opera House in the style of Van Gogh's oil paintings,
 
@@ -121,7 +123,6 @@ Synthesize the SVGs of the Sydney Opera House in the style of Van Gogh's oil pai
 
            particle 4
 
-------------
 
 Sketch
 """"""""""""
@@ -132,43 +133,36 @@ Synthesize the free-hand sketches of the Lamborghini,
 
    $ python svg_render.py x=svgdreamer prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./svgdreamer/Lamborghini'
 
-You will get the following result:
-
-.. image:: ../../examples/svgdreamer/sketch_Lamborghini_1.png
-.. image:: ../../examples/svgdreamer/sketch_Lamborghini_randT_1.png
-.. raw:: html
-
-    <p style="text-align: center;"><strong>Fig 3. </strong>Lamborghini. sketch. Number of vector particles: 6</p>
 
 Pixel Art
 """"""""""""
 
-Synthesize German shepherds in vector art,
+The DarthVader with lightsaber in pixel art,
 
 .. code-block:: console
 
-   $ python svg_render.py x=svgdreamer prompt='Darth vader with lightsaber. ultrarealistic.' x.style='pixelart' x.grid=30 save_step=50 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 x.guidance.num_iter=1000 result_path='./svgdreamer/DarthVader'
+   $ python svg_render.py x=svgdreamer prompt='Darth vader with lightsaber. ultrarealistic.' x.style='pixelart' x.grid=30 save_step=50 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 x.guidance.num_iter=1000 result_path='./svgdreamer/DarthVader' seed=302819
 
 **Result**:
 
 .. list-table:: Fig 4. Darth vader. pixel art. Number of vector particles: 4
 
-    * - .. figure:: ../../examples/svgdreamer/PixelArt-DarthVader/p0.svg
+    * - .. figure:: ../../examples/svgdreamer/PixelArt-DarthVader/p_0.svg
            :width: 150
 
            particle 1
 
-      - .. figure:: ../../examples/svgdreamer/PixelArt-DarthVader/p1.svg
+      - .. figure:: ../../examples/svgdreamer/PixelArt-DarthVader/p_1.svg
            :width: 150
 
            particle 2
 
-      - .. figure:: ../../examples/svgdreamer/PixelArt-DarthVader/p2.svg
+      - .. figure:: ../../examples/svgdreamer/PixelArt-DarthVader/p_2.svg
            :width: 150
 
            particle 3
 
-      - .. figure:: ../../examples/svgdreamer/PixelArt-DarthVader/p3.svg
+      - .. figure:: ../../examples/svgdreamer/PixelArt-DarthVader/p_3.svg
            :width: 150
 
            particle 4
@@ -279,13 +273,6 @@ Synthesize self-portraits of Van Gogh,
 
    $ python svg_render.py x=svgdreamer prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait'
 
-You will get the following result:
-
-.. image:: ../../examples/svgdreamer/painting_VanGogh_portrait.png
-.. raw:: html
-
-    <p style="text-align: center;"><strong>Fig. </strong>self-portraits of Van Gogh. Painting. Number of vector particles: 6</p>
-
 Ink and Wash
 """"""""""""
 
@@ -295,10 +282,26 @@ Synthesize the Big Wild Goose Pagoda,
 
    $ python svg_render.py x=svgdreamer prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.' x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='max_0.5_2000' x.num_paths=128 x.width=6 result_path='./svgdreamer/BigWildGoosePagoda'
 
-You will get the following result:
+**Result**:
 
-.. image:: ../../examples/svgdreamer/ink_BigWildGoosePagoda_1.png
-.. image:: ../../examples/svgdreamer/ink_BigWildGoosePagoda_2.png
-.. raw:: html
+.. list-table:: Fig 8. Big Wild Goose Pagoda. Ink and Wash. Number of vector particles: 4
 
-    <p style="text-align: center;"><strong>Fig. </strong>Big Wild Goose Pagoda. Ink and Wash. Number of vector particles: 6</p>
+    * - .. figure:: ../../examples/svgdreamer/Ink-BigWildGoosePagoda/p_0.svg
+           :width: 150
+
+           particle 1
+
+      - .. figure:: ../../examples/svgdreamer/Ink-BigWildGoosePagoda/p_1.svg
+           :width: 150
+
+           particle 2
+
+      - .. figure:: ../../examples/svgdreamer/Ink-BigWildGoosePagoda/p_2.svg
+           :width: 150
+
+           particle 3
+
+      - .. figure:: ../../examples/svgdreamer/Ink-BigWildGoosePagoda/p_3.svg
+           :width: 150
+
+           particle 4
