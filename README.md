@@ -221,6 +221,8 @@ python svg_render.py x=stylediffsketcher "prompt='The French Revolution. highly 
 ```shell
 # Inject the meaning of the word bunny into the 'Y' in the word 'BUNNY'
 python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'
+# Change font: 'LuckiestGuy-Regular', default: 'KaushanScript-Regular'
+python svg_render.py x=wordasimage x.word='DRAGONFLY' prompt='Dragonfly' x.optim_letter='Y' x.font='LuckiestGuy-Regular'
 ```
 
 ### 2. SDS Loss based Approach

@@ -64,7 +64,10 @@ def test_PyTorchSVGRender(args):
         "python svg_render.py x=diffsketcher " + "prompt='a photo of Sydney opera house'" + " x.token_ind=5 x.optim_width=True x.optim_rgba=True x.optim_opacity=False seed=8019"
     ]
     run_wordasimg = [
-        "python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'"
+        "python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter='Y'",
+        "python svg_render.py x=wordasimage x.word='PANTS' prompt='PANTS' x.optim_letter='P'",
+        "python svg_render.py x=wordasimage x.word='FROG' prompt='FROG' x.optim_letter='G'",
+        "python svg_render.py x=wordasimage x.word='DRAGONFLY' prompt='Dragonfly' x.optim_letter='Y' x.font='LuckiestGuy-Regular'"
     ]
 
     # test_sequence = [
@@ -121,6 +124,7 @@ if __name__ == '__main__':
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipasso' --result "./test_PyTorchSVGRender/test_clipasso"
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipfont' --result "./test_PyTorchSVGRender/test_clipfont"
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'svgdreamer' --result "./test_PyTorchSVGRender/test_svgdreamer/"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'wordasimg' --result "./test_PyTorchSVGRender/test_wordasimg/"
     """
 
     test_PyTorchSVGRender(args)

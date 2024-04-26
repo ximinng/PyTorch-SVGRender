@@ -119,7 +119,7 @@ class WordAsImagePipeline(ModelState):
                     raster_img,
                     im_size=self.x_cfg.sds.im_size,
                     prompt=[prompt],
-                    negative_prompt=self.args.neg_prompt,
+                    negative_prompt=[self.args.neg_prompt],
                     guidance_scale=self.x_cfg.sds.guidance_scale,
                     grad_scale=self.x_cfg.sds.grad_scale,
                     t_range=list(self.x_cfg.sds.t_range),

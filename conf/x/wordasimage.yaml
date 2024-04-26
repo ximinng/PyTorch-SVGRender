@@ -17,7 +17,7 @@ lr:
 
 # font
 font: 'KaushanScript-Regular'
-font_path: "./assets/fonts/${x.font}.ttf"
+font_path: "./data/fonts/${x.font}.ttf"
 level_of_cc: 1 # 0 - original number of cc / 1 - recommended / 2 - more control points
 
 # diffusion
