@@ -29,7 +29,7 @@ class VectorizedParticleSDSPipeline(torch.nn.Module):
 
         pipe_kwargs = {
             "device": self.device,
-            "torch_dtype": torch.float32,
+            "torch_dtype": torch.float16 if args.state.mprec == 'fp16' else torch.float32,
             "local_files_only": not diffuser_cfg.download,
             "force_download": diffuser_cfg.force_download,
             "resume_download": diffuser_cfg.resume_download,
@@ -113,6 +113,7 @@ class VectorizedParticleSDSPipeline(torch.nn.Module):
         self.t_schedule: str = guidance_cfg.t_schedule
         self.t_range = list(guidance_cfg.t_range)
         print(
+            f"diffusion torch_dtype: {pipe_kwargs['torch_dtype']} \n",
             f'n_particles: {guidance_cfg.n_particle}, '
             f'enhance_particles: {guidance_cfg.particle_aug}, '
             f'n_particles of score: {self.vsd_n_particle}, '
@@ -517,7 +518,6 @@ class VectorizedParticleSDSPipeline(torch.nn.Module):
         else:
             pred_rgb_ = F.interpolate(pred_rgb, (512, 512), mode='bilinear', align_corners=False)
             # encode image into latents with vae, requires grad!
-            # latents = self.encode2latent(pred_rgb_)
             latent_list = [self.encode2latent(pred_rgb_[i].unsqueeze(0)) for i in range(bz)]
             latents = torch.cat(latent_list, dim=0)
             latents = latents.to(self.device)
@@ -562,7 +562,7 @@ class VectorizedParticleSDSPipeline(torch.nn.Module):
         noise_pred_est = self.get_noise_map(noise_pred_est, self.guidance_scale_lora, use_cfg=False)
 
         # w(t), sigma_t^2
-        w = (1 - self.alphas[self.t])
+        w = (1 - self.alphas[self.t]).to(pred_rgb.dtype)
         grad = grad_scale * w * (noise_pred_pretrain - noise_pred_est.detach())
         grad = torch.nan_to_num(grad)
 

@@ -21,6 +21,76 @@ SVGDreamer generates various styles of SVG based on text prompts. It supports th
 Iconography
 """"""""""""
 
+Synthesize a German shepherd in vector art,
+
+.. code-block:: console
+
+   $ python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=50 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd'
+
+**Result**:
+
+.. list-table:: Fig 1. German shepherd in vector art. iconography. Number of vector particles: 4
+
+    * - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_0.svg
+           :width: 150
+
+           particle 1
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_1.svg
+           :width: 150
+
+           particle 2
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_2.svg
+           :width: 150
+
+           particle 3
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_3.svg
+           :width: 150
+
+           particle 4
+
+To save GPU VRAM, fp16 optimization is supported,
+
+.. code-block:: console
+
+   $ python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' state.mprec='fp16' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd-fp16'
+
+**Result**:
+
+.. list-table:: Fig 2. German shepherd in vector art. iconography. Number of vector particles: 4
+
+    * - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_0.svg
+           :width: 150
+
+           particle 1
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_1.svg
+           :width: 150
+
+           particle 2
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_2.svg
+           :width: 150
+
+           particle 3
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_3.svg
+           :width: 150
+
+           particle 4
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_4.svg
+           :width: 150
+
+           particle 5
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd-fp16/p_5.svg
+           :width: 150
+
+           particle 6
+
 Synthesize the SVGs of the Sydney Opera House in the style of Van Gogh's oil paintings,
 
 .. code-block:: console
@@ -29,7 +99,7 @@ Synthesize the SVGs of the Sydney Opera House in the style of Van Gogh's oil pai
 
 **Result**:
 
-.. list-table:: Fig 1. The oil paintings of Sydney Opera House by Van Gogh's. iconography. Number of vector particles: 4
+.. list-table:: Fig 3. The oil paintings of Sydney Opera House by Van Gogh's. iconography. Number of vector particles: 4
 
     * - .. figure:: ../../examples/svgdreamer/Iconography-SydneyOperaHouse/p_0.svg
            :width: 150
@@ -52,36 +122,6 @@ Synthesize the SVGs of the Sydney Opera House in the style of Van Gogh's oil pai
            particle 4
 
 ------------
-
-Synthesize a German shepherd in vector art,
-
-.. code-block:: console
-
-   $ python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=50 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd'
-
-**Result**:
-
-.. list-table:: Fig 2. German shepherd in vector art. iconography. Number of vector particles: 4
-
-    * - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_0.svg
-           :width: 150
-
-           particle 1
-
-      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_1.svg
-           :width: 150
-
-           particle 2
-
-      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_2.svg
-           :width: 150
-
-           particle 3
-
-      - .. figure:: ../../examples/svgdreamer/Iconography-GermanShepherd/p_3.svg
-           :width: 150
-
-           particle 4
 
 Sketch
 """"""""""""

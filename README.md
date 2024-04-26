@@ -175,19 +175,19 @@ including Iconography, Sketch, Pixel Art, Low-Poly, Painting, and Ink and Wash.
 ```shell
 # primitive: iconography
 ## 1. German shepherd
-python svg_render.py x=svgdreamer "prompt='A colorful German shepherd in vector art. tending on artstation.'" save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd'
+python svg_render.py x=svgdreamer "prompt='A colorful German shepherd in vector art. tending on artstation.'" save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd'
 ## 2. sydney opera house
-python svg_render.py x=svgdreamer "prompt='Sydney opera house. oil painting. by Van Gogh'" save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/SydneyOperaHouse'
+python svg_render.py x=svgdreamer "prompt='Sydney opera house. oil painting. by Van Gogh'" save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='./svgdreamer/SydneyOperaHouse'
 # primitive: low-ploy
-python svg_render.py x=svgdreamer "prompt='A picture of a bald eagle. low-ploy. polygon'" x.style='low-poly' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.grid=30 x.guidance.num_iter=1000 result_path='./svgdreamer/BaldEagle'
+python svg_render.py x=svgdreamer "prompt='A picture of a bald eagle. low-ploy. polygon'" x.style='low-poly' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.grid=30 x.guidance.num_iter=1000 result_path='./svgdreamer/BaldEagle'
 # primitive: pixel-art
-python svg_render.py x=svgdreamer "prompt='Darth vader with lightsaber. ultrarealistic. pixelart. trending on artstation.'" x.style='pixelart' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.num_iter=1000 result_path='./svgdreamer/DarthVader'
+python svg_render.py x=svgdreamer "prompt='Darth vader with lightsaber. ultrarealistic. pixelart. trending on artstation.'" x.style='pixelart' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.num_iter=1000 result_path='./svgdreamer/DarthVader'
 # primitive: painting
 python svg_render.py x=svgdreamer "prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.'" x.style='painting' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait'
 # primitive: sketch
-python svg_render.py x=svgdreamer "prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.'" x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=128 result_path='./svgdreamer/Lamborghini'
+python svg_render.py x=svgdreamer "prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.'" x.style='sketch' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=128 result_path='./svgdreamer/Lamborghini'
 # primitive: ink and wash
-python svg_render.py x=svgdreamer "prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.'" x.style='ink' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=128 x.width=6 result_path='./svgdreamer/BigWildGoosePagoda'
+python svg_render.py x=svgdreamer "prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.'" x.style='ink' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=128 x.width=6 result_path='./svgdreamer/BigWildGoosePagoda'
 ```
 
 **VectorFusion** synthesizes SVGs in various styles based on text prompts:
@@ -237,7 +237,7 @@ We only compare the performance of SDS, which means that no other loss is used:
 # SDS loss
 python svg_render.py x=vectorfusion "prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'"
 # Input Augmentation SDS loss (LSDS loss)
-python svg_render.py x=vectorfusion x.style='sketch' "prompt='an elephant. minimal 2d line drawing. trending on artstation.'"
+python svg_render.py x=vectorfusion x.style='sketch' "prompt='an elephant. minimal 2d line drawing. trending on artstation.'" x.skip_live=True
 # Input Augmentation SDS loss (ASDS loss)
 python svg_render.py x=diffsketcher "prompt='an elephant. minimal 2d line drawing. trending on artstation.'" x.token_ind=2 x.sds.grad_scale=1 x.sds.num_aug=4 x.clip.vis_loss=0 x.perceptual.coeff=0 x.opacity_delta=0.3 
 # Vectorized Particle-based Score Distillation (VPSD loss)
@@ -260,6 +260,7 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 <h2 align="center">🗒 TODO</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
+- [x] SVGDreamer supports fp16 optimization.
 - [x] integrated SVGDreamer.
 
 <h2 align="center">🤝 Contribution</h2>

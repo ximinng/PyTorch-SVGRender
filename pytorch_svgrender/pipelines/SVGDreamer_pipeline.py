@@ -211,7 +211,7 @@ class SVGDreamerPipeline(ModelState):
                     self.frame_idx += 1
 
                 L_guide, grad, latents, t_step = self.pipeline.variational_score_distillation(
-                    raster_imgs,
+                    raster_imgs.to(self.weight_dtype),
                     self.step,
                     prompt=[text_prompt],
                     negative_prompt=self.args.neg_prompt,
