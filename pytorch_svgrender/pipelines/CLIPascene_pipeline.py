@@ -16,6 +16,7 @@ from pytorch_svgrender.painter.clipascene.lama_utils import apply_inpaint
 from pytorch_svgrender.painter.clipascene.scripts_utils import read_svg
 from pytorch_svgrender.painter.clipascene.sketch_utils import plot_attn, get_mask_u2net, fix_image_scale
 from pytorch_svgrender.plt import plot_img, plot_couple
+from pytorch_svgrender.svgtools import merge_svg_files
 
 
 class CLIPascenePipeline(ModelState):
@@ -278,11 +279,16 @@ class CLIPascenePipeline(ModelState):
         mask = imageio.v2.imread(mask_path)
         mask = resize(mask, (output_size, output_size), anti_aliasing=False)
 
-        object_svg_path = foreground_output_dir / "best_iter.svg"
-        raster_o = read_svg(object_svg_path, resize_obj=1, params=params, multiply=1.8, device=device)
+        foreground_svg_path = foreground_output_dir / "best_iter.svg"
+        raster_o = read_svg(foreground_svg_path, resize_obj=1, params=params, multiply=1.8, device=device)
 
         background_svg_path = background_output_dir / "best_iter.svg"
         raster_b = read_svg(background_svg_path, resize_obj=0, params=params, multiply=1.8, device=device)
+
+        combine_svg_path = self.result_path / "combined.svg"
+        merge_svg_files(foreground_svg_path, background_svg_path, merge_type='simple',
+                        output_svg_path=combine_svg_path.as_posix(),
+                        out_size=(self.x_cfg.image_size, self.x_cfg.image_size))
 
         raster_b[mask == 1] = 1
         raster_b[raster_o != 1] = raster_o[raster_o != 1]

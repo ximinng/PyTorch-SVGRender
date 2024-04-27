@@ -138,11 +138,10 @@ python svg_render.py x=clipasso target='./data/horse.png'
 
 **CLIPascene** synthesizes vectorized sketches from images:
 
-**note:** first download the U2Net model `sh script/download_u2net.sh`, and make sure the `./data/background` folder and
-the `./data/scene` folder exist with target images.
+**note:** first download the U2Net model `sh script/download_u2net.sh`.
 
 ```shell
-python svg_render.py x=clipascene target='ballerina.png'
+python svg_render.py x=clipascene target='./data/ballerina.png'
 ```
 
 **CLIPDraw** synthesizes SVGs based on text prompts:
@@ -262,6 +261,7 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 <h2 align="center">🗒 TODO</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
+- [ ] SVG Layout Pipeline: Given words and layout attrs, returning layout in SVG format.
 - [x] SVGDreamer supports fp16 optimization.
 - [x] integrated SVGDreamer.
 

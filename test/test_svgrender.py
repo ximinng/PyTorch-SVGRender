@@ -25,7 +25,9 @@ def test_PyTorchSVGRender(args):
         "python svg_render.py x=clipasso target='./data/horse.png'" + " x.num_paths=24"
     ]
     run_clipascene = [
-        "python svg_render.py x=clipascene target='ballerina.png'"
+        "python svg_render.py x=clipascene target='./data/ballerina.png'",
+        "python svg_render.py x=clipascene target='./data/bull.png'",
+        "python svg_render.py x=clipascene target='./data/house.png'",
     ]
     run_clipdraw = [
         "python svg_render.py x=clipdraw " + "prompt='a photo of a cat'" + " seed=42",
@@ -125,6 +127,7 @@ if __name__ == '__main__':
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipfont' --result "./test_PyTorchSVGRender/test_clipfont"
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'svgdreamer' --result "./test_PyTorchSVGRender/test_svgdreamer/"
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'wordasimg' --result "./test_PyTorchSVGRender/test_wordasimg/"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipasene' --result "./test_PyTorchSVGRender/test_clipasene/"
     """
 
     test_PyTorchSVGRender(args)
