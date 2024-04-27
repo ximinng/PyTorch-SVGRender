@@ -48,7 +48,7 @@ Convert an image of *ballerina* from the original PNG format to an abstract sket
 
 .. list-table:: Fig 2. Rendering Result
 
-      - .. figure:: ../../examples/clipascene/ballerina/final_64.svg
+    * - .. figure:: ../../examples/clipascene/ballerina/final_64.svg
            :width: 200
 
            Final sketch
