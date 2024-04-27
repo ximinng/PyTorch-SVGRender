@@ -8,6 +8,8 @@ Welcome to PyTorch-SVGRender documentation!
 
     <p style="text-align: center;"><strong>Pytorch-SVGRender</strong> is the go-to library for state-of-the-art differentiable rendering methods for image vectorization.</p>
 
+PyTorch-SVGRender originated within academic research and has since undergone extensive development and consolidation through practical implementation,
+driven by the overarching objective of propelling advancements in the realm of vector graphics rendering.
 
 .. note::
 
@@ -22,38 +24,38 @@ Installation
 Table of Contents
 -----------
 
-:doc:`DiffVG <diffvg>`
+:doc:`DiffVG: Differentiable Vector Graphics Rasterization for Editing and Learning <diffvg>`
     Differentiable Vector Graphics Rasterization.
 
-:doc:`LIVE <live>`
-    Type: **Img-to-SVG**
+:doc:`CLIPDraw: Exploring Text-to-Drawing Synthesis through Language-Image Encoders <clipdraw>`
+    Task: **Text-to-SVG**
 
-:doc:`CLIPDraw <clipdraw>`
-    Type: **Text-to-SVG**
+:doc:`StyleCLIPDraw: Coupling Content and Style in Text-to-Drawing Translation <styleclipdraw>`
+    Task: **Text-and-Img-to-SVG**
 
-:doc:`StyleCLIPDraw <styleclipdraw>`
-    Type: **Text-and-Ref-to-SVG**
+:doc:`LIVE: Towards Layer-wise Image Vectorization <live>`
+    Task: **Img-to-SVG**
 
-:doc:`CLIPFont <clipfont>`
-    Type: **Text-and-Glyph-to-Glyph**
+:doc:`CLIPFont: Texture Guided Vector WordArt Generation <clipfont>`
+    Task: **Text-and-Glyph-to-Glyph**
 
-:doc:`CLIPasso <clipasso>`
-    Type: **Img-to-Sketch**
+:doc:`CLIPasso: Semantically-Aware Object Sketching <clipasso>`
+    Task: **Img-to-Sketch**
 
-:doc:`CLIPascene <clipascene>`
-    Type: **Img-to-Sketch**
+:doc:`CLIPascene: Scene Sketching with Different Types and Levels of Abstraction <clipascene>`
+    Task: **Img-to-Sketch**
 
-:doc:`VectorFusion <vectorfusion>`
-    Type: **Text-to-SVG**
+:doc:`VectorFusion: Text-to-SVG by Abstracting Pixel-Based Diffusion Models <vectorfusion>`
+    Task: **Text-to-SVG**
 
-:doc:`DiffSketcher <diffsketcher>`
-    Type: **Text-to-Sketch**
+:doc:`DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models <diffsketcher>`
+    Task: **Text-to-Sketch**
 
-:doc:`Word-As-Image <wordasimage>`
-    Type: **Text-and-Glyph-to-Glyph**
+:doc:`Word-As-Image: Word-As-Image for Semantic Typography <wordasimage>`
+    Task: **Text-and-Glyph-to-Glyph**
 
-:doc:`SVGDreamer <svgdreamer>`
-    Type: **Text-to-SVG**
+:doc:`SVGDreamer: Text Guided SVG Generation with Diffusion Model <svgdreamer>`
+    Task: **Text-to-SVG**
 
 API Documentation
 -----------
@@ -100,7 +102,7 @@ About Us
 
 .. bibliographic fields (which also require a transform):
 
-:Authors: Ximing Xing; Juncheng Hu
+:Authors: Ximing Xing and Juncheng Hu
 :Contact: ximingxing@gmail.com
 :Organization: https://huggingface.co/SVGRender @BUAA
 :Status: This is a "work in progress"
