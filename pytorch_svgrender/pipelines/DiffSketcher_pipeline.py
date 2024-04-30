@@ -431,7 +431,7 @@ class DiffSketcherPipeline(ModelState):
         # saving final result
         renderer.save_svg(self.svg_logs_dir.as_posix(), "final_render_tmp")
         # stroke pruning
-        if self.args.opacity_delta != 0:
+        if self.x_cfg.opacity_delta != 0:
             paths_pruning(self.svg_logs_dir / "final_render_tmp.svg", self.result_path / "final_render.svg",
                           self.x_cfg.opacity_delta)
 
