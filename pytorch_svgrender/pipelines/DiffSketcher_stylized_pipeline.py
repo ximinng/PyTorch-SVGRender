@@ -116,7 +116,7 @@ class StylizedDiffSketcherPipeline(ModelState):
 
         height = width = model2res(self.x_cfg.model_id)
         outputs = self.diffusion(prompt=[prompt],
-                                 negative_prompt=self.args.neg_prompt,
+                                 negative_prompt=[self.args.neg_prompt],
                                  height=height,
                                  width=width,
                                  controller=controller,

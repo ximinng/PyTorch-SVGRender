@@ -128,6 +128,7 @@ if __name__ == '__main__':
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'svgdreamer' --result "./test_PyTorchSVGRender/test_svgdreamer/"
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'wordasimg' --result "./test_PyTorchSVGRender/test_wordasimg/"
     CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'clipasene' --result "./test_PyTorchSVGRender/test_clipasene/"
+    CUDA_VISIBLE_DEVICES=0 python test/test_svgrender.py --which 'diffsketcher' --result "./test_PyTorchSVGRender/test_diffsketcher/"
     """
 
     test_PyTorchSVGRender(args)
