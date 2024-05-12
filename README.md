@@ -48,6 +48,10 @@
 
   [[Project]](https://clipasso.github.io/clipasso/) [[Paper]](https://arxiv.org/abs/2202.05822) [[Code]](https://github.com/yael-vinker/CLIPasso)
 
+- Conditional Vector Graphics Generation for Music Cover Images (`2022`)
+
+  [[Paper]](https://arxiv.org/pdf/2205.07301) [[Code]](https://github.com/IzhanVarsky/CoverGAN)
+
 - CLIPascene: Scene Sketching with Different Types and Levels of Abstraction (`ICCV 2023`)
 
   [[Project]](https://clipascene.github.io/CLIPascene/) [[Paper]](https://arxiv.org/abs/2211.17256) [[Code]](https://github.com/yael-vinker/SceneSketch)
@@ -81,6 +85,19 @@
 - SVGDreamer: Text Guided SVG Generation with Diffusion Model (`CVPR 2024`)
 
   [[Project]](https://ximinng.github.io/SVGDreamer-project/) [[Paper]](https://arxiv.org/abs/2312.16476) [[Code]](https://github.com/ximinng/SVGDreamer) [[Blog]](https://huggingface.co/blog/xingxm/svgdreamer/)
+
+### 3. Image-to-Stylized SVG Synthesis
+
+- Neural Style Transfer for Vector Graphics (`2023`)
+
+  [[Paper]](https://arxiv.org/pdf/2303.03405) [[Code]](https://github.com/IzhanVarsky/VectorNST)
+
+- VectorPainter: A Novel Approach to Stylized Vector Graphics
+Synthesis with Vectorized Strokes (`2024`)
+
+  [[Paper]](https://arxiv.org/pdf/2405.02962)
+
+
 
 <h2 align="center">⚙️ Installation</h2>
 
