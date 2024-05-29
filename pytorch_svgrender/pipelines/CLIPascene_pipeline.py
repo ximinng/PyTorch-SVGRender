@@ -53,7 +53,7 @@ class CLIPascenePipeline(ModelState):
         scaled_img = Image.open(scaled_path)
         mask = get_mask_u2net(scaled_img, scene_path, self.args.x.u2net_path, preprocess=True, device=self.device)
         masked_path = scene_path / f"{image_path.stem}_mask.png"
-        imageio.imsave(masked_path, mask)
+        imageio.imsave(masked_path, mask.astype(np.uint8) * 255)
 
         apply_inpaint(scene_path, background_path, self.device)
         return scaled_path, background_path / f"{image_path.stem}_mask.png"

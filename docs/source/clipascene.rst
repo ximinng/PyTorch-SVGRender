@@ -48,7 +48,7 @@ Convert an image of *ballerina* from the original PNG format to an abstract sket
 
 .. list-table:: Fig 2. Rendering Result
 
-    * - .. figure:: ../../examples/clipascene/ballerina/final_64.svg
+    * - .. figure:: ../../examples/clipascene/ballerina/combined.svg
            :width: 200
 
            Final sketch
@@ -59,6 +59,53 @@ Convert an image of *ballerina* from the original PNG format to an abstract sket
            Foreground sketch
 
       - .. figure:: ../../examples/clipascene/ballerina/bg.svg
+           :width: 200
+
+           Background sketch
+
+
+**Examples: Bull**
+
+Convert an image of *bull* from the original PNG format to an abstract sketch:
+
+.. code-block:: console
+
+   $ python svg_render.py x=clipascene target='./data/bull.png'
+
+**Segmentation and Inpainting Result**:
+
+.. list-table:: Fig 1. Input Process Result
+
+    * - .. figure:: ../../data/bull.png
+           :width: 200
+
+           Input image
+
+      - .. figure:: ../../examples/clipascene/bull/fg_img.png
+           :width: 200
+
+           Foreground image
+
+      - .. figure:: ../../examples/clipascene/bull/bg_img.png
+           :width: 200
+
+           Background image
+
+**Vector Sketch Result**:
+
+.. list-table:: Fig 2. Rendering Result
+
+    * - .. figure:: ../../examples/clipascene/bull/combined.svg
+           :width: 200
+
+           Final sketch
+
+      - .. figure:: ../../examples/clipascene/bull/fg.svg
+           :width: 200
+
+           Foreground sketch
+
+      - .. figure:: ../../examples/clipascene/bull/bg.svg
            :width: 200
 
            Background sketch
