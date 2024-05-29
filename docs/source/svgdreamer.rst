@@ -55,6 +55,12 @@ To save GPU VRAM, fp16 optimization is supported via `state.mprec='fp16'`,
 
 .. code-block:: console
 
+   $ python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd-fp32'
+
+If you have a VRAM limit issue? ``fp16`` can be used:
+
+.. code-block:: console
+
    $ python svg_render.py x=svgdreamer prompt='A colorful German shepherd in vector art. tending on artstation.' state.mprec='fp16' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='./svgdreamer/GermanShepherd-fp16'
 
 **Result**:
@@ -131,8 +137,31 @@ Synthesize the free-hand sketches of the Lamborghini,
 
 .. code-block:: console
 
-   $ python svg_render.py x=svgdreamer prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.' x.style='sketch' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./svgdreamer/Lamborghini'
+   $ python svg_render.py x=svgdreamer prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.' x.style='sketch' save_step=30 x.guidance.n_particle=4 x.guidance.vsd_n_particle=2 x.guidance.phi_n_particle=2 x.num_paths=128 result_path='./svgdreamer/Lamborghini'
 
+**Result**:
+
+.. list-table:: Fig 4. A free-hand drawing of A speeding Lamborghini. Sketch. Number of vector particles: 4
+
+    * - .. figure:: ../../examples/svgdreamer/Iconography-SydneyOperaHouse/p_0.svg
+           :width: 150
+
+           particle 1
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-SydneyOperaHouse/p_1.svg
+           :width: 150
+
+           particle 2
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-SydneyOperaHouse/p_2.svg
+           :width: 150
+
+           particle 3
+
+      - .. figure:: ../../examples/svgdreamer/Iconography-SydneyOperaHouse/p_3.svg
+           :width: 150
+
+           particle 4
 
 Pixel Art
 """"""""""""
@@ -145,7 +174,7 @@ The DarthVader with lightsaber in pixel art,
 
 **Result**:
 
-.. list-table:: Fig 4. Darth vader. pixel art. Number of vector particles: 4
+.. list-table:: Fig 5. Darth vader. pixel art. Number of vector particles: 4
 
     * - .. figure:: ../../examples/svgdreamer/PixelArt-DarthVader/p_0.svg
            :width: 150
@@ -178,7 +207,7 @@ Synthesize bald eagles in low-poly,
 
 **Result**:
 
-.. list-table:: Fig 5. Bald eagle. low-poly. Number of vector particles: 4
+.. list-table:: Fig 6. Bald eagle. low-poly. Number of vector particles: 4
 
     * - .. figure:: ../../examples/svgdreamer/LowPoly-BaldEagles/p_0.svg
            :width: 150
@@ -210,7 +239,7 @@ Synthesize scarlet macaws in low-poly,
 
 **Result**:
 
-.. list-table:: Fig 6. Scarlet Macaw. low-poly. Number of vector particles: 4
+.. list-table:: Fig 7. Scarlet Macaw. low-poly. Number of vector particles: 4
 
     * - .. figure:: ../../examples/svgdreamer/LowPoly-Macaw/p_0.svg
            :width: 150
@@ -243,7 +272,7 @@ Synthesize phoenixes coming out of the fire drawing,
 
 **Result**:
 
-.. list-table:: Fig 7. Phoenixes. Painting. Number of vector particles: 4
+.. list-table:: Fig 8. Phoenixes. Painting. Number of vector particles: 4
 
     * - .. figure:: ../../examples/svgdreamer/Painting-Phoenix/p_0.svg
            :width: 150
@@ -265,13 +294,6 @@ Synthesize phoenixes coming out of the fire drawing,
 
            particle 4
 
-------------
-
-Synthesize self-portraits of Van Gogh,
-
-.. code-block:: console
-
-   $ python svg_render.py x=svgdreamer prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.' x.style='painting' save_step=30 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=1500 result_path='./svgdreamer/VanGogh_portrait'
 
 Ink and Wash
 """"""""""""
@@ -284,7 +306,7 @@ Synthesize the Big Wild Goose Pagoda,
 
 **Result**:
 
-.. list-table:: Fig 8. Big Wild Goose Pagoda. Ink and Wash. Number of vector particles: 4
+.. list-table:: Fig 10. Big Wild Goose Pagoda. Ink and Wash. Number of vector particles: 4
 
     * - .. figure:: ../../examples/svgdreamer/Ink-BigWildGoosePagoda/p_0.svg
            :width: 150
