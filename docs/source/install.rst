@@ -48,6 +48,7 @@ Install LaMa:
    (svgrender) $ cd lama
    (svgrender) $ curl -O -L https://huggingface.co/xingxm/PyTorch-SVGRender-models/resolve/main/big-lama.zip
    (svgrender) $ unzip big-lama.zip
+   (svgrender) $ cd ..
 
 Install CLIP:
 

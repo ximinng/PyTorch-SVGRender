@@ -28,6 +28,7 @@ cd lama
 # download LaMa model weights:
 curl -O -L https://huggingface.co/xingxm/PyTorch-SVGRender-models/resolve/main/big-lama.zip
 unzip big-lama.zip
+cd ..
 
 echo "LaMa installation is complete."
 

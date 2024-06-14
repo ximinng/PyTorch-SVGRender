@@ -32,6 +32,7 @@ cd lama
 # raw link(deprecated): curl -L $(yadisk-direct https://disk.yandex.ru/d/kHJkc7bs7mKIVA) -o big-lama.zip
 curl -O -L https://huggingface.co/xingxm/PyTorch-SVGRender-models/resolve/main/big-lama.zip
 unzip big-lama.zip
+cd ..
 ```
 
 Install CLIP:
