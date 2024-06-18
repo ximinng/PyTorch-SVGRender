@@ -295,11 +295,13 @@ We gratefully thank the authors for their wonderful works.
 If you use this code for your research, please cite the following work:
 
 ```
-@article{xing2023svgdreamer,
-    title={SVGDreamer: Text Guided SVG Generation with Diffusion Model},
-    author={Xing, Ximing and Zhou, Haitao and Wang, Chuang and Zhang, Jing and Xu, Dong and Yu, Qian},
-    journal={arXiv preprint arXiv:2312.16476},
-    year={2023}
+@InProceedings{xing2024svgdreamer,
+    author    = {Xing, Ximing and Zhou, Haitao and Wang, Chuang and Zhang, Jing and Xu, Dong and Yu, Qian},
+    title     = {SVGDreamer: Text Guided SVG Generation with Diffusion Model},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2024},
+    pages     = {4546-4555}
 }
 @inproceedings{xing2023diffsketcher,
     title={DiffSketcher: Text Guided Vector Sketch Synthesis through Latent Diffusion Models},
