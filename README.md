@@ -138,7 +138,7 @@ python svg_render.py x=clipasso target='./data/horse.png'
 
 **CLIPascene** synthesizes vectorized sketches from images:
 
-**note:** first download the U2Net model `sh script/download_u2net.sh`.
+**note:** first download the U2Net model `bash script/download_u2net.sh`.
 
 ```shell
 python svg_render.py x=clipascene target='./data/ballerina.png'
@@ -248,22 +248,20 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 <h2 align="center">❓ FAQ</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
-- Q: Where can I get more scripts and visualizations?
+- **Q: Where can I get more scripts and visualizations?**
 - A: Check the [pytorch-svgrender.readthedocs.io](https://pytorch-svgrender.readthedocs.io/en/latest/index.html).
 
-- Q: An error says HuggingFace cannot find the model in the disk cache.
-- A: Add *`diffuser.download=True`* to the command for downloading model checkpoints the **first time** you run the
-  script.
+- **Q: An error says HuggingFace cannot find the model in the disk cache.**
+- A: Add *`diffuser.download=True`* to the command for downloading model checkpoints the **first time** you run the script.
 
-- Q: It says xFormers is not built with CUDA support or xFormers cannot load C++/CUDA extensions.
+- **Q: It says xFormers is not built with CUDA support or xFormers cannot load C++/CUDA extensions.**
 - A: You need to install xFormers again using the command *`pip install --pre -U xformers`* instead of the conda one.
 
 <h2 align="center">🗒 TODO</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
 
 - [ ] SVG Layout Pipeline: Given words and layout attrs, returning layout in SVG format.
-- [x] SVGDreamer supports fp16 optimization.
-- [x] integrated SVGDreamer.
+- [x] integrated SVGDreamer & SVGDreamer supports fp16 optimization.
 
 <h2 align="center">🤝 Contribution</h2>
 

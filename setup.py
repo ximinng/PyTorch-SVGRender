@@ -94,7 +94,7 @@ class CustomInstallCommand(install):
 
         pip_packages = [
             'hydra-core', 'omegaconf',
-            'freetype-py', 'shapely', 'svgutils',
+            'freetype-py', 'shapely', 'svgutils', 'cairosvg',
             'opencv-python', 'scikit-image', 'matplotlib', 'visdom', 'wandb', 'beautifulsoup4',
             'triton', 'numba',
             'numpy', 'scipy', 'scikit-fmm', 'einops', 'timm', 'fairscale==0.4.13',
