@@ -84,26 +84,26 @@
 
 <h2 align="center">⚙️ Installation</h2>
 
-You can follow the steps below to quickly get up and running with PyTorch-SVGRender.
-These steps will let you run quick inference locally.
+### 🛠️ Step 1: Set Up the Environment
 
-In the top level directory run,
+To quickly get started with **PyTorch-SVGRender**, follow the steps below.  
+These instructions will help you run **quick inference locally**.
 
-```bash
-sh script/install.sh
-```
+#### 🚀 **Option 1: Standard Installation**
 
-Note: Make sure that the script file has execution **permissions** (you can give them using `chmod +x script.sh`), and
-then run the script.
-
-or using docker,
+Run the following command in the **top-level directory**:
 
 ```shell
-docker run --name svgdreamer --gpus all -it --ipc=host ximingxing/svgrender:v1 /bin/bash
+chmod +x script/install.sh
+bash script/install.sh
 ```
 
-For more information, please refer to
-the [Install.md](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Install.md).
+#### 🐳 Option 2: Using Docker
+
+```shell
+chmod +x script/run_docker.sh
+sudo bash script/run_docker.sh
+```
 
 <h2 align="center">👩‍🎨🎨 Quickstart</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
@@ -268,7 +268,9 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 <h2 align="center">🤝 Contribution</h2>
 
 - How to Contribute to the PyTorch-SVGRender Community?
-- We greatly appreciate your contributions to the [PyTorch-SVGRender community](https://huggingface.co/SVGRender) and
+- Contributions are welcome! Feel free to submit a pull request if you have found a bug or developed a feature that may
+  be useful for others. We greatly appreciate your contributions to
+  the [PyTorch-SVGRender community](https://huggingface.co/SVGRender) and
   helping us make it even better than it is now! For more details, please refer to
   the [Contribution Guidelines](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Contribution.md).
 

@@ -100,8 +100,11 @@ def main(cfg: omegaconf.DictConfig):
     elif flag == "clipdraw":  # text2svg
         from pytorch_svgrender.pipelines.CLIPDraw_pipeline import CLIPDrawPipeline
 
-        pipe = CLIPDrawPipeline(cfg)
-        pipe.painterly_rendering(cfg.prompt)
+        if not cfg.multirun:
+            pipe = CLIPDrawPipeline(cfg)
+            pipe.painterly_rendering(cfg.prompt)
+        else:  # generate many SVG at once
+            render_batch_fn(pipeline=CLIPDrawPipeline, prompt=cfg.prompt)
 
     elif flag == "clipfont":  # text and font to font
         from pytorch_svgrender.pipelines.CLIPFont_pipeline import CLIPFontPipeline
@@ -115,8 +118,11 @@ def main(cfg: omegaconf.DictConfig):
     elif flag == "styleclipdraw":  # text to stylized svg
         from pytorch_svgrender.pipelines.StyleCLIPDraw_pipeline import StyleCLIPDrawPipeline
 
-        pipe = StyleCLIPDrawPipeline(cfg)
-        pipe.painterly_rendering(cfg.prompt, style_fpath=cfg.target)
+        if not cfg.multirun:
+            pipe = StyleCLIPDrawPipeline(cfg)
+            pipe.painterly_rendering(cfg.prompt, style_fpath=cfg.target)
+        else:  # generate many SVG at once
+            render_batch_fn(pipeline=StyleCLIPDrawPipeline, prompt=cfg.prompt, style_fpath=cfg.target)
 
     elif flag == "diffsketcher":  # text2sketch
         from pytorch_svgrender.pipelines.DiffSketcher_pipeline import DiffSketcherPipeline

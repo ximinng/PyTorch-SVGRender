@@ -241,7 +241,7 @@ class VectorFusionPipeline(ModelState):
                         lr_str +
                         f"L_total: {loss.item():.4f}, "
                         f"L_recon: {loss_recon.item():.4f}, "
-                        f"L_xing: {loss_xing.item()}"
+                        f"L_xing: {loss_xing.item():.4e}"
                     )
 
                     # optimization

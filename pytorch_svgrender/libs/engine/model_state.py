@@ -80,8 +80,7 @@ class ModelState:
             print(self.x_cfg)
 
             print("\n***** Model State *****")
-            print(f"-> Mixed Precision: {self.accelerator.state.mixed_precision}, AMP: {self.accelerator.native_amp}")
-            print(f"-> Weight dtype:  {self.weight_dtype}")
+            print(f"-> Weight Dtype:  {self.weight_dtype}")
 
             if self.accelerator.scaler_handler is not None and self.accelerator.scaler_handler.enabled:
                 print(f"-> Enabled GradScaler: {self.accelerator.scaler_handler.to_kwargs()}")

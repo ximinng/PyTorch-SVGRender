@@ -4,7 +4,7 @@ image_size: 224 # canvas size
 path_svg: ~ # if you want to load a svg file and train from it
 
 # train
-num_iter: 1000
+num_iter: 1500
 num_stages: 1 # training stages, you can train x strokes, then freeze them and train another x strokes etc
 lr_schedule: True
 lr: 1

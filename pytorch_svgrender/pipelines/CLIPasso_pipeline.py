@@ -73,7 +73,7 @@ class CLIPassoPipeline(ModelState):
 
         with tqdm(initial=self.step, total=total_step, disable=not self.accelerator.is_main_process) as pbar:
             while self.step < total_step:
-                sketches = renderer.get_image().to(self.device)
+                sketches = renderer.get_image()
 
                 if self.make_video and (self.step % self.args.framefreq == 0 or self.step == total_step - 1):
                     plot_img(sketches, self.frame_log_dir, fname=f"iter{self.frame_idx}")
@@ -141,7 +141,7 @@ class CLIPassoPipeline(ModelState):
 
         # log final results
         renderer.save_svg(self.result_path.as_posix(), "final_render")
-        final_raster_sketch = renderer.get_image().to(self.device)
+        final_raster_sketch = renderer.get_image()
         plot_img_title(final_raster_sketch,
                        title=f'final result - {self.step} step',
                        output_dir=self.result_path,
