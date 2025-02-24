@@ -1,82 +1,85 @@
 Installation
-===============
+============
 
-.. _install:
+This guide provides three methods to install **PyTorch-SVGRender**.
 
-You can follow the steps below to quickly get up and running with PyTorch-SVGRender.
-These steps will let you run quick inference locally.
+Environment Setup
+----------------
 
-In the top level directory run,
+Choose one of the following installation methods that best suits your needs:
 
-.. code-block:: console
+Method 1: Standard Installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   $ sh script/install.sh
+For a straightforward installation, run these commands in the project's root directory:
 
-Note: Make sure that the script file has execution **permissions** (you can give them using ``chmod +x script.sh``), and
-then run the script.
+.. code-block:: bash
 
-**If you want to install it yourself step by step, you can refer to the following content,**
+    chmod +x script/install.sh
+    bash script/install.sh
 
-Create a new conda environment:
+Method 2: Docker Installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: console
+For a containerized environment, use Docker:
 
-   (base) $ conda create --name svgrender python=3.10
-   (base) $ conda activate svgrender
+.. code-block:: bash
 
-Install pytorch and the following libraries:
+    chmod +x script/run_docker.sh
+    sudo bash script/run_docker.sh
 
-.. code-block:: console
+Method 3: Python Installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   (svgrender) $ conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
-   (svgrender) $ pip install hydra-core omegaconf
-   (svgrender) $ pip install freetype-py shapely svgutils
-   (svgrender) $ pip install opencv-python scikit-image matplotlib visdom wandb BeautifulSoup4
-   (svgrender) $ pip install triton numba
-   (svgrender) $ pip install numpy scipy scikit-fmm einops timm fairscale==0.4.13
-   (svgrender) $ pip install accelerate transformers safetensors datasets
+For a manual Python setup:
 
-Install LaMa:
+.. code-block:: bash
 
-.. code-block:: console
+    # Create and activate conda environment
+    conda create -n svgrender python=3.10
+    conda activate svgrender
 
-   (svgrender) $ pip install easydict scikit-learn pytorch_lightning webdataset
-   (svgrender) $ pip install albumentations==0.5.2
-   (svgrender) $ pip install kornia==0.5.0
-   (svgrender) $ pip install wldhx.yadisk-direct
+    # Install the package
+    python setup.py install
 
-   (svgrender) $ cd lama
-   (svgrender) $ curl -O -L https://huggingface.co/xingxm/PyTorch-SVGRender-models/resolve/main/big-lama.zip
-   (svgrender) $ unzip big-lama.zip
-   (svgrender) $ cd ..
+System Requirements
+-----------------
 
-Install CLIP:
+- Python 3.10 or higher
+- CUDA-capable GPU (optional, for accelerated rendering)
+- Docker (only for Method 2)
+- Git
 
-.. code-block:: console
+Troubleshooting
+--------------
 
-   (svgrender) $ pip install ftfy regex tqdm
-   (svgrender) $ pip install git+https://github.com/openai/CLIP.git
+If you encounter any issues during installation:
 
-Install diffusers:
+1. Ensure all prerequisites are installed
+2. Check your Python version
+3. Verify CUDA installation (if using GPU)
+4. Ensure you have sufficient disk space
 
-.. code-block:: console
+For detailed error messages and solutions, please refer to our `GitHub Issues <https://github.com/your-repo/issues>`_.
 
-   (svgrender) $ pip install diffusers==0.20.2
+Additional Notes
+--------------
 
-Install xformers (require ``python=3.10``):
+- The Docker installation method is recommended for production environments
+- For development purposes, the Python installation method (Method 3) is preferred
+- Standard installation (Method 1) is best for quick testing and evaluation
 
-.. code-block:: console
+Need Help?
+---------
 
-   (svgrender) $ conda install xformers -c xformers
+If you need assistance:
 
-Install diffvg:
+- Check our `Documentation <https://your-docs-url.com>`_
+- Open an issue on our `GitHub repository <https://github.com/your-repo>`_
+- Contact our support team
 
-.. code-block:: console
+.. note::
+   Make sure to activate the conda environment before running any commands.
 
-   (svgrender) $ git clone https://github.com/BachiLi/diffvg.git
-   (svgrender) $ cd diffvg
-   (svgrender) $ git submodule update --init --recursive
-   (svgrender) $ conda install -y -c anaconda cmake
-   (svgrender) $ conda install -y -c conda-forge ffmpeg
-   (svgrender) $ pip install svgwrite svgpathtools cssutils torch-tools
-   (svgrender) $ python setup.py install
+.. warning::
+   GPU support requires appropriate NVIDIA drivers and CUDA toolkit installation.
