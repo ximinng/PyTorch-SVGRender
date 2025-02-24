@@ -11,7 +11,7 @@ import numpy as np
 import torch
 
 from pytorch_svgrender.libs.modules.edge_map.DoG import XDoG
-from pytorch_svgrender.diffvg_warp import DiffVGState
+from pytorch_svgrender.model_helper import DiffVGState
 
 
 class Painter(DiffVGState):

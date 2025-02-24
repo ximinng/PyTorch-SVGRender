@@ -6,7 +6,7 @@ import pydiffvg
 import torch
 from torch.optim.lr_scheduler import LambdaLR
 
-from pytorch_svgrender.diffvg_warp import DiffVGState
+from pytorch_svgrender.model_helper import DiffVGState
 from .ttf import font_string_to_beziers, write_letter_svg
 
 

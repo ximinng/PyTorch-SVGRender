@@ -22,7 +22,7 @@ from pytorch_svgrender.painter.svgdreamer import VectorizedParticleSDSPipeline
 from pytorch_svgrender.plt import plot_img
 from pytorch_svgrender.utils.color_attrs import init_tensor_with_color
 from pytorch_svgrender.token2attn.ptp_utils import view_images
-from pytorch_svgrender.diffusers_warp import model2res
+from pytorch_svgrender.model_helper import model2res
 
 import ImageReward as RM
 

@@ -163,6 +163,10 @@ lightning_logs/*
 # ignore local results
 /workspace/
 .workspace/
+/logs/
+/logs/*
+/outputs/
+/outputs/*
 
 # ignore files
 ./tmp/

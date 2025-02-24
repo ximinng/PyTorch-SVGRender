@@ -16,7 +16,7 @@ import pydiffvg
 import torch
 from torch.optim.lr_scheduler import LambdaLR
 
-from pytorch_svgrender.diffvg_warp import DiffVGState
+from pytorch_svgrender.model_helper import DiffVGState
 from pytorch_svgrender.libs.solver.optim import get_optimizer
 from pytorch_svgrender.utils import AnyPath
 

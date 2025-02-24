@@ -20,7 +20,7 @@ from pytorch_svgrender.painter.vectorfusion import channel_saturation_penalty_lo
 from pytorch_svgrender.painter.live import xing_loss_fn
 from pytorch_svgrender.plt import plot_img, plot_couple
 from pytorch_svgrender.token2attn.ptp_utils import view_images
-from pytorch_svgrender.diffusers_warp import init_StableDiffusion_pipeline, model2res
+from pytorch_svgrender.model_helper import init_StableDiffusion_pipeline, model2res
 
 
 class VectorFusionPipeline(ModelState):

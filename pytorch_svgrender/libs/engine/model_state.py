@@ -13,7 +13,7 @@ import torch
 from accelerate.utils import LoggerType
 from accelerate import Accelerator
 
-from ..utils.logging import build_sysout_print_logger
+from pytorch_svgrender.libs.utils.logging import build_sysout_print_logger
 
 
 class ModelState:

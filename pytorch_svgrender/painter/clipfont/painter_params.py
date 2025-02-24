@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) XiMing Xing. All rights reserved.
 # Author: XiMing Xing
-# Description: SVG Painter and ist optimizer
+# Description: SVG Painter and Optimizer
 
 from typing import Tuple
 
@@ -10,7 +10,7 @@ import pydiffvg
 import torch
 import numpy as np
 
-from pytorch_svgrender.diffvg_warp import DiffVGState
+from pytorch_svgrender.model_helper import DiffVGState
 from pytorch_svgrender.utils import get_rgb_from_color
 
 

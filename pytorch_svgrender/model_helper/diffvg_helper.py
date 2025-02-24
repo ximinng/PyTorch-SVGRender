@@ -2,7 +2,8 @@
 # Author: ximing
 # Description: parent class
 # Copyright (c) 2023, XiMing Xing.
-# License: MIT License
+# License: MPL-2.0 License
+
 import pathlib
 from typing import AnyStr, List, Union
 import xml.etree.ElementTree as etree

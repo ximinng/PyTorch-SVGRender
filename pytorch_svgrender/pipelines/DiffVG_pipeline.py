@@ -76,9 +76,7 @@ class DiffVGPipeline(ModelState):
 
         # init Painter Optimizer
         num_iter = self.x_cfg.num_iter
-        optimizer = PainterOptimizer(renderer,
-                                     num_iter,
-                                     self.x_cfg.lr_base,
+        optimizer = PainterOptimizer(renderer, num_iter, self.x_cfg.lr_base,
                                      trainable_stroke=self.x_cfg.path_type == 'unclosed')
         optimizer.init_optimizer()
 

@@ -11,8 +11,6 @@ from accelerate.utils import set_seed
 import hydra
 import omegaconf
 
-sys.path.append(os.path.split(os.path.abspath(os.path.dirname(__file__)))[0])
-
 from pytorch_svgrender.utils import render_batch_wrap, get_seed_range
 
 METHODS = [

@@ -2,6 +2,7 @@
 # Copyright (c) XiMing Xing. All rights reserved.
 # Author: XiMing Xing
 # Description:
+
 from pathlib import Path
 
 from tqdm.auto import tqdm
@@ -12,7 +13,7 @@ from pytorch_svgrender.painter.wordasimage import Painter, PainterOptimizer
 from pytorch_svgrender.painter.wordasimage.losses import ToneLoss, ConformalLoss
 from pytorch_svgrender.painter.vectorfusion import LSDSPipeline
 from pytorch_svgrender.plt import plot_img, plot_couple
-from pytorch_svgrender.diffusers_warp import init_StableDiffusion_pipeline
+from pytorch_svgrender.model_helper import init_StableDiffusion_pipeline
 from pytorch_svgrender.svgtools import FONT_LIST
 
 

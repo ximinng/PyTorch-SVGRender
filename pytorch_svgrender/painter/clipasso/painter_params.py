@@ -8,7 +8,7 @@ import torch
 from torch.optim.lr_scheduler import LambdaLR
 from torchvision import transforms
 
-from pytorch_svgrender.diffvg_warp import DiffVGState
+from pytorch_svgrender.model_helper import DiffVGState
 from pytorch_svgrender.libs.modules.edge_map.DoG import XDoG
 from .grad_cam import gradCAM
 from . import modified_clip as clip

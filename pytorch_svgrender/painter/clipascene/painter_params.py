@@ -7,7 +7,7 @@ import pydiffvg
 import torch
 import torch.nn as nn
 from PIL import Image
-from pytorch_svgrender.diffvg_warp import DiffVGState
+from pytorch_svgrender.model_helper import DiffVGState
 from pytorch_svgrender.libs.modules.edge_map.DoG import XDoG
 from pytorch_svgrender.painter.clipasso import modified_clip as clip
 from pytorch_svgrender.painter.clipasso.grad_cam import gradCAM
