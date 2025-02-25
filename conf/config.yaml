@@ -6,52 +6,50 @@
 target: ~ # target file
 prompt: ~ # textual prompt
 neg_prompt: "nsfw, lowres, (bad), text, error, fewer, extra, missing, worst quality, jpeg artifacts, low quality, watermark, unfinished, displeasing, oldest, early, chromatic aberration, signature, extra digits, artistic error, username, scan" # negative prompt
+result_path: './workspace' # results output path
 
 # Accelerate config
 state:
-  cpu: False # use cpu
-  mprec: 'no' # mixed precision, choices: 'no', 'fp16', 'bf16'
+  cpu: False   # use CPU (false means use GPU)
+  mprec: 'no'  # mixed precision, choices: 'no', 'fp16', 'bf16'
 #  wandb: False
 #  tensorboard: False
 
 # Diffusers config
 diffuser:
-  download: False # Set this variable to True the first time it runs
+  download: False        # set to true the first time it runs
   force_download: False
   resume_download: False
-
 # PyDiffVG config
 diffvg:
   print_timing: False
 
-# reproduction
+# Reproduction
 seed: 951222
-# multi-run
-multirun: False
-srange: ~ # seed range, example: [100, 100]
+# Batch Processing
+multirun: False  # whether to run multiple times
+srange: ~        # seed range, example: [100, 100]
 
-# log
-result_path: './workspace'
-save_step: 10
-eval_step: 10
+# Logging
+save_step: 10    # save interval
+eval_step: 10    # evaluation interval
 
-# visual rendering process
-mv: False # make video
-framefreq: 5 # save the image interval
-framerate: 24 # by adjusting the frame rate, you can control the playback speed of the output video
+# Visualization Configuration
+mv: False       # whether to generate video
+framefreq: 5    # image saving interval
+framerate: 24   # video frame rate
 
-# hydra setting
+# Hydra Configuration
 hydra:
   help:
-    # app name, override to match the name your app is known by
     app_name: 'SVGRender'
   run:
     # output directory for normal runs
     # warning: make sure that the L56-58 of '/libs/engine/model_state.py' and 'dir' are modified together
     dir: ./${result_path}/${x.method}-${now:%Y-%m-%d-%H-%M}
 
-# default settings
+# Default Settings
 defaults:
   - _self_
   - x: ~
-  - override hydra/job_logging: disabled # Outputs only to stdout (no log file)
+  - override hydra/job_logging: disabled # outputs only to stdout (no log file)
