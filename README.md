@@ -164,39 +164,44 @@ python svg_render.py x=clipfont "prompt='Starry Night by Vincent van gogh'" targ
 
 ---
 
-> Because the following methods rely on stable diffusion, add `diffuser.download=True` to the command the **first time**
-> you
-> run the script.
+> Note: Since the following methods rely on Stable Diffusion, add `diffuser.download=True` to the command the first time you run the script.
 
-**SVGDreamer** generates various styles of SVG based on text prompts. It supports the use of six vector primitives,
-including Iconography, Sketch, Pixel Art, Low-Poly, Painting, and Ink and Wash.
+**SVGDreamer** generates diverse SVG styles based on text prompts. It supports six vector primitives:
+**Iconography, Sketch, Pixel Art, Low-Poly, Painting, and Ink & Wash.**
 
 ```shell
-# primitive: iconography
+# 🖼️ Primitive: Iconography
 ## 1. German shepherd
-python svg_render.py x=svgdreamer "prompt='A colorful German shepherd in vector art. tending on artstation.'" save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='svgdreamer/GermanShepherd'
+python svg_render.py x=svgdreamer state.mprec='fp16' "prompt='A colorful German shepherd in vector art. tending on artstation.'" save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 result_path='svgdreamer/GermanShepherd'
 ## 2. sydney opera house
-python svg_render.py x=svgdreamer "prompt='Sydney opera house. oil painting. by Van Gogh'" save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='svgdreamer/SydneyOperaHouse'
-# primitive: low-ploy
-python svg_render.py x=svgdreamer "prompt='A picture of a bald eagle. low-ploy. polygon'" x.style='low-poly' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.grid=30 x.guidance.num_iter=1000 result_path='svgdreamer/BaldEagle'
-# primitive: pixel-art
-python svg_render.py x=svgdreamer "prompt='Darth vader with lightsaber. ultrarealistic. pixelart. trending on artstation.'" x.style='pixelart' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.num_iter=1000 result_path='svgdreamer/DarthVader'
-# primitive: painting
-python svg_render.py x=svgdreamer "prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.'" x.style='painting' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=1500 result_path='svgdreamer/VanGogh_portrait'
-# primitive: sketch
-python svg_render.py x=svgdreamer "prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.'" x.style='sketch' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=128 result_path='svgdreamer/Lamborghini'
-# primitive: ink and wash
-python svg_render.py x=svgdreamer "prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.'" x.style='ink' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=128 x.width=6 result_path='svgdreamer/BigWildGoosePagoda'
+python svg_render.py x=svgdreamer state.mprec='fp16' "prompt='Sydney opera house. oil painting. by Van Gogh'" save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.num_paths=512 result_path='svgdreamer/SydneyOperaHouse'
+
+# 🔺 Primitive: Low-Poly
+python svg_render.py x=svgdreamer state.mprec='fp16' "prompt='A picture of a bald eagle. low-ploy. polygon'" x.style='low-poly' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.grid=30 x.guidance.num_iter=1000 result_path='svgdreamer/BaldEagle'
+
+# 🎨 Primitive: Pixel Art
+python svg_render.py x=svgdreamer state.mprec='fp16' "prompt='Darth vader with lightsaber. ultrarealistic. pixelart. trending on artstation.'" x.style='pixelart' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.num_iter=1000 result_path='svgdreamer/DarthVader'
+
+# 🖌️ Primitive: Painting
+python svg_render.py x=svgdreamer state.mprec='fp16' "prompt='self portrait of Van Gogh. oil painting. cmyk portrait. multi colored. defiant and beautiful. cmyk. expressive eyes.'" x.style='painting' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=1500 result_path='svgdreamer/VanGogh_portrait'
+
+# ✏️ Primitive: Sketch
+python svg_render.py x=svgdreamer state.mprec='fp16' "prompt='A free-hand drawing of A speeding Lamborghini. black and white drawing.'" x.style='sketch' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=128 result_path='svgdreamer/Lamborghini'
+
+# 🏯 Primitive: Ink & Wash
+python svg_render.py x=svgdreamer state.mprec='fp16' "prompt='Big Wild Goose Pagoda. ink style. Minimalist abstract art grayscale watercolor.'" x.style='ink' save_step=50 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 x.guidance.t_schedule='randint' x.num_paths=128 x.width=6 result_path='svgdreamer/BigWildGoosePagoda'
 ```
 
 **VectorFusion** synthesizes SVGs in various styles based on text prompts:
 
 ```shell
-# Iconography style
+# 🖼️ Primitive: Iconography
 python svg_render.py x=vectorfusion x.style='iconography' "prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'"
-# PixelArt style
+
+# 🎨 Primitive: Pixel Art
 python svg_render.py x=vectorfusion x.style='pixelart' "prompt='a panda rowing a boat in a pond. pixel art. trending on artstation.'"
-# Sketch style
+
+# ✏️ Primitive: Sketch
 python svg_render.py x=vectorfusion x.style='sketch' "prompt='a panda rowing a boat in a pond. minimal 2d line drawing. trending on artstation.'"
 ```
 
@@ -207,10 +212,13 @@ Following SVGDreamer, we've added three additional styles (`Paining`, `Ink and W
 ```shell
 # DiffSketcher
 python svg_render.py x=diffsketcher "prompt='a photo of Sydney opera house'" x.token_ind=5 seed=8019
+
 # DiffSketcher, variable stroke width
 python svg_render.py x=diffsketcher "prompt='a photo of Sydney opera house'" x.token_ind=5 x.optim_width=True seed=8019
+
 # DiffSketcher RGBA version
 python svg_render.py x=diffsketcher "prompt='a photo of Sydney opera house'" x.token_ind=5 x.optim_width=True x.optim_rgba=True x.optim_opacity=False seed=8019
+
 # DiffSketcher + style transfer
 python svg_render.py x=stylediffsketcher "prompt='The French Revolution. highly detailed. 8k. ornate. intricate. cinematic. dehazed. atmospheric. oil painting. by Van Gogh'" x.token_ind=4 x.num_paths=2000 target='./data/starry.png' seed=876809
 ```
@@ -224,25 +232,31 @@ python svg_render.py x=wordasimage x.word='BUNNY' prompt='BUNNY' x.optim_letter=
 python svg_render.py x=wordasimage x.word='DRAGONFLY' prompt='Dragonfly' x.optim_letter='Y' x.font='LuckiestGuy-Regular'
 ```
 
-### 2. SDS Loss based Approach
+### 2. SDS Loss-based Approach
 
-This is achieved by utilizing a pretrained text-to-image diffusion model as a strong image prior to supervise the
-training of the PyDiffVG, enabling rendering SVG alignment with the text. This remarkable capability is fundamentally
-grounded in the use of Score Distillation Sampling (SDS). SDS acts as the core mechanism that lifts raster images from
-diffusion models to the SVG domain, enabling the training of SVG parameters without images.
-This includes the methods VectorFusion, DiffSketcher and SVGDreamer.
+This approach leverages a pretrained text-to-image diffusion model as a powerful image prior to supervise the training
+of **PyDiffVG**, enabling SVG rendering that aligns with textual descriptions. This capability is fundamentally driven
+by
+**Score Distillation Sampling (SDS)**, which serves as the key mechanism for bridging raster images from diffusion
+models to
+the SVG domain. This allows for the optimization of SVG parameters without requiring explicit image supervision.
 
-We only compare the performance of SDS, which means that no other loss is used:
+Notable methods based on this approach include **VectorFusion, DiffSketcher, and SVGDreamer.**
+
+We focus solely on evaluating the performance of SDS, meaning no additional loss functions are applied:
 
 ```shell
-# SDS loss
+# Standard SDS loss
 python svg_render.py x=vectorfusion "prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'"
+
 # Input Augmentation SDS loss (LSDS loss)
 python svg_render.py x=vectorfusion x.style='sketch' "prompt='an elephant. minimal 2d line drawing. trending on artstation.'" x.skip_live=True
+
 # Input Augmentation SDS loss (ASDS loss)
 python svg_render.py x=diffsketcher "prompt='an elephant. minimal 2d line drawing. trending on artstation.'" x.token_ind=2 x.sds.grad_scale=1 x.sds.num_aug=4 x.clip.vis_loss=0 x.perceptual.coeff=0 x.opacity_delta=0.3 
+
 # Vectorized Particle-based Score Distillation (VPSD loss)
-python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'" save_step=60 x.guidance.n_particle=6 x.guidance.vsd_n_particle=4 x.guidance.phi_n_particle=2 
+python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. minimal flat 2d vector icon. lineal color. trending on artstation.'" save_step=60 x.guidance.n_particle=6 x.guidance.vsd_n_particle=6 x.guidance.phi_n_particle=6 state.mprec='fp16'  
 ```
 
 <h2 align="center">❓ FAQ</h2>
@@ -252,10 +266,11 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 - A: Check the [pytorch-svgrender.readthedocs.io](https://pytorch-svgrender.readthedocs.io/en/latest/index.html).
 
 - **Q: An error says HuggingFace cannot find the model in the disk cache.**
-- A: Add *`diffuser.download=True`* to the command for downloading model checkpoints the **first time** you run the script.
+- A: Add `diffuser.download=True` to the command for downloading model checkpoints the **first time** you run the
+  script.
 
 - **Q: It says xFormers is not built with CUDA support or xFormers cannot load C++/CUDA extensions.**
-- A: You need to install xFormers again using the command *`pip install --pre -U xformers`* instead of the conda one.
+- A: You need to install xFormers again using the command `pip install --pre -U xformers` instead of the conda one.
 
 <h2 align="center">🗒 TODO</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
@@ -265,14 +280,15 @@ python svg_render.py x=svgdreamer "prompt='a panda rowing a boat in a pond. mini
 
 <h2 align="center">🤝 Contribution</h2>
 
-- How to Contribute to the PyTorch-SVGRender Community?
-- Contributions are welcome! Feel free to submit a pull request if you have found a bug or developed a feature that may
-  be useful for others. We greatly appreciate your contributions to
-  the [PyTorch-SVGRender community](https://huggingface.co/SVGRender) and
-  helping us make it even better than it is now! For more details, please refer to
-  the [Contribution Guidelines](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Contribution.md).
+- We welcome all contributions! 🚀 If you’ve found a bug or developed a feature that could benefit others, feel free to
+  submit a pull request. Your contributions are invaluable in
+  improving [PyTorch-SVGRender community](https://huggingface.co/SVGRender) and
+  making it even better!
 
-  **Remember** to use `test/test_svgrender.py` to test your code before committing it.
+  For more details, please check
+  our [Contribution Guidelines](https://github.com/ximinng/PyTorch-SVGRender/blob/main/Contribution.md).
+
+  **Tip:** Before committing your changes, make sure to run `test/test_svgrender.py` to verify your code. ✅
 
 <h2 align="center">💘 Acknowledgement</h2>
 <p align="right"><a href="#ptsvg"><sup>▴ Back to top</sup></a></p>
